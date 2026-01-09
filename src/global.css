@@ -1,68 +1,126 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+@font-face {
+  font-family: 'Roboto';
+  src: url('@assets/fonts/Roboto-Regular.woff2') format('woff2');
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-display: swap;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+@font-face {
+  font-family: 'Roboto';
+  src: url('@assets/fonts/Roboto-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
 }
-a:hover {
-  color: #535bf2;
+
+:root {
+  /* ----- ЦВЕТА ----- */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-base-300: #272b3b;
+  --color-base-400: #192144;
+  --color-base-500: #1d2e5b;
+  --color-base-600: #161c35;
+
+  --color-primary-50: #edeff6;
+  --color-primary-100: #cce5fa;
+  --color-primary-200: #a8d2f4;
+  --color-primary-300: #aed0eb;
+  --color-primary-400: #7ebaeb;
+  --color-primary-500: #4d99d6;
+  --color-primary-600: #468ac1;
+
+  --color-neutral-50: #edeff6;
+  --color-neutral-100: #e2e5f2;
+  --color-neutral-200: #d6daed;
+  --color-neutral-500: #444444;
+  --color-neutral-600: #3f4251;
+
+  /* ----- ТИПОГРАФИКА ----- */
+  --font-family-sans: 'Roboto', sans-serif;
+  --font-family-mono: 'Roboto Mono', SFMono-Regular, Menlo, monospace;
+
+  --font-size-sm: 1.25rem;
+  /* 20px */
+  --font-size-base: 1.5rem;
+  /* 24px */
+  --font-size-lg: 1.75rem;
+  /* 28px */
+  --font-size-xl: 2rem;
+  /* 32px */
+  --font-size-xxl: 2.25rem;
+  /* 36px */
+
+  /* ----- ОТСТУПЫ (SPACING) ----- */
+  --base-indent: 0.25rem;
+
+  --indent-1: var(--base-indent);
+  /* 4px */
+  --indent-2: calc(var(--base-indent) * 2);
+  /* 8px */
+  --indent-3: calc(var(--base-indentt) * 3);
+  /* 12px */
+  --indent-4: calc(var(--base-indent) * 4);
+  /* 16px */
+
+  /* ----- ГРАНИЦЫ (BORDERS) ----- */
+  --border-radius-sm: 0.25rem;
+  /* 4px */
+  --border-radius-md: 0.375rem;
+  /* 6px */
+  --border-radius-lg: 1.25rem;
+  /* 20px */
+
+  /* ----- ТЕНИ (SHADOWS) ----- */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+
+  /* ----- ПРОЗРАЧНОСТЬ (OPACITY) ----- */
+  --opacity-base: 0.3;
+  --opacity-disabled: 0.1;
+
+
+  /* ----- АНИМАЦИЯ ----- */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+  --transition-all: all 2s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.visually-hidden {
+  position: absolute;
+  scale: 0;
+}
+
+img {
+  max-inline-size: 100%;
+  block-size: auto;
+  object-fit: cover;
+}
+
+html,
+body {
+  block-size: 100%;
 }
 
 body {
+  min-block-size: 100%;
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  background-color: var(--color-white);
+  color: var(--color-base-500);
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  line-height: 1;
+  text-align: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.wrapper {
+  inline-size: min(1440px, 100%);
+  margin-inline: auto;
 }
