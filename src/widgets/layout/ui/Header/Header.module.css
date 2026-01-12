@@ -5,5 +5,25 @@
 .nav {
   display: flex;
   justify-content: start;
+  align-items: center;
   padding-block-start: 46px;
+}
+
+.image {
+  display: blockS;
+}
+
+.navList {
+  display: flex;
+  margin-inline-start: 145px;
+  margin-block: 0;
+  padding-inline-start: 0;
+  gap: var(--indent-4);
+  list-style-type: none;
+}
+
+.navItem {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
 }
