@@ -1,0 +1,64 @@
+.bgImage {
+  position: absolute;
+  left: 0;
+  top: -108px;
+  z-index: -1;
+}
+
+.slogan {
+  margin-block: 0 110px;
+  padding-inline-start: 12px;
+  padding-block-start: 90px;
+  color: var(--color-white);
+  font-size: 70px;
+  font-weight: 700;
+  font-variant: small-caps;
+  text-transform: lowercase;
+  text-align: start;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+.roadmap {
+  display: flex;
+  margin-block: 0;
+  padding-inline-start: 0;
+  padding-block-end: 115px;
+  list-style-type: none;
+}
+
+.roadmapItem {
+  padding-inline: var(--indent-8) 120px;
+  padding-block: var(--indent-8);
+  border-radius: 20px;
+  color: var(--color-base-600);
+  font-size: 22px;
+  line-height: 24px;
+  font-weight: 700;
+  text-align: start;
+}
+
+.roadmapItem:first-child {
+  background-color: var(--color-primary-500);
+}
+
+.roadmapItem:nth-child(2) {
+  background-color: var(--color-primary-400);
+}
+
+.roadmapItem:nth-child(3) {
+  background-color: var(--color-primary-200);
+}
+
+.roadmapItem:last-child {
+  background-color: var(--color-primary-100);
+}
+
+.roadmapItem:not(:first-child) {
+  margin-inline-start: -30px;
+  box-shadow: -4px 0px 10px 0px #00000040;
+}

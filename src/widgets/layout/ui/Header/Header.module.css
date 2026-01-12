@@ -1,4 +1,9 @@
 .header {
-  background-color: var(--color-base-300);
   color: var(--color-white);
+}
+
+.nav {
+  display: flex;
+  justify-content: start;
+  padding-block-start: 46px;
 }
