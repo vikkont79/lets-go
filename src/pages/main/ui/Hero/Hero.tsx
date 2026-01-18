@@ -5,7 +5,7 @@ import traveller from '@assets/images/traveller.png'
 
 const Hero = () => {
   return (
-    <section className={styles.hero}>
+    <section className={`${styles.hero} wrapper`}>
       <Image
         src={bgImage}
         alt='Вид на планету'
@@ -13,12 +13,31 @@ const Hero = () => {
         height={750}
         className={styles.bgImage}
       />
-
-      <p className={styles.slogan}>
-        В путешествие<br />
-        с крутыми<br />
-        попутчиками!
-      </p>
+      <div className={styles.content}>
+        <p className={styles.slogan}>
+          В путешествие<br />
+          с крутыми<br />
+          попутчиками!
+        </p>
+        <ul className={styles.roadmap}>
+          <li className={styles.roadmapItem}>
+            Выберите
+            направление
+          </li>
+          <li className={styles.roadmapItem}>
+            Изучите идеи
+            путешественников
+          </li>
+          <li className={styles.roadmapItem}>
+            Находите тех,
+            кто похож на вас
+          </li>
+          <li className={styles.roadmapItem}>
+            Путешествуйте
+            вместе!
+          </li>
+        </ul>
+      </div>
       <Image
         src={traveller}
         alt='Путешественник'
@@ -26,24 +45,6 @@ const Hero = () => {
         height={640}
         className={styles.heroImage}
       />
-      <ul className={styles.roadmap}>
-        <li className={styles.roadmapItem}>
-          Выберите
-          направление
-        </li>
-        <li className={styles.roadmapItem}>
-          Изучите идеи
-          путешественников
-        </li>
-        <li className={styles.roadmapItem}>
-          Находите тех,
-          кто похож на вас
-        </li>
-        <li className={styles.roadmapItem}>
-          Путешествуйте
-          вместе!
-        </li>
-      </ul>
     </section>
   )
 }

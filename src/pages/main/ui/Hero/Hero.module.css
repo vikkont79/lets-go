@@ -1,8 +1,21 @@
+.hero {
+  position: relative;
+  margin-block: 60px -60px;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  background-color: var(--color-base-400);
+}
+
 .bgImage {
   position: absolute;
   left: 0;
   top: -108px;
-  z-index: -1;
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
 }
 
 .slogan {
@@ -20,7 +33,7 @@
 .heroImage {
   position: absolute;
   top: 0;
-  z-index: -1;
+  z-index: 1;
 }
 
 .roadmap {
