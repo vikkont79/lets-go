@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'
 import styles from './Button.module.css'
-import type { BasePressableProps, Size, Variant } from '../types'
+import type { BasePressableProps, Size, Variant } from '../../types/types'
 
 interface BaseButtonProps extends BasePressableProps {
   variant?: Variant;
@@ -51,4 +51,7 @@ const Button = ({
   )
 }
 
-export { Button }
+export {
+  Button,
+  type ButtonProps,
+}
