@@ -2,29 +2,15 @@ import { Image, IconButton, Input } from '@/shared/ui'
 import styles from './Form.module.css'
 import level from '@assets/images/level.png'
 import avatar from '@assets/images/avatar.jpg'
-import { useCallback, useState } from 'react'
-import { type FormData, type TransportType } from '../../types'
 import { TRANSPORT_OPTIONS } from '../../constants'
+import { useTripForm } from '../../lib'
 
 const FormPage = () => {
-
-  const [formData, setFormData] = useState<FormData>({
-    tags: '',
-    transport: []
-  })
-
-  const handleTagsChange = useCallback((value: string) => {
-    setFormData(prev => ({ ...prev, tags: value }));
-  }, []);
-
-  const toggleTransport = useCallback((type: TransportType) => {
-    setFormData(prev => ({
-      ...prev,
-      transport: prev.transport.includes(type)
-        ? prev.transport.filter(item => item !== type) // убираем если уже выбран
-        : [...prev.transport, type] // добавляем если не выбран
-    }));
-  }, []);
+  const {
+    formData,
+    handleTagsChange,
+    handleToggleTransport,
+  } = useTripForm()
 
   return (
     <main className={styles.main}>
@@ -71,7 +57,7 @@ const FormPage = () => {
                 <IconButton
                   className={styles.transportButton}
                   icon={item}
-                  onClick={() => toggleTransport(item)}
+                  onClick={() => handleToggleTransport(item)}
                   iconLabel={item}
                   aria-pressed={formData.transport.includes(item)}
                 />
