@@ -76,7 +76,37 @@
   list-style-type: none;
 }
 
-.transportItem {
+.transportButton {
   padding: 10px;
   background-color: var(--color-white);
+  color: var(--color-neutral-300);
+
+  &:hover {
+    background-color: var(--color-white);
+    color: var(--color-neutral-400);
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    background-color: var(--color-neutral-100);
+    color: var(--color-base-500);
+    opacity: var(--opacity-disabled);
+  }
+
+  &[aria-pressed='true'] {
+    color: var(--color-base-500);
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+      opacity: var(--opacity-base);
+    }
+  }
+
+
 }

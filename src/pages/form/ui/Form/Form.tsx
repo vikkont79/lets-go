@@ -2,13 +2,30 @@ import { Image, IconButton, Input } from '@/shared/ui'
 import styles from './Form.module.css'
 import level from '@assets/images/level.png'
 import avatar from '@assets/images/avatar.jpg'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { type FormData, type TransportType } from '../../types'
+import { TRANSPORT_OPTIONS } from '../../constants'
 
 const FormPage = () => {
-  const [hashtags, setHashtags] = useState('')
-  const handleChange = (newValue: string) => {
-    setHashtags(newValue);
-  };
+
+  const [formData, setFormData] = useState<FormData>({
+    tags: '',
+    transport: []
+  })
+
+  const handleTagsChange = useCallback((value: string) => {
+    setFormData(prev => ({ ...prev, tags: value }));
+  }, []);
+
+  const toggleTransport = useCallback((type: TransportType) => {
+    setFormData(prev => ({
+      ...prev,
+      transport: prev.transport.includes(type)
+        ? prev.transport.filter(item => item !== type) // убираем если уже выбран
+        : [...prev.transport, type] // добавляем если не выбран
+    }));
+  }, []);
+
   return (
     <main className={styles.main}>
       <h1 className='visually-hidden'>
@@ -37,11 +54,11 @@ const FormPage = () => {
             теги
           </legend>
           <Input
-            value={hashtags}
-            onChange={handleChange}
+            value={formData.tags}
+            onChange={handleTagsChange}
             label='Список тегов'
             hiddenLabel={true}
-            placeholder='#делать дичь'
+            placeholder='#делатьдичь'
           />
         </fieldset>
         <fieldset className={styles.field}>
@@ -49,30 +66,17 @@ const FormPage = () => {
             транспорт
           </legend>
           <ul className={styles.transportList}>
-            <li>
-              <IconButton
-                className={styles.transportItem}
-                icon='plane'
-              />
-            </li>
-            <li>
-              <IconButton
-                className={styles.transportItem}
-                icon='bus'
-              />
-            </li>
-            <li>
-              <IconButton
-                className={styles.transportItem}
-                icon='bicycle'
-              />
-            </li>
-            <li>
-              <IconButton
-                className={styles.transportItem}
-                icon='run'
-              />
-            </li>
+            {TRANSPORT_OPTIONS.map((item) => (
+              <li key={item}>
+                <IconButton
+                  className={styles.transportButton}
+                  icon={item}
+                  onClick={() => toggleTransport(item)}
+                  iconLabel={item}
+                  aria-pressed={formData.transport.includes(item)}
+                />
+              </li>
+            ))}
           </ul>
         </fieldset>
       </section>
