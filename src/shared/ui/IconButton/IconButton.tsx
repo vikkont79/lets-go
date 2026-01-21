@@ -14,7 +14,7 @@ const IconButton = ({
   iconSize,
   iconColor,
   iconLabel,
-  iconPosition = 'left',
+  iconPosition,
   children,
   className = '',
   ...buttonProps

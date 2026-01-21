@@ -2,11 +2,13 @@
   position: relative;
   inline-size: min(1440px, 100%);
   margin-inline: auto;
-  margin-block: -60px;
+  margin-block-end: -60px;
   background-color: var(--color-neutral-50);
+  background-color: var(--color-primary-300);
 }
 
 .title {
+  position: relative;
   padding-inline: 64px;
   margin-block: 0;
   padding-block: 124px 64px;
@@ -34,79 +36,56 @@
   border-radius: var(--border-radius-lg);
 }
 
-.info {
+.baseFields {
   display: flex;
   justify-content: space-between;
   align-items: start;
   flex-wrap: wrap;
   column-gap: 140px;
-  padding-block: 64px;
-}
+  margin-block: -60px;
+  padding-block: 124px;
+  background-color: var(--color-neutral-50);
 
-.field {
-  margin-inline: 0;
-  padding: 0;
-  border: 1px solid #cbced9;
-  border-radius: 10px;
-  font-size: 20px;
-  line-height: 22px;
-}
+  .field {
+    margin-inline: 0;
+    padding: 0;
+    border: 1px solid #cbced9;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 22px;
+  }
 
-.field:first-of-type {
-  flex-grow: 1;
+  .field:first-of-type {
+    flex-grow: 1;
+
+    .fieldTitle {
+      margin-inline: 40px auto;
+    }
+  }
 
   .fieldTitle {
-    margin-inline: 40px auto;
+    color: var(--color-base-500);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 9%;
   }
 }
 
-.fieldTitle {
-  color: var(--color-base-500);
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 9%;
+.stepFields {
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  background-color: var(--color-primary-300);
+
+  p {
+    margin-block-start: 0;
+  }
 }
 
-.transportList {
-  display: flex;
-  margin-block: 0;
-  padding-inline: 104px;
-  padding-block: 14px var(--indent-6);
-  list-style-type: none;
-}
-
-.transportButton {
-  padding: 10px;
+.stepField {
+  margin-block-end: 72px;
+  padding-inline: 160px;
+  padding-block: 100px;
+  border-radius: 60px;
   background-color: var(--color-white);
-  color: var(--color-neutral-300);
-
-  &:hover {
-    background-color: var(--color-white);
-    color: var(--color-neutral-400);
-  }
-
-  &:active,
-  &:focus,
-  &:focus-visible {
-    background-color: var(--color-neutral-100);
-    color: var(--color-base-500);
-    opacity: var(--opacity-disabled);
-  }
-
-  &[aria-pressed='true'] {
-    color: var(--color-base-500);
-
-    &:hover {
-      opacity: 0.7;
-    }
-
-    &:active,
-    &:focus,
-    &:focus-visible {
-      opacity: var(--opacity-base);
-    }
-  }
-
-
 }
