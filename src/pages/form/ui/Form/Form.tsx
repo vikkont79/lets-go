@@ -56,27 +56,53 @@ const FormPage = () => {
         </div>
         <div className={`${styles.stepFields} wrapper`}>
           <h2 className='visually-hidden'>Пошаговый план маршрута</h2>
-          <p>Добавить план:</p>
+          <p className={styles.stepsTitle}>Добавить план:</p>
           <fieldset className={styles.stepField}>
             <legend className='visually-hidden'>Выбор даты и участников</legend>
-            <p>Шаг 1. Даты пребывания</p>
-            <p>Укажите предпочтительное количество попутчиков, которых
-              вы хотели бы позвать в поездку, и ее предполагаемую длительность.</p>
+            <div className={styles.stepContent}>
+              <div className={styles.stepIntro}>
+                <p className={styles.stepTitle}>Шаг 1. Даты пребывания</p>
+                <p className={styles.stepDescription}>Укажите предпочтительное количество попутчиков, которых<br /> вы хотели бы позвать в поездку, и ее предполагаемую длительность.</p>
+              </div>
+              <ul className={styles.stepList}>
+                <li className={styles.stepItem}>Даты</li>
+                <li className={styles.stepItem}>Маршрут</li>
+                <li className={styles.stepItem}>Развлечения</li>
+              </ul>
+            </div>
             {/* Поля формы */}
           </fieldset>
           <fieldset className={styles.stepField}>
             <legend className='visually-hidden'>Выбор маршрута</legend>
-            <p>Шаг 2. Маршрут</p>
-            <p>Укажите страны, которые вы хотели бы посетить.
-              Это может быть одна или сразу несколько.</p>
+            <div className={styles.stepContent}>
+              <div className={styles.stepIntro}>
+                <p className={styles.stepTitle}>Шаг 2. Маршрут</p>
+                <p className={styles.stepDescription}>Укажите страны, которые вы хотели бы посетить.
+                  Это может быть одна или сразу несколько.</p>
+              </div>
+              <ul className={styles.stepList}>
+                <li className={styles.stepItem}>Даты</li>
+                <li className={styles.stepItem}>Маршрут</li>
+                <li className={styles.stepItem}>Развлечения</li>
+              </ul>
+            </div>
             {/* Поля формы */}
           </fieldset>
           <fieldset className={styles.stepField}>
             <legend className='visually-hidden'>Выбор развлечений</legend>
-            <p>Шаг 3. Развлечения</p>
-            <p>Наконец, расскажите о своих планах времяпровождения.
-              Можно писать в свободной форме и ставить тэги.
-            </p>
+            <div className={styles.stepContent}>
+              <div className={styles.stepIntro}>
+                <p className={styles.stepTitle}>Шаг 3. Развлечения</p>
+                <p className={styles.stepDescription}>Наконец, расскажите о своих планах времяпровождения.
+                  Можно писать в свободной форме и ставить тэги.
+                </p>
+              </div>
+              <ul className={styles.stepList}>
+                <li className={styles.stepItem}>Даты</li>
+                <li className={styles.stepItem}>Маршрут</li>
+                <li className={styles.stepItem}>Развлечения</li>
+              </ul>
+            </div>
             {/* Поля формы */}
           </fieldset>
         </div>
