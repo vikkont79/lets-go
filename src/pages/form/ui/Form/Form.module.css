@@ -98,6 +98,7 @@
 
 .stepContent {
   display: flex;
+  margin-block-end: 85px;
   justify-content: space-between;
   font-size: var(--font-size-sm);
   line-height: 24px;
@@ -133,4 +134,17 @@
 
 .stepItem:not(:last-child) {
   margin-block-end: var(--indent-6);
+}
+
+.counterInputs {
+  display: grid;
+  grid-template-columns: max-content min-content min-content;
+  row-gap: var(--indent-4);
+}
+
+.counterInput {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+  gap: var(--indent-8);
 }

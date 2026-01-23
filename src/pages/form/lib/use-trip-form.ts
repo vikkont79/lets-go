@@ -4,6 +4,8 @@ import type { FormData, TransportType } from "../types"
 const initialFormData: FormData = {
   tags: '',
   transport: [],
+  companions: 1,
+  duration: 2,
 }
 
 export const useTripForm = () => {
@@ -22,6 +24,14 @@ export const useTripForm = () => {
     }))
   }, [])
 
+  const handleCompanionsChange = useCallback((value: number) => {
+    setFormData(prev => ({ ...prev, companions: value }));
+  }, [])
+
+  const handleDurationChange = useCallback((value: number) => {
+    setFormData(prev => ({ ...prev, duration: value }));
+  }, [])
+
   const resetForm = useCallback(() => {
     setFormData(initialFormData)
   }, [])
@@ -37,6 +47,8 @@ export const useTripForm = () => {
     formData,
     handleTagsChange,
     handleToggleTransport,
+    handleCompanionsChange,
+    handleDurationChange,
     resetForm,
     validateForm,
   }

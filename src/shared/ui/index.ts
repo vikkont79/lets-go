@@ -4,4 +4,5 @@ export { Link } from './Link/Link'
 export { Icon, type IconProps } from './Icon/Icon'
 export { IconButton } from './IconButton/IconButton'
 export { Input } from './Input/Input'
+export { CounterInput } from './CounterInput/CounterInput'
 

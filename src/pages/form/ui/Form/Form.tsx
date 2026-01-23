@@ -1,15 +1,17 @@
-import { Image, Input } from '@/shared/ui'
-import styles from './Form.module.css'
+import { CounterInput, Image, Input } from '@/shared/ui'
 import level from '@assets/images/level.png'
 import avatar from '@assets/images/avatar.jpg'
 import { useTripForm } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
+import styles from './Form.module.css'
 
 const FormPage = () => {
   const {
     formData,
     handleTagsChange,
     handleToggleTransport,
+    handleCompanionsChange,
+    handleDurationChange,
   } = useTripForm()
 
   return (
@@ -70,7 +72,28 @@ const FormPage = () => {
                 <li className={styles.stepItem}>Развлечения</li>
               </ul>
             </div>
-            {/* Поля формы */}
+            <div className={styles.counterInputs}>
+              <CounterInput
+                className={styles.counterInput}
+                id='companions-input'
+                label='Ищу попутчиков:'
+                value={formData.companions}
+                unit='чел.'
+                onChange={handleCompanionsChange}
+                min={1}
+                max={10}
+              />
+              <CounterInput
+                className={styles.counterInput}
+                id='duration'
+                label='Длительность:'
+                value={formData.duration}
+                unit='дн.'
+                onChange={handleDurationChange}
+                min={2}
+                max={31}
+              />
+            </div>
           </fieldset>
           <fieldset className={styles.stepField}>
             <legend className='visually-hidden'>Выбор маршрута</legend>

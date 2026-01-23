@@ -6,5 +6,7 @@ export type TransportType = typeof TRANSPORT_OPTIONS[number];
 export interface FormData {
   tags: string;
   transport: TransportType[];
+  companions: number;
+  duration: number;
 }
 
