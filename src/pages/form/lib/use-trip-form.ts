@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react"
-import type { FormData, TransportType } from "../types"
+import type { FormData, TransportType, TripDateRange } from "../types"
+import { addDays } from "date-fns"
 
 const initialFormData: FormData = {
   tags: '',
@@ -34,10 +35,6 @@ export const useTripForm = () => {
 
   const handleDurationChange = useCallback((value: number) => {
     setFormData(prev => ({ ...prev, duration: value }))
-  }, [])
-
-  const handleDateChange = useCallback((newRange: TripDateRange) => {
-    setFormData(prev => ({ ...prev, dates: newRange }))
   }, [])
 
   const handleDateChange = useCallback((newRange: TripDateRange) => {
