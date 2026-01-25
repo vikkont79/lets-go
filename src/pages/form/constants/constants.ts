@@ -1,1 +1,1 @@
-export const TRANSPORT_OPTIONS = ['plane', 'bus', 'bicycle', 'run',] as const;
+export const TRANSPORT_OPTIONS = ['plane', 'bus', 'bicycle', 'run',] as const
