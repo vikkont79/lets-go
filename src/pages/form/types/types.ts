@@ -8,5 +8,11 @@ export interface FormData {
   transport: TransportType[];
   companions: number;
   duration: number;
+  dates: TripDateRange;
 }
+
+export type TripDateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
+} | undefined;
 

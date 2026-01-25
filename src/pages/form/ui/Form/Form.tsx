@@ -1,9 +1,10 @@
-import { CounterInput, Image, Input } from '@/shared/ui'
+import { Button, CounterInput, Image, Input } from '@/shared/ui'
 import level from '@assets/images/level.png'
 import avatar from '@assets/images/avatar.jpg'
 import { useTripForm } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'
+import { DatePicker } from '../DatePicker/DatePicker'
 
 const FormPage = () => {
   const {
@@ -12,6 +13,7 @@ const FormPage = () => {
     handleToggleTransport,
     handleCompanionsChange,
     handleDurationChange,
+    handleDateChange,
   } = useTripForm()
 
   return (
@@ -93,6 +95,14 @@ const FormPage = () => {
                 min={2}
                 max={31}
               />
+            </div>
+            <DatePicker
+              value={formData.dates}
+              onChange={handleDateChange}
+            />
+            <div className={styles.stepsNav}>
+              <Button>Следующий шаг</Button>
+              <Button>На шаг назад</Button>
             </div>
           </fieldset>
           <fieldset className={styles.stepField}>

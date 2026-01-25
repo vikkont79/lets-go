@@ -148,3 +148,9 @@
   grid-template-columns: subgrid;
   gap: var(--indent-8);
 }
+
+.stepsNav {
+  display: flex;
+  justify-content: space-between;
+  margin-block-start: 60px;
+}

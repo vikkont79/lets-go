@@ -26,8 +26,8 @@ const Input = ({
   ...props
 }: InputProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.target.value);
-  };
+    onChange(e.target.value)
+  }
 
   return (
     <label
