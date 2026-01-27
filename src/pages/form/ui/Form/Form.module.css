@@ -89,7 +89,7 @@
 
 .stepField {
   margin-inline: 0;
-  margin-block-end: 72px;
+  margin-block-end: 132px;
   padding-inline: 160px;
   padding-block: 100px;
   border-radius: 60px;
@@ -121,20 +121,7 @@
   color: var(--color-neutral-500);
 }
 
-.stepList {
-  margin-block: 0;
-  padding-inline-start: 44px;
-}
 
-.stepItem {
-  color: var(--color-black);
-  text-transform: uppercase;
-  opacity: 0.6;
-}
-
-.stepItem:not(:last-child) {
-  margin-block-end: var(--indent-6);
-}
 
 .counterInputs {
   display: grid;

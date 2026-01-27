@@ -6,13 +6,19 @@ import styles from './TransportSelector.module.css'
 type TransportSelectorProps = {
   selected: TransportType[];
   onChange: (type: TransportType) => void;
+  error?: string;
+
 }
 
 const TransportSelector = ({
   selected,
   onChange,
+  error,
 }: TransportSelectorProps) => (
-  <fieldset className={styles.field}>
+  <fieldset
+    className={styles.field}
+    data-invalid={!!error}
+  >
     <legend className={styles.fieldTitle}>
       транспорт
     </legend>

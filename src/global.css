@@ -38,6 +38,8 @@
   --color-neutral-500: #444444;
   --color-neutral-600: #3f4251;
 
+  --color-error: #ff0000;
+
   /* ----- ТИПОГРАФИКА ----- */
   --font-family-sans: 'Roboto', sans-serif;
   --font-family-mono: 'Roboto Mono', SFMono-Regular, Menlo, monospace;

@@ -55,3 +55,7 @@
     }
   }
 }
+
+.field[data-invalid="true"] {
+  border-color: red;
+}

@@ -6,7 +6,6 @@ interface InputProps extends BaseInputProps, Omit<React.InputHTMLAttributes<HTML
   label: string;
   hiddenLabel?: boolean;
   error?: string;
-  isInvalid?: boolean;
   size?: Size;
 }
 
@@ -19,7 +18,6 @@ const Input = ({
   label,
   hiddenLabel,
   error,
-  isInvalid = false,
   size = 'base',
   id,
   type = 'text',
@@ -32,7 +30,7 @@ const Input = ({
   return (
     <label
       className={`${styles.inputWrapper} ${className || ''}`.trim()}
-      data-invalid={isInvalid}
+      data-invalid={!!error}
     >
       <span className={hiddenLabel ? 'visually-hidden' : styles.label}>{label}</span>
       <input
@@ -43,7 +41,7 @@ const Input = ({
         id={id}
         onChange={handleChange}
         disabled={disabled}
-        aria-invalid={isInvalid}
+        aria-invalid={!!error}
         {...props}
       />
       {error && (

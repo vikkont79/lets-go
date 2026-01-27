@@ -15,7 +15,7 @@
 .input {
   position: relative;
   flex-grow: 1;
-  border: none;
+  border: 1px solid transparent;
   border-radius: 10px;
   outline: none;
   background-color: transparent;
@@ -28,17 +28,12 @@
   top: 100%;
   color: var(--color-error);
   font-weight: 500;
-  opacity: 0;
-  transition: opacity 0.2s
+  line-height: 2;
 }
 
 .base {
   padding-inline: 32px;
   padding-block: 24px 36px;
-}
-
-.inputWrapper[data-invalid="true"] .error {
-  opacity: 1;
 }
 
 .inputWrapper[data-invalid="true"] .input {

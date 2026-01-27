@@ -15,6 +15,7 @@ const initialFormData: FormData = {
 
 export const useTripForm = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData)
+  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
 
   const handleTagsChange = useCallback((value: string) => {
     setFormData(prev => ({ ...prev, tags: value }))
@@ -45,22 +46,29 @@ export const useTripForm = () => {
     setFormData(initialFormData)
   }, [])
 
-  const validateForm = useCallback((): boolean => {
-    return (
-      formData.tags.trim().length > 0 &&
-      formData.transport.length > 0
-    )
-  }, [formData])
+  const goToNextStep = useCallback(() => {
+    if (currentStep < 3) {
+      setCurrentStep(prev => (prev + 1) as 1 | 2 | 3);
+    }
+  }, [currentStep]);
+
+  const goToPrevStep = useCallback(() => {
+    if (currentStep > 1) {
+      setCurrentStep(prev => (prev - 1) as 1 | 2 | 3);
+    }
+  }, [currentStep]);
 
   return {
     formData,
+    currentStep,
     handleTagsChange,
     handleToggleTransport,
     handleCompanionsChange,
     handleDurationChange,
     handleDateChange,
+    goToNextStep,
+    goToPrevStep,
     resetForm,
-    validateForm,
   }
 }
 
