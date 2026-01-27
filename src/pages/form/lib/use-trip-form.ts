@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import type { FormData, TransportType, TripDateRange } from "../types"
+import type { FormData, SimpleCountry, TransportType, TripDateRange } from "../types"
 import { addDays } from "date-fns"
 
 const initialFormData: FormData = {
@@ -10,7 +10,8 @@ const initialFormData: FormData = {
   dates: {
     from: new Date(),
     to: addDays(new Date(), 1)
-  }
+  },
+  countries: [],
 }
 
 export const useTripForm = () => {
@@ -42,6 +43,20 @@ export const useTripForm = () => {
     setFormData(prev => ({ ...prev, dates: newRange }))
   }, [])
 
+  const handleAddCountry = useCallback((country: SimpleCountry) => {
+    setFormData(prev => ({
+      ...prev,
+      countries: [...prev.countries, country]
+    }));
+  }, []);
+
+  const handleRemoveCountry = useCallback((index: number) => {
+    setFormData(prev => ({
+      ...prev,
+      countries: prev.countries.filter((_, i) => i !== index)
+    }));
+  }, []);
+
   const resetForm = useCallback(() => {
     setFormData(initialFormData)
   }, [])
@@ -66,6 +81,8 @@ export const useTripForm = () => {
     handleCompanionsChange,
     handleDurationChange,
     handleDateChange,
+    handleAddCountry,
+    handleRemoveCountry,
     goToNextStep,
     goToPrevStep,
     resetForm,

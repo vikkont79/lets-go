@@ -9,10 +9,13 @@ export interface FormData {
   companions: number;
   duration: number;
   dates: TripDateRange;
+  countries: SimpleCountry[];
 }
 
 export type TripDateRange = {
   from: Date | undefined;
   to?: Date | undefined;
 } | undefined;
+
+export type SimpleCountry = 'a' | 'b' | 'c';
 

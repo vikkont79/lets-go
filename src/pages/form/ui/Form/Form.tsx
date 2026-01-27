@@ -8,6 +8,7 @@ import { DatePicker } from '../DatePicker/DatePicker'
 import { StepList } from '../StepList/StepList'
 import { useCallback, useState } from 'react'
 import { StepsNav } from '../StepsNav/StepsNav'
+import { CountrySelect } from '../CountrySelect/CountrySelect'
 
 const FormPage = () => {
   const {
@@ -18,6 +19,8 @@ const FormPage = () => {
     handleCompanionsChange,
     handleDurationChange,
     handleDateChange,
+    handleAddCountry,
+    handleRemoveCountry,
     goToNextStep,
     goToPrevStep,
   } = useTripForm()
@@ -107,7 +110,6 @@ const FormPage = () => {
                   id='companions-input'
                   label='Ищу попутчиков:'
                   value={formData.companions}
-
                   unit='чел.'
                   onChange={handleCompanionsChange}
                   min={1}
@@ -148,7 +150,11 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              {/* Поля формы */}
+              <CountrySelect
+                selected={formData.countries}
+                onAdd={handleAddCountry}
+                onRemove={handleRemoveCountry}
+              />
               <StepsNav
                 currentStep={currentStep}
                 onNext={handleNextClick}
