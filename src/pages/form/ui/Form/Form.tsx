@@ -1,4 +1,4 @@
-import { Button, CounterInput, Image, Input } from '@/shared/ui'
+import { CounterInput, Image, Input } from '@/shared/ui'
 import level from '@assets/images/level.png'
 import avatar from '@assets/images/avatar.jpg'
 import { useTripForm, validateStep } from '../../lib'
@@ -6,7 +6,8 @@ import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'
 import { DatePicker } from '../DatePicker/DatePicker'
 import { StepList } from '../StepList/StepList'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { StepsNav } from '../StepsNav/StepsNav'
 
 const FormPage = () => {
   const {
@@ -23,7 +24,7 @@ const FormPage = () => {
 
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({});
 
-  const handleNextClick = () => {
+  const handleNextClick = useCallback(() => {
     const stepKey = `step${currentStep}` as const;
     const validation = validateStep(stepKey, formData);
 
@@ -32,15 +33,14 @@ const FormPage = () => {
       return;
     }
 
-    // 3. Если ошибок нет:
-    setStepErrors({}); // Очищаем ошибки
-    goToNextStep();     // Переходим к шагу 2
-  }
+    setStepErrors({});
+    goToNextStep();
+  }, [currentStep, formData, goToNextStep])
 
-  const handleBackClick = () => {
-    setStepErrors({});    // Очищаем ошибки
-    goToPrevStep();       // Переходим назад
-  }
+  const handleBackClick = useCallback(() => {
+    setStepErrors({});
+    goToPrevStep();
+  }, [goToPrevStep])
 
   return (
     <main className={styles.main}>
@@ -128,14 +128,11 @@ const FormPage = () => {
                 value={formData.dates}
                 onChange={handleDateChange}
               />
-              <div className={styles.stepsNav}>
-                <Button
-                  onClick={handleNextClick}
-                >Следующий шаг</Button>
-                <Button
-                  onClick={handleBackClick}
-                >На шаг назад</Button>
-              </div>
+              <StepsNav
+                currentStep={currentStep}
+                onNext={handleNextClick}
+                onBack={handleBackClick}
+              />
             </fieldset>
           )}
           {currentStep === 2 && (
@@ -152,14 +149,11 @@ const FormPage = () => {
                 />
               </div>
               {/* Поля формы */}
-              <div className={styles.stepsNav}>
-                <Button
-                  onClick={handleNextClick}
-                >Следующий шаг</Button>
-                <Button
-                  onClick={handleBackClick}
-                >На шаг назад</Button>
-              </div>
+              <StepsNav
+                currentStep={currentStep}
+                onNext={handleNextClick}
+                onBack={handleBackClick}
+              />
             </fieldset>
           )}
           {currentStep === 3 && (
@@ -177,14 +171,11 @@ const FormPage = () => {
                 />
               </div>
               {/* Поля формы */}
-              <div className={styles.stepsNav}>
-                <Button
-                  onClick={handleNextClick}
-                >Следующий шаг</Button>
-                <Button
-                  onClick={handleBackClick}
-                >На шаг назад</Button>
-              </div>
+              <StepsNav
+                currentStep={currentStep}
+                onNext={handleNextClick}
+                onBack={handleBackClick}
+              />
             </fieldset>
           )}
         </div>

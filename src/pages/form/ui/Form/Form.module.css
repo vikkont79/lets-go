@@ -121,8 +121,6 @@
   color: var(--color-neutral-500);
 }
 
-
-
 .counterInputs {
   display: grid;
   grid-template-columns: max-content min-content min-content;
@@ -134,10 +132,4 @@
   grid-column: 1/-1;
   grid-template-columns: subgrid;
   gap: var(--indent-8);
-}
-
-.stepsNav {
-  display: flex;
-  justify-content: space-between;
-  margin-block-start: 60px;
 }

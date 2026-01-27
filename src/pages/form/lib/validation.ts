@@ -34,8 +34,38 @@ export const stepValidators = {
       message: 'От 2 до 31 дней',
     },
   },
-  step2: {},
-  step3: {},
+  step2: {
+    tags: {
+      validate: (value: string): boolean => {
+        const trimmed = value.trim();
+        return trimmed.split(/[\s,]+/).some(tag =>
+          tag.startsWith('#') && tag.length > 1
+        )
+      },
+      message: 'Добавьте хотя бы один тег с #',
+    },
+
+    transport: {
+      validate: (value: TransportType[]): boolean => value.length > 0,
+      message: 'Выберите способ передвижения',
+    },
+  },
+  step3: {
+    tags: {
+      validate: (value: string): boolean => {
+        const trimmed = value.trim();
+        return trimmed.split(/[\s,]+/).some(tag =>
+          tag.startsWith('#') && tag.length > 1
+        )
+      },
+      message: 'Добавьте хотя бы один тег с #',
+    },
+
+    transport: {
+      validate: (value: TransportType[]): boolean => value.length > 0,
+      message: 'Выберите способ передвижения',
+    },
+  },
 } as const
 
 export type StepKey = keyof typeof stepValidators;
