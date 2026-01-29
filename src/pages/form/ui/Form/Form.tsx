@@ -21,6 +21,7 @@ const FormPage = () => {
     handleDateChange,
     handleAddCountry,
     handleRemoveCountry,
+    handleReplaceCountry,
     goToNextStep,
     goToPrevStep,
   } = useTripForm()
@@ -154,6 +155,7 @@ const FormPage = () => {
                 selected={formData.countries}
                 onAdd={handleAddCountry}
                 onRemove={handleRemoveCountry}
+                onReplace={handleReplaceCountry}
               />
               <StepsNav
                 currentStep={currentStep}

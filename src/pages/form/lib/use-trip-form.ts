@@ -57,6 +57,15 @@ export const useTripForm = () => {
     }));
   }, []);
 
+  const handleReplaceCountry = useCallback((index: number, newCountry: SimpleCountry) => {
+    setFormData(prev => ({
+      ...prev,
+      countries: prev.countries.map((country, i) =>
+        i === index ? newCountry : country
+      )
+    }));
+  }, []);
+
   const resetForm = useCallback(() => {
     setFormData(initialFormData)
   }, [])
@@ -83,6 +92,7 @@ export const useTripForm = () => {
     handleDateChange,
     handleAddCountry,
     handleRemoveCountry,
+    handleReplaceCountry,
     goToNextStep,
     goToPrevStep,
     resetForm,

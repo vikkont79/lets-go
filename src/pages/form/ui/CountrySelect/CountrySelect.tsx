@@ -1,75 +1,92 @@
+import { useCallback, useEffect, useState } from "react"
+import { CountryDropdown } from "../CountryDropdown/CountryDropdown";
+
 // Временный тип для прототипа
 type SimpleCountry = 'a' | 'b' | 'c';
 
 interface CountrySelectProps {
-  // Массив выбранных "стран" (пока a, b, c)
   selected: SimpleCountry[];
-  // Добавить "страну" в конец массива
   onAdd: (country: SimpleCountry) => void;
-  // Удалить "страну" по индексу
   onRemove: (index: number) => void;
+  onReplace: (index: number, country: SimpleCountry) => void;
 }
 
-const CountrySelect = ({ selected, onAdd, onRemove }: CountrySelectProps) => {
+const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectProps) => {
   // Временное состояние для опций
-  const allCountries: SimpleCountry[] = ['a', 'b', 'c'];
+  const allCountries: SimpleCountry[] = ['a', 'b', 'c']
+  const [isOpen, setIsOpen] = useState(false)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  const handleOpenDropdown = useCallback((index: number) => {
+    setActiveIndex(index);
+    setIsOpen(true)
+  }, [])
+  const handleAddCountry = useCallback((country: SimpleCountry) => {
+    onAdd(country)
+    setIsOpen(false)
+  }, [onAdd])
+  const handleReplaceCountry = useCallback((country: SimpleCountry) => {
+    if (activeIndex !== null) {
+      onReplace(activeIndex, country);
+      setIsOpen(false);
+    }
+  }, [activeIndex, onReplace]);
+  const handleRemoveCountry = useCallback((index: number) => {
+    onRemove(index)
+  }, [onRemove])
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isOpen]);
 
   return (
     <div>
       {selected.map((country, index) => (
-        <div key={`${country}-${index}`}>
-          <select
-            value={country}
-            onChange={(e) => {
-              const newValue = e.target.value as SimpleCountry;
-              if (!newValue) {
-                // Если выбрали пустое значение — удаляем страну
-                onRemove(index);
-              } else {
-                // Если выбрали другую страну — добавляем новую
-                onAdd(newValue);
-              }
-            }}
+        <div key={`${country}-${index}`} style={{ position: 'relative' }}>
+          <button
+            type='button'
+            onClick={() => handleOpenDropdown(index)}
           >
-            <option value="">-- Удалить --</option>
-            {allCountries.map(opt => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
-
-
+            {country}
+          </button>
           <button
             type="button"
-            onClick={() => onRemove(index)}
+            onClick={() => handleRemoveCountry(index)}
           >
             ×
           </button>
+          {isOpen && activeIndex === index && (
+            <CountryDropdown
+              allCountries={allCountries}
+              onCountrySelect={handleReplaceCountry}
+            />
+          )}
         </div>
       ))}
 
       {selected.length < 4 && (
-        <div>
-          <select
-            value=""
-            onChange={(e) => {
-              const newValue = e.target.value as SimpleCountry;
-              if (newValue) {
-                onAdd(newValue);
-              }
-            }}
+        <div style={{ position: 'relative' }}>
+          <button
+            type='button'
+            onClick={() => handleOpenDropdown(-1)}
           >
-            <option value="">-- Выберите --</option>
-            {allCountries.map(opt => (
-              <option key={opt} value={opt}>
-                {opt}
-              </option>
-            ))}
-          </select>
+            -- Добавить страну --
+          </button>
+          {isOpen && activeIndex === -1 && (
+            <CountryDropdown
+              allCountries={allCountries}
+              onCountrySelect={handleAddCountry}
+            />
+          )}
         </div>
       )}
-    </div>
+    </div >
   );
 };
 
