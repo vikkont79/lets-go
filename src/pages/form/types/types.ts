@@ -1,3 +1,4 @@
+import type { Country } from "@/features/country-dropdown/model/countries";
 import type { TRANSPORT_OPTIONS } from "../constants";
 
 
@@ -9,7 +10,7 @@ export interface FormData {
   companions: number;
   duration: number;
   dates: TripDateRange;
-  countries: SimpleCountry[];
+  countries: Country[];
 }
 
 export type TripDateRange = {
@@ -17,5 +18,5 @@ export type TripDateRange = {
   to?: Date | undefined;
 } | undefined;
 
-export type SimpleCountry = 'a' | 'b' | 'c';
+
 

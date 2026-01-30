@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react"
-import type { FormData, SimpleCountry, TransportType, TripDateRange } from "../types"
+import type { FormData, TransportType, TripDateRange } from "../types"
 import { addDays } from "date-fns"
+import type { Country } from "@/features/country-dropdown/model/countries"
 
 const initialFormData: FormData = {
   tags: '',
@@ -16,7 +17,7 @@ const initialFormData: FormData = {
 
 export const useTripForm = () => {
   const [formData, setFormData] = useState<FormData>(initialFormData)
-  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(1)
+  const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(2)
 
   const handleTagsChange = useCallback((value: string) => {
     setFormData(prev => ({ ...prev, tags: value }))
@@ -43,7 +44,7 @@ export const useTripForm = () => {
     setFormData(prev => ({ ...prev, dates: newRange }))
   }, [])
 
-  const handleAddCountry = useCallback((country: SimpleCountry) => {
+  const handleAddCountry = useCallback((country: Country) => {
     setFormData(prev => ({
       ...prev,
       countries: [...prev.countries, country]
@@ -57,7 +58,7 @@ export const useTripForm = () => {
     }));
   }, []);
 
-  const handleReplaceCountry = useCallback((index: number, newCountry: SimpleCountry) => {
+  const handleReplaceCountry = useCallback((index: number, newCountry: Country) => {
     setFormData(prev => ({
       ...prev,
       countries: prev.countries.map((country, i) =>

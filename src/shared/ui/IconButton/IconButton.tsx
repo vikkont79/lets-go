@@ -32,7 +32,7 @@ const IconButton = ({
         label={iconLabel || (typeof children === 'string' ? children : undefined)}
         className={styles.icon}
       />
-      {children && <span className={styles.text}>{children}</span>}
+      {children && <span>{children}</span>}
     </Button>
   )
 }

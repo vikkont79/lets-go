@@ -1,19 +1,17 @@
-import { useCallback, useEffect, useState } from "react"
-import { CountryDropdown } from "../CountryDropdown/CountryDropdown";
-
-// Временный тип для прототипа
-type SimpleCountry = 'a' | 'b' | 'c';
+import { useCallback, useEffect, useState } from 'react'
+import { CountryDropdown } from '@/features/country-dropdown/ui/CountryDropdown/CountryDropdown'
+import { IconButton } from '@/shared/ui';
+import styles from './CountrySelect.module.css'
+import type { Country } from '@/features/country-dropdown/model/countries';
 
 interface CountrySelectProps {
-  selected: SimpleCountry[];
-  onAdd: (country: SimpleCountry) => void;
+  selected: Country[];
+  onAdd: (country: Country) => void;
   onRemove: (index: number) => void;
-  onReplace: (index: number, country: SimpleCountry) => void;
+  onReplace: (index: number, country: Country) => void;
 }
 
 const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectProps) => {
-  // Временное состояние для опций
-  const allCountries: SimpleCountry[] = ['a', 'b', 'c']
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -21,11 +19,11 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectPr
     setActiveIndex(index);
     setIsOpen(true)
   }, [])
-  const handleAddCountry = useCallback((country: SimpleCountry) => {
+  const handleAddCountry = useCallback((country: Country) => {
     onAdd(country)
     setIsOpen(false)
   }, [onAdd])
-  const handleReplaceCountry = useCallback((country: SimpleCountry) => {
+  const handleReplaceCountry = useCallback((country: Country) => {
     if (activeIndex !== null) {
       onReplace(activeIndex, country);
       setIsOpen(false);
@@ -34,6 +32,9 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectPr
   const handleRemoveCountry = useCallback((index: number) => {
     onRemove(index)
   }, [onRemove])
+  const handleCloseDropdown = useCallback(() => {
+    setIsOpen(false)
+  }, [])
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -46,42 +47,65 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectPr
   }, [isOpen]);
 
   return (
-    <div>
+    <div className={styles.selects}>
       {selected.map((country, index) => (
-        <div key={`${country}-${index}`} style={{ position: 'relative' }}>
-          <button
-            type='button'
+        <div
+          key={`${country}-${index}`}
+          className={styles.select}
+        >
+          <IconButton
+            className={styles.selectButton}
+            icon='arrow-down'
+            iconPosition='right'
+            variant='transparent'
             onClick={() => handleOpenDropdown(index)}
           >
-            {country}
-          </button>
-          <button
-            type="button"
+            {country.name_ru}
+          </IconButton>
+          <img
+            src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
+            alt={country.name_ru}
+            className={styles.flag}
+            width={70}
+            height={47}
+            onError={(e) => {
+              // fallback: скрыть или поставить заглушку
+              (e.currentTarget as HTMLImageElement).style.display = 'none';
+            }}
+          />
+          <IconButton
+            className={styles.close}
+            icon='close'
+            variant='transparent'
             onClick={() => handleRemoveCountry(index)}
-          >
-            ×
-          </button>
+          />
           {isOpen && activeIndex === index && (
             <CountryDropdown
-              allCountries={allCountries}
               onCountrySelect={handleReplaceCountry}
+              onCloseButton={handleCloseDropdown}
             />
           )}
         </div>
       ))}
 
       {selected.length < 4 && (
-        <div style={{ position: 'relative' }}>
-          <button
-            type='button'
+        <div
+          className={styles.select}
+        >
+          <IconButton
+            className={styles.selectButton}
+            icon='plus'
+            iconSize={20}
+            iconPosition='right'
+            variant='transparent'
             onClick={() => handleOpenDropdown(-1)}
           >
-            -- Добавить страну --
-          </button>
+            Добавить страну
+          </IconButton>
           {isOpen && activeIndex === -1 && (
             <CountryDropdown
-              allCountries={allCountries}
               onCountrySelect={handleAddCountry}
+              onCloseButton={handleCloseDropdown}
             />
           )}
         </div>

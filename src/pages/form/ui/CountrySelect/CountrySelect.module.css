@@ -1,0 +1,52 @@
+.selects {
+  display: grid;
+  grid-template-columns: max-content 1fr 1fr;
+  row-gap: var(--indent-4);
+}
+
+.select {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1/-1;
+  position: relative;
+  align-items: center;
+  text-align: start;
+}
+
+.selectButton {
+  min-inline-size: 730px;
+  justify-content: space-between;
+  padding: 24px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-transform: uppercase;
+
+  &:hover,
+  &:active,
+  &:focus,
+  &:focus-visible {
+    background-color: var(--color-neutral-200);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: -2px;
+  }
+}
+
+.flag {
+  justify-self: center;
+}
+
+.close {
+  padding: var(--indent-6);
+  justify-self: end;
+  align-self: center;
+  border: none;
+  color: var(--color-black);
+  opacity: 0.5;
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -144,7 +144,7 @@ const FormPage = () => {
               <div className={styles.stepContent}>
                 <div className={styles.stepIntro}>
                   <p className={styles.stepTitle}>Шаг 2. Маршрут</p>
-                  <p className={styles.stepDescription}>Укажите страны, которые вы хотели бы посетить.
+                  <p className={styles.stepDescription}>Укажите страны, которые вы хотели бы посетить.<br />
                     Это может быть одна или сразу несколько.</p>
                 </div>
                 <StepList
