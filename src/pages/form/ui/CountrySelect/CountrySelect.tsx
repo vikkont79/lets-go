@@ -9,9 +9,10 @@ interface CountrySelectProps {
   onAdd: (country: Country) => void;
   onRemove: (index: number) => void;
   onReplace: (index: number, country: Country) => void;
+  error?: string;
 }
 
-const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectProps) => {
+const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountrySelectProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -102,6 +103,9 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace }: CountrySelectPr
           >
             Добавить страну
           </IconButton>
+          {error && (
+            <span className={styles.error}>{error}</span>
+          )}
           {isOpen && activeIndex === -1 && (
             <CountryDropdown
               onCountrySelect={handleAddCountry}

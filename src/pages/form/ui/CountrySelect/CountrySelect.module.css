@@ -5,11 +5,14 @@
 }
 
 .select {
+  position: relative;
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1/-1;
   position: relative;
   align-items: center;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
   text-align: start;
 }
 
@@ -17,8 +20,6 @@
   min-inline-size: 730px;
   justify-content: space-between;
   padding: 24px;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
   text-transform: uppercase;
 
   &:hover,
@@ -49,4 +50,16 @@
   &:hover {
     opacity: 1;
   }
+}
+
+.error {
+  position: absolute;
+  left: var(--indent-3);
+  top: 100%;
+  color: var(--color-error);
+  line-height: 2;
+}
+
+.select:has(.error) .selectButton {
+  border-color: var(--color-error);
 }

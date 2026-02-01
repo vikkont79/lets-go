@@ -156,6 +156,7 @@ const FormPage = () => {
                 onAdd={handleAddCountry}
                 onRemove={handleRemoveCountry}
                 onReplace={handleReplaceCountry}
+                error={stepErrors.countries}
               />
               <StepsNav
                 currentStep={currentStep}

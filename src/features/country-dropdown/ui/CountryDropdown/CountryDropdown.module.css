@@ -33,6 +33,7 @@
 .alfabet {
   display: grid;
   grid-template-columns: repeat(5, min-content);
+  grid-template-rows: repeat(5, min-content);
   gap: var(--indent-4);
   padding-inline-start: var(--indent-6);
   padding-block: var(--indent-8);

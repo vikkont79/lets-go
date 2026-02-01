@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Button, IconButton } from '@/shared/ui'
 import styles from './CountryDropdown.module.css'
-import { fetchCountriesByLetter } from '../../api/mock-countries';
+import { fetchCountries } from '../../api/mock-server-countries';
 import type { Country } from '../../model/countries';
 
 interface CountryDropdownProps {
@@ -10,14 +10,31 @@ interface CountryDropdownProps {
 }
 
 const CountryDropdown = ({ onCountrySelect, onCloseButton }: CountryDropdownProps) => {
+  const [allCountries, setAllCountries] = useState<Country[]>([]);
   const [countries, setCountries] = useState<Country[]>([]);
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
-  const handleLetterClick = useCallback(async (letter: string) => {
-    const countries = await fetchCountriesByLetter(letter)
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const data = await fetchCountries()
+        setAllCountries(data)
+      } catch (error) {
+        console.error('Failed to fetch countries:', error);
+      }
+    }
+    loadData()
+  }, [])
+
+  const handleLetterClick = useCallback((letter: string) => {
+    const normalizedLetter = letter.toLowerCase();
+    const countries = allCountries
+      .filter(country => country.name_ru.toLowerCase().startsWith(normalizedLetter))
+      .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))
     setCountries(countries)
     setIsCountryOpen(true)
-  }, [])
+  }, [allCountries])
+
   const handleCountrySelect = useCallback((country: Country) => {
     onCountrySelect(country)
     setIsCountryOpen(false)

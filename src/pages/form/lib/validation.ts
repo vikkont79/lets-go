@@ -1,3 +1,4 @@
+import type { Country } from '@/features/country-dropdown/model/countries';
 import type { FormData, TransportType, TripDateRange } from '../types'
 
 export const stepValidators = {
@@ -26,7 +27,6 @@ export const stepValidators = {
       validate: (value: number): boolean => value >= 2 && value <= 31,
       message: 'От 2 до 31 дней',
     },
-
     dates: {
       validate: (value: TripDateRange): boolean => {
         return !!(value?.from && value?.to)
@@ -44,10 +44,13 @@ export const stepValidators = {
       },
       message: 'Добавьте хотя бы один тег с #',
     },
-
     transport: {
       validate: (value: TransportType[]): boolean => value.length > 0,
       message: 'Выберите способ передвижения',
+    },
+    countries: {
+      validate: (value: Country[]): boolean => value.length > 0,
+      message: 'Выберите страну',
     },
   },
   step3: {
