@@ -57,8 +57,8 @@ const FormPage = () => {
         <Image
           src={level}
           alt='Уровень попутчика'
-          width={95}
-          height={95}
+          width={94}
+          height={94}
         />
         <Image
           className={styles.avatar}

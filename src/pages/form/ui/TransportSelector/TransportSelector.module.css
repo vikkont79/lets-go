@@ -21,6 +21,10 @@
   padding-inline: 104px;
   padding-block: 14px var(--indent-6);
   list-style-type: none;
+
+  @media(max-width: 321px) {
+    padding-inline: 70px;
+  }
 }
 
 .transportButton {

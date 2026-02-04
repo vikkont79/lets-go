@@ -21,6 +21,18 @@
   font-variant: small-caps;
   text-transform: uppercase;
   text-align: start;
+
+  @media(max-width: 769px) {
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
+  @media(max-width: 321px) {
+    padding-inline: var(--indent-6);
+    padding-block: 60px var(--indent-3);
+
+    font-size: var(--font-size-xxl);
+  }
 }
 
 .user {
@@ -30,10 +42,24 @@
   display: flex;
   align-items: start;
   gap: 40px;
+
+  @media(max-width: 769px) {
+    top: 326px;
+    right: 75px;
+    gap: 430px;
+  }
+
+  @media(max-width: 321px) {
+    display: none;
+  }
 }
 
 .avatar {
   border-radius: var(--border-radius-lg);
+
+  @media(max-width: 769px) {
+    inline-size: 94px;
+  }
 }
 
 .baseFields {
@@ -61,6 +87,8 @@
     .fieldTitle {
       margin-inline: 40px auto;
     }
+
+
   }
 
   .fieldTitle {
@@ -70,6 +98,12 @@
     text-transform: uppercase;
     letter-spacing: 9%;
   }
+
+  @media(max-width: 769px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
 }
 
 .stepFields {
@@ -77,6 +111,14 @@
   border-top-left-radius: 60px;
   border-top-right-radius: 60px;
   background-color: var(--color-primary-300);
+
+  @media(max-width: 769px) {
+    border-radius: 30px;
+  }
+
+  @media(max-width: 321px) {
+    padding-block-start: 30px;
+  }
 }
 
 .stepsTitle {
@@ -85,15 +127,36 @@
   font-size: var(--font-size-xxl);
   font-weight: 700;
   text-align: start;
+
+  @media(max-width: 769px) {
+    margin-block-end: var(--indent-8);
+    padding-inline-start: 0;
+  }
+
+  @media(max-width: 321px) {
+    font-size: var(--font-size-base);
+  }
 }
 
 .stepField {
   margin-inline: 0;
   margin-block-end: 132px;
-  padding-inline: 160px;
+  padding-inline: clamp(24px, 11vw, 160px);
   padding-block: 100px;
+  border: none;
   border-radius: 60px;
   background-color: var(--color-white);
+
+  @media(max-width: 769px) {
+    padding-inline: clamp(24px, 6vw, 40px);
+    padding-block: 50px;
+    border-radius: 30px;
+  }
+
+  @media(max-width: 321px) {
+    padding-block: var(--indent-6);
+    border-radius: 10px;
+  }
 }
 
 .stepContent {
@@ -103,6 +166,16 @@
   font-size: var(--font-size-sm);
   line-height: 24px;
   text-align: start;
+
+  @media(max-width: 769px) {
+    margin-block-end: var(--indent-8);
+  }
+
+  @media(max-width: 321px) {
+    margin-block-end: var(--indent-5);
+    font-size: 12px;
+    line-height: 22px;
+  }
 }
 
 .stepIntro {
@@ -114,6 +187,15 @@
   font-size: var(--font-size-xxl);
   line-height: 1;
   font-weight: 700;
+
+  @media(max-width: 769px) {
+    margin-block-end: 70px;
+  }
+
+  @media(max-width: 321px) {
+    margin-block-end: var(--indent-4);
+    font-size: var(--font-size-sm);
+  }
 }
 
 .stepDescription {

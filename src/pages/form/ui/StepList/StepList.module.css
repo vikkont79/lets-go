@@ -1,6 +1,10 @@
 .stepList {
   margin-block: 0;
   padding-inline-start: 44px;
+
+  @media(max-width: 769px) {
+    display: none;
+  }
 }
 
 .stepItem {

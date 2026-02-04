@@ -23,6 +23,10 @@
   padding-inline-start: 0;
   gap: var(--indent-4);
   list-style-type: none;
+
+  @media(max-width: 769px) {
+    display: none;
+  }
 }
 
 .navItem {

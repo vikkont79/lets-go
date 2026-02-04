@@ -2,4 +2,9 @@
   display: flex;
   justify-content: space-between;
   margin-block-start: 60px;
+
+  @media(max-width: 321px) {
+    flex-direction: column;
+    gap: var(--indent-2);
+  }
 }
