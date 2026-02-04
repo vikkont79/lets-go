@@ -7,9 +7,10 @@ import type { Country } from '../../model/countries';
 interface CountryDropdownProps {
   onCountrySelect: (country: Country) => void;
   onCloseButton: () => void;
+  className?: string;
 }
 
-const CountryDropdown = ({ onCountrySelect, onCloseButton }: CountryDropdownProps) => {
+const CountryDropdown = ({ onCountrySelect, onCloseButton, className }: CountryDropdownProps) => {
   const [allCountries, setAllCountries] = useState<Country[]>([]);
   const [countries, setCountries] = useState<Country[]>([]);
   const [isCountryOpen, setIsCountryOpen] = useState(false)
@@ -41,40 +42,44 @@ const CountryDropdown = ({ onCountrySelect, onCloseButton }: CountryDropdownProp
   }, [onCountrySelect])
 
   return (
-    <div className={styles.dropdown}>
-      <p className={styles.title}>Выберите страну</p>
+    <div className={`${styles.dropdown} ${className}`}>
       <IconButton
         className={styles.close}
         icon='close'
+        iconPosition='right'
         variant='transparent'
         onClick={onCloseButton}
-      />
-      <div className={styles.alfabet}>
-        {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
-          <Button
-            key={letter}
-            className={styles.letter}
-            variant='transparent'
-            onClick={() => handleLetterClick(letter)}
-          >
-            {letter}
-          </Button>
-        ))}
-      </div>
-      {isCountryOpen && (
-        <div className={styles.countries}>
-          {countries.map(country => (
+      >
+        Выберите страну
+      </IconButton>
+      <div className={styles.content}>
+        <div className={styles.alfabet}>
+          {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
             <Button
-              key={country.code}
-              className={styles.country}
+              key={letter}
+              className={styles.letter}
               variant='transparent'
-              onClick={() => handleCountrySelect(country)}
+              onClick={() => handleLetterClick(letter)}
             >
-              {country.name_ru}
+              {letter}
             </Button>
           ))}
         </div>
-      )}
+        {isCountryOpen && (
+          <div className={styles.countries}>
+            {countries.map(country => (
+              <Button
+                key={country.code}
+                className={styles.country}
+                variant='transparent'
+                onClick={() => handleCountrySelect(country)}
+              >
+                {country.name_ru}
+              </Button>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

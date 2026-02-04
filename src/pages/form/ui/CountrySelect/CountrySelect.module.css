@@ -1,6 +1,6 @@
 .selects {
   display: grid;
-  grid-template-columns: max-content 1fr 1fr;
+  grid-template-columns: 1fr min-content min-content;
   row-gap: var(--indent-4);
 }
 
@@ -9,18 +9,23 @@
   display: grid;
   grid-template-columns: subgrid;
   grid-column: 1/-1;
-  position: relative;
   align-items: center;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
   text-align: start;
 }
 
 .selectButton {
-  min-inline-size: 730px;
+  max-inline-size: 730px;
   justify-content: space-between;
-  padding: 24px;
+  padding: var(--indent-6);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
   text-transform: uppercase;
+
+  @media(max-width: 321px) {
+    padding: var(--indent-3);
+    font-size: 15px;
+    line-height: 18px;
+  }
 
   &:hover,
   &:active,
@@ -36,11 +41,20 @@
 }
 
 .flag {
+  display: inline-block;
+  min-inline-size: 70px;
+  margin-inline: var(--indent-6);
   justify-self: center;
+  object-fit: contain;
+
+  @media(max-width: 321px) {
+    min-inline-size: 35px;
+    margin-inline: var(--indent-2);
+  }
 }
 
 .close {
-  padding: var(--indent-6);
+  padding: 0;
   justify-self: end;
   align-self: center;
   border: none;
@@ -49,6 +63,18 @@
 
   &:hover {
     opacity: 1;
+  }
+}
+
+.countryDropdown {
+  position: relative;
+  top: -92px;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+
+  @media(max-width: 321px) {
+    top: -64px;
+    grid-template-columns: 1fr;
   }
 }
 

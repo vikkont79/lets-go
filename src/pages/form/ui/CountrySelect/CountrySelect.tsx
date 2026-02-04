@@ -82,8 +82,10 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           />
           {isOpen && activeIndex === index && (
             <CountryDropdown
+              className={styles.countryDropdown}
               onCountrySelect={handleReplaceCountry}
               onCloseButton={handleCloseDropdown}
+
             />
           )}
         </div>
@@ -106,13 +108,14 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           {error && (
             <span className={styles.error}>{error}</span>
           )}
-          {isOpen && activeIndex === -1 && (
-            <CountryDropdown
-              onCountrySelect={handleAddCountry}
-              onCloseButton={handleCloseDropdown}
-            />
-          )}
         </div>
+      )}
+      {isOpen && activeIndex === -1 && (
+        <CountryDropdown
+          className={styles.countryDropdown}
+          onCountrySelect={handleAddCountry}
+          onCloseButton={handleCloseDropdown}
+        />
       )}
     </div >
   );
