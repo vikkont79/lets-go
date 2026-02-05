@@ -30,7 +30,6 @@ const Input = ({
   return (
     <label
       className={`${styles.inputWrapper} ${className || ''}`.trim()}
-      data-invalid={!!error}
     >
       <span className={hiddenLabel ? 'visually-hidden' : styles.label}>{label}</span>
       <input

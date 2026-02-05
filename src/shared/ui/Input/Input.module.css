@@ -36,6 +36,6 @@
   padding-block: 24px 36px;
 }
 
-.inputWrapper[data-invalid="true"] .input {
-  border-color: red;
+.inputWrapper:has(.error) .input {
+  border-color: var(--color-error);
 }

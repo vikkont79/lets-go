@@ -115,6 +115,7 @@ const FormPage = () => {
                   onChange={handleCompanionsChange}
                   min={1}
                   max={10}
+                  error={stepErrors.companions}
                 />
                 <CounterInput
                   className={styles.counterInput}
@@ -125,6 +126,7 @@ const FormPage = () => {
                   onChange={handleDurationChange}
                   min={2}
                   max={31}
+                  error={stepErrors.duration}
                 />
               </div>
               <DatePicker

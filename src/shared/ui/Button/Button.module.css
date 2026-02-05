@@ -32,6 +32,13 @@
   }
 }
 
+.transparent {
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--border-radius-sm);
+  background-color: transparent;
+  color: var(--color-base-500);
+}
+
 .base {
   padding-inline: calc(var(--base-indent) * 8);
   padding-block: calc(var(--base-indent) * 7);
@@ -41,11 +48,4 @@
 
 .large {
   inline-size: 100%;
-}
-
-.transparent {
-  border: 1px solid var(--color-neutral-200);
-  border-radius: var(--border-radius-sm);
-  background-color: transparent;
-  color: var(--color-base-500);
 }

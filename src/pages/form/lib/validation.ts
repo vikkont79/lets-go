@@ -20,7 +20,7 @@ export const stepValidators = {
 
     companions: {
       validate: (value: number): boolean => value >= 1 && value <= 10,
-      message: 'От 1 до 10 человек',
+      message: 'От 1 до 10 чел.',
     },
 
     duration: {

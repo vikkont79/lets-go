@@ -10,6 +10,7 @@
 }
 
 .counter {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,4 +42,19 @@
   border: none;
   outline: none;
   color: var(--color-base-500);
+}
+
+.error {
+  position: absolute;
+  top: 100%;
+  color: var(--color-error);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: initial;
+}
+
+.counterWrapper:has(.error) .counter {
+  border-color: var(--color-error);
+  scale: 0.95;
 }
