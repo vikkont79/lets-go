@@ -1,6 +1,6 @@
-import { IconButton } from '@/shared/ui';
-import type { TransportType } from '../../types'
-import { TRANSPORT_OPTIONS } from '../../constants';
+import { IconButton } from '@/shared/ui'
+import type { TransportType } from '@/shared//types'
+import { TRANSPORT_OPTIONS } from '../../../../shared/constants'
 import styles from './TransportSelector.module.css'
 
 type TransportSelectorProps = {

@@ -1,8 +1,7 @@
-// widgets/user-info/ui/UserInfo/UserInfo.tsx
-import { Image } from '@/shared/ui';
-import levelImage from '@assets/images/level.png';
-import avatarImage from '@assets/images/avatar.jpg';
-import styles from './UserInfo.module.css';
+import { Image } from '@/shared/ui'
+import levelImage from '@assets/images/level.png'
+import avatarImage from '@assets/images/avatar.jpg'
+import styles from './UserInfo.module.css'
 
 interface UserInfoProps {
   className?: string;

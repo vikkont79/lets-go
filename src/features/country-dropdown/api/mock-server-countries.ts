@@ -1,4 +1,4 @@
-import type { Country } from "../model/countries";
+import type { Country } from '@/shared/types'
 
 const API_BASE = 'http://localhost:3001'
 

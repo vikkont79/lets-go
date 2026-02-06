@@ -1,5 +1,5 @@
 import styles from './Textarea.module.css'
-import type { BaseInputProps, Size } from '../../types/types'
+import type { BaseInputProps, Size } from '../../types/base'
 
 interface TextareaProps extends BaseInputProps,
   Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>,

@@ -1,4 +1,6 @@
-import { COUNTRIES, type Country } from "../model/countries";
+import type { Country } from "@/shared/types";
+import { COUNTRIES } from "../model/countries"
+
 
 export const fetchCountriesByLetter = (
   letter: string

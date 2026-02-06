@@ -1,5 +1,3 @@
-export type Country = { code: string; name_ru: string };
-
 const COUNTRIES = [
   { code: 'AF', name_ru: 'Афганистан' },
   { code: 'AX', name_ru: 'Острова Аландские' },

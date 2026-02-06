@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
 import { CountryDropdown } from '@/features/country-dropdown/ui/CountryDropdown/CountryDropdown'
-import { IconButton } from '@/shared/ui';
+import { IconButton } from '@/shared/ui'
 import styles from './CountrySelect.module.css'
-import type { Country } from '@/features/country-dropdown/model/countries';
+import type { Country } from '@/shared//types'
 
 interface CountrySelectProps {
   selected: Country[];

@@ -1,6 +1,4 @@
-import type { Country } from '@/features/country-dropdown/model/countries';
-import type { FormData, TransportType, TripDateRange } from '../types'
-
+import type { Country, FormData, TransportType, TripDateRange } from '@/shared//types'
 export const stepValidators = {
   step1: {
     tags: {

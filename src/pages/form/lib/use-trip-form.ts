@@ -1,7 +1,7 @@
-import { useCallback, useState } from "react"
-import type { FormData, TransportType, TripDateRange } from "../types"
-import { addDays } from "date-fns"
-import type { Country } from "@/features/country-dropdown/model/countries"
+import { useCallback, useState } from 'react'
+import type { Country, FormData, TransportType, TripDateRange } from '@/shared//types'
+import { addDays } from 'date-fns'
+
 
 const initialFormData: FormData = {
   tags: '',

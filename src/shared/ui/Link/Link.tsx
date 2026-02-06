@@ -1,6 +1,6 @@
 import { Link as RouterLink } from 'react-router-dom'
 import styles from './Link.module.css'
-import type { BasePressableProps } from '../../types/types'
+import type { BasePressableProps } from '../../types/base'
 
 type LinkProps = BasePressableProps & (
   | { to: string }
