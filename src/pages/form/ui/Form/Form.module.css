@@ -39,26 +39,15 @@
   position: absolute;
   top: 64px;
   right: 138px;
-  display: flex;
-  align-items: start;
-  gap: 40px;
 
   @media(max-width: 769px) {
-    top: 326px;
-    right: 75px;
-    gap: 430px;
+    position: relative;
+    top: 70px;
+    right: 0;
   }
 
   @media(max-width: 321px) {
     display: none;
-  }
-}
-
-.avatar {
-  border-radius: var(--border-radius-lg);
-
-  @media(max-width: 769px) {
-    inline-size: 94px;
   }
 }
 
@@ -87,8 +76,6 @@
     .fieldTitle {
       margin-inline: 40px auto;
     }
-
-
   }
 
   .fieldTitle {
@@ -102,6 +89,9 @@
   @media(max-width: 769px) {
     flex-direction: column;
     align-items: center;
+    margin-block-start: -130px;
+    margin-block-end: -30px;
+    padding-block: 96px 82px;
     gap: 50px;
   }
 }
@@ -206,7 +196,7 @@
 .counterInputs {
   display: grid;
   grid-template-columns: max-content min-content min-content;
-  row-gap: var(--indent-4);
+  row-gap: var(--indent-6);
 }
 
 .counterInput {

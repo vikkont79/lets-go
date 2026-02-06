@@ -1,0 +1,25 @@
+.user {
+  display: flex;
+  align-items: start;
+  gap: 40px;
+
+
+  @media(max-width: 769px) {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 60px;
+  }
+
+  @media(max-width: 321px) {
+    display: none;
+  }
+}
+
+.avatar {
+  border-radius: var(--border-radius-lg);
+
+  @media(max-width: 769px) {
+    inline-size: 95px;
+    block-size: 95px;
+  }
+}

@@ -8,7 +8,8 @@ import { DatePicker } from '../DatePicker/DatePicker'
 import { StepList } from '../StepList/StepList'
 import { useCallback, useState } from 'react'
 import { StepsNav } from '../StepsNav/StepsNav'
-import { CountrySelect } from '../CountrySelect/CountrySelect'
+import { CountrySelect } from '@/widgets/country-select'
+import { UserInfo } from '@/widgets/user-info'
 
 const FormPage = () => {
   const {
@@ -52,22 +53,7 @@ const FormPage = () => {
         Страница планирования путешествия
       </h1>
       <p className={styles.title}>Направления</p>
-      <section className={styles.user}>
-        <h2 className='visually-hidden'>Информация о пользователе</h2>
-        <Image
-          src={level}
-          alt='Уровень попутчика'
-          width={94}
-          height={94}
-        />
-        <Image
-          className={styles.avatar}
-          src={avatar}
-          alt='Аватар попутчика'
-          width={220}
-          height={237}
-        />
-      </section>
+      <UserInfo className={styles.user} />
       <form>
         <div className={`${styles.baseFields} wrapper`}>
           <h2 className='visually-hidden'>Базовые параметры маршрута</h2>

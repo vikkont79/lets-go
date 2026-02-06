@@ -85,7 +85,6 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
               className={styles.countryDropdown}
               onCountrySelect={handleReplaceCountry}
               onCloseButton={handleCloseDropdown}
-
             />
           )}
         </div>
