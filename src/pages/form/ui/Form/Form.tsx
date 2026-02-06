@@ -1,6 +1,4 @@
-import { CounterInput, Image, Input } from '@/shared/ui'
-import level from '@assets/images/level.png'
-import avatar from '@assets/images/avatar.jpg'
+import { CounterInput, Input, Textarea } from '@/shared/ui'
 import { useTripForm, validateStep } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'
@@ -23,6 +21,7 @@ const FormPage = () => {
     handleAddCountry,
     handleRemoveCountry,
     handleReplaceCountry,
+    handleTextareaChange,
     goToNextStep,
     goToPrevStep,
   } = useTripForm()
@@ -167,7 +166,16 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              {/* Поля формы */}
+              <Textarea
+                className={styles.textarea}
+                value={formData.entertainment}
+                onChange={handleTextareaChange}
+                placeholder='План действий'
+                label='Информация о досуге'
+                hiddenLabel={true}
+                error={stepErrors.entertainment}
+                rows={5}
+              />
               <StepsNav
                 currentStep={currentStep}
                 onNext={handleNextClick}

@@ -11,6 +11,7 @@ export interface FormData {
   duration: number;
   dates: TripDateRange;
   countries: Country[];
+  entertainment: string;
 }
 
 export type TripDateRange = {

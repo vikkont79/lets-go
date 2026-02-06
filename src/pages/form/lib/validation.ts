@@ -68,6 +68,14 @@ export const stepValidators = {
       validate: (value: TransportType[]): boolean => value.length > 0,
       message: 'Выберите способ передвижения',
     },
+
+    entertainment: {
+      validate: (value: string): boolean => {
+        const trimmed = value.trim();
+        return trimmed.length >= 3 && trimmed.length <= 200;
+      },
+      message: 'От 3 до 200 символов'
+    }
   },
 } as const
 

@@ -13,6 +13,7 @@ const initialFormData: FormData = {
     to: addDays(new Date(), 1)
   },
   countries: [],
+  entertainment: '',
 }
 
 export const useTripForm = () => {
@@ -67,6 +68,10 @@ export const useTripForm = () => {
     }));
   }, []);
 
+  const handleTextareaChange = useCallback((value: string) => {
+    setFormData(prev => ({ ...prev, entertainment: value }))
+  }, [])
+
   const resetForm = useCallback(() => {
     setFormData(initialFormData)
   }, [])
@@ -94,6 +99,7 @@ export const useTripForm = () => {
     handleAddCountry,
     handleRemoveCountry,
     handleReplaceCountry,
+    handleTextareaChange,
     goToNextStep,
     goToPrevStep,
     resetForm,
