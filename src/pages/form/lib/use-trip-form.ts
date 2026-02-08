@@ -75,10 +75,6 @@ export const useTripForm = () => {
     }))
   }, [])
 
-  const resetForm = useCallback(() => {
-    setFormData(initialFormData)
-  }, [])
-
   const goToNextStep = useCallback(() => {
     if (currentStep < 3) {
       setCurrentStep(prev => (prev + 1) as 1 | 2 | 3);
@@ -105,7 +101,6 @@ export const useTripForm = () => {
     handlePlanChange,
     goToNextStep,
     goToPrevStep,
-    resetForm,
   }
 }
 

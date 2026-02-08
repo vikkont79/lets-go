@@ -4,6 +4,7 @@ export interface BasePressableProps {
   children: React.ReactNode;
   /** Дополнительные CSS-классы */
   className?: string;
+  disabled?: boolean;
 }
 
 /* Базовые пропсы для инпутов/форм */

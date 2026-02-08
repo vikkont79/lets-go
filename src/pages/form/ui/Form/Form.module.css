@@ -240,7 +240,6 @@
 .flag {
   display: inline-block;
   min-inline-size: 70px;
-  margin-inline: var(--indent-6);
   justify-self: center;
   object-fit: contain;
 

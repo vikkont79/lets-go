@@ -1,5 +1,5 @@
 import { CounterInput, Input, Textarea } from '@/shared/ui'
-import { useTripForm, validateStep } from '../../lib'
+import { useFormSubmit, useTripForm, validateStep } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'
 import { DatePicker } from '../DatePicker/DatePicker'
@@ -8,8 +8,10 @@ import { useCallback, useState } from 'react'
 import { StepsNav } from '../StepsNav/StepsNav'
 import { CountrySelect } from '@/widgets/country-select'
 import { UserInfo } from '@/widgets/user-info'
+import { generateUser } from '@/entities/user'
 
 const FormPage = () => {
+  const [currentUser] = useState(() => generateUser())
   const {
     formData,
     currentStep,
@@ -26,20 +28,23 @@ const FormPage = () => {
     goToPrevStep,
   } = useTripForm()
 
-  const [stepErrors, setStepErrors] = useState<Record<string, string>>({});
+  const {
+    handleSubmit,
+    isSubmit
+  } = useFormSubmit(formData, currentUser)
+
+  const [stepErrors, setStepErrors] = useState<Record<string, string>>({})
 
   const handleNextClick = useCallback(() => {
     const stepKey = `step${currentStep}` as const;
-    const validation = validateStep(stepKey, formData);
-
+    const validation = validateStep(stepKey, formData)
     if (!validation.isValid) {
       setStepErrors(validation.errors);
       return;
     }
-
-    setStepErrors({});
-    goToNextStep();
-  }, [currentStep, formData, goToNextStep])
+    setStepErrors({})
+    currentStep < 3 ? goToNextStep() : handleSubmit()
+  }, [currentStep, formData, goToNextStep, handleSubmit])
 
   const handleBackClick = useCallback(() => {
     setStepErrors({});
@@ -198,6 +203,7 @@ const FormPage = () => {
                 currentStep={currentStep}
                 onNext={handleNextClick}
                 onBack={handleBackClick}
+                isSubmit={isSubmit}
               />
             </fieldset>
           )}

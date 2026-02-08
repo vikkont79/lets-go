@@ -34,6 +34,11 @@
 .base {
   padding: var(--indent-6);
   font-size: var(--font-size-sm);
+
+  @media(max-width: 321px) {
+    font-size: 16px;
+    line-height: 22px;
+  }
 }
 
 .large {
