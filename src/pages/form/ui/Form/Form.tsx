@@ -1,4 +1,4 @@
-import { CounterInput, Input } from '@/shared/ui'
+import { Input } from '@/shared/ui'
 import { useFormSubmit, useTripForm, validateStep } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'

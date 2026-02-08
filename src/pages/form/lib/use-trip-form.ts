@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import type { Country, FormData, TransportType, TripDateRange } from '@/shared//types'
-import { addDays } from 'date-fns'
+import { addDays, differenceInDays } from 'date-fns'
 
 const initialFormData: FormData = {
   tags: '',
@@ -36,11 +36,33 @@ export const useTripForm = () => {
   }, [])
 
   const handleDurationChange = useCallback((value: number) => {
-    setFormData(prev => ({ ...prev, duration: value }))
+    setFormData(prev => {
+      if (!prev.dates?.from) {
+        return { ...prev, duration: value }
+      }
+      return {
+        ...prev,
+        duration: value,
+        dates: {
+          from: prev.dates.from,
+          to: addDays(prev.dates.from, value - 1)
+        }
+      }
+    })
   }, [])
 
   const handleDateChange = useCallback((newRange: TripDateRange) => {
-    setFormData(prev => ({ ...prev, dates: newRange }))
+    setFormData(prev => {
+      if (!newRange?.from || !newRange?.to) {
+        return { ...prev, dates: newRange }
+      }
+      const daysDiff = differenceInDays(newRange.to, newRange.from) + 1
+      return {
+        ...prev,
+        dates: newRange,
+        duration: daysDiff
+      }
+    })
   }, [])
 
   const handleAddCountry = useCallback((country: Country) => {
