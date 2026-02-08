@@ -14,7 +14,7 @@
 }
 
 .textarea {
-  border: 1px solid var(--color-black);
+  border: 1px solid var(--color-neutral-300);
   border-radius: var(--border-radius-sm);
   outline: none;
   font: inherit;
@@ -32,8 +32,8 @@
 }
 
 .base {
-  padding: var(--indent-3);
-  font-size: var(--font-size-base);
+  padding: var(--indent-6);
+  font-size: var(--font-size-sm);
 }
 
 .large {

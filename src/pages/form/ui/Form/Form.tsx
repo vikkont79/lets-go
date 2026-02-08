@@ -158,7 +158,7 @@ const FormPage = () => {
               <div className={styles.stepContent}>
                 <div className={styles.stepIntro}>
                   <p className={styles.stepTitle}>Шаг 3. Развлечения</p>
-                  <p className={styles.stepDescription}>Наконец, расскажите о своих планах времяпровождения.
+                  <p className={styles.stepDescription}>Наконец, расскажите о своих планах времяпровождения.<br />
                     Можно писать в свободной форме и ставить тэги.
                   </p>
                 </div>
@@ -166,9 +166,21 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              <div>
+              <div className={styles.plans}>
                 {formData.countries.map(country => (
-                  <div key={country.code}>
+                  <div className={styles.plan} key={country.code}>
+                    <p className={styles.country}>{country.name_ru}</p>
+                    <img
+                      src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
+                      alt={country.name_ru}
+                      className={styles.flag}
+                      width={70}
+                      height={47}
+                      onError={(e) => {
+                        // fallback: скрыть или поставить заглушку
+                        (e.currentTarget as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
                     <Textarea
                       className={styles.textarea}
                       value={country.plan || ''}
