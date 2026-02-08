@@ -1,4 +1,4 @@
-import { CounterInput, Input, Textarea } from '@/shared/ui'
+import { CounterInput, Input } from '@/shared/ui'
 import { useFormSubmit, useTripForm, validateStep } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
 import styles from './Form.module.css'
@@ -9,6 +9,8 @@ import { StepsNav } from '../StepsNav/StepsNav'
 import { CountrySelect } from '@/widgets/country-select'
 import { UserInfo } from '@/widgets/user-info'
 import { generateUser } from '@/entities/user'
+import { CountryPlan } from '../CountryPlans/CountryPlans'
+import { Counters } from '../Counters/Counters'
 
 const FormPage = () => {
   const [currentUser] = useState(() => generateUser())
@@ -95,30 +97,13 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              <div className={styles.counterInputs}>
-                <CounterInput
-                  className={styles.counterInput}
-                  id='companions-input'
-                  label='Ищу попутчиков:'
-                  value={formData.companions}
-                  unit='чел.'
-                  onChange={handleCompanionsChange}
-                  min={1}
-                  max={10}
-                  error={stepErrors.companions}
-                />
-                <CounterInput
-                  className={styles.counterInput}
-                  id='duration'
-                  label='Длительность:'
-                  value={formData.duration}
-                  unit='дн.'
-                  onChange={handleDurationChange}
-                  min={2}
-                  max={31}
-                  error={stepErrors.duration}
-                />
-              </div>
+              <Counters
+                companions={formData.companions}
+                duration={formData.duration}
+                onCompanionsChange={handleCompanionsChange}
+                onDurationChange={handleDurationChange}
+                errors={stepErrors}
+              />
               <DatePicker
                 value={formData.dates}
                 onChange={handleDateChange}
@@ -171,34 +156,11 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              <div className={styles.plans}>
-                {formData.countries.map(country => (
-                  <div className={styles.plan} key={country.code}>
-                    <p className={styles.country}>{country.name_ru}</p>
-                    <img
-                      src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
-                      alt={country.name_ru}
-                      className={styles.flag}
-                      width={70}
-                      height={47}
-                      onError={(e) => {
-                        // fallback: скрыть или поставить заглушку
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                    <Textarea
-                      className={styles.textarea}
-                      value={country.plan || ''}
-                      onChange={(value) => handlePlanChange(country.code, value)}
-                      placeholder='План действий'
-                      label={`Информация о досуге в ${country.name_ru}`}
-                      hiddenLabel={true}
-                      error={stepErrors[`plan-${country.code}`]}
-                      rows={5}
-                    />
-                  </div>
-                ))}
-              </div>
+              <CountryPlan
+                countries={formData.countries}
+                onPlanChange={handlePlanChange}
+                errors={stepErrors}
+              />
               <StepsNav
                 currentStep={currentStep}
                 onNext={handleNextClick}

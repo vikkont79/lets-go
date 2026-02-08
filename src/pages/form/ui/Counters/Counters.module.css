@@ -1,0 +1,12 @@
+.counterInputs {
+  display: grid;
+  grid-template-columns: max-content min-content min-content;
+  row-gap: var(--indent-6);
+}
+
+.counterInput {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+  gap: var(--indent-8);
+}
