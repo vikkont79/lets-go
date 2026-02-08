@@ -208,4 +208,5 @@
 
 .textarea {
   font-size: var(--font-size-sm);
+  margin-block-end: 36px;
 }

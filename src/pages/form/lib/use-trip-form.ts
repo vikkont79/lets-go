@@ -2,7 +2,6 @@ import { useCallback, useState } from 'react'
 import type { Country, FormData, TransportType, TripDateRange } from '@/shared//types'
 import { addDays } from 'date-fns'
 
-
 const initialFormData: FormData = {
   tags: '',
   transport: [],
@@ -13,7 +12,6 @@ const initialFormData: FormData = {
     to: addDays(new Date(), 1)
   },
   countries: [],
-  entertainment: '',
 }
 
 export const useTripForm = () => {
@@ -48,7 +46,7 @@ export const useTripForm = () => {
   const handleAddCountry = useCallback((country: Country) => {
     setFormData(prev => ({
       ...prev,
-      countries: [...prev.countries, country]
+      countries: [...prev.countries, { ...country, plan: '' }]
     }));
   }, []);
 
@@ -63,13 +61,18 @@ export const useTripForm = () => {
     setFormData(prev => ({
       ...prev,
       countries: prev.countries.map((country, i) =>
-        i === index ? newCountry : country
+        i === index ? { ...newCountry, plan: '' } : country
       )
     }));
   }, []);
 
-  const handleTextareaChange = useCallback((value: string) => {
-    setFormData(prev => ({ ...prev, entertainment: value }))
+  const handlePlanChange = useCallback((countryCode: string, plan: string) => {
+    setFormData(prev => ({
+      ...prev,
+      countries: prev.countries.map(country =>
+        country.code === countryCode ? { ...country, plan } : country
+      )
+    }))
   }, [])
 
   const resetForm = useCallback(() => {
@@ -99,7 +102,7 @@ export const useTripForm = () => {
     handleAddCountry,
     handleRemoveCountry,
     handleReplaceCountry,
-    handleTextareaChange,
+    handlePlanChange,
     goToNextStep,
     goToPrevStep,
     resetForm,

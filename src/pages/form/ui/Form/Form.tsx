@@ -21,7 +21,7 @@ const FormPage = () => {
     handleAddCountry,
     handleRemoveCountry,
     handleReplaceCountry,
-    handleTextareaChange,
+    handlePlanChange,
     goToNextStep,
     goToPrevStep,
   } = useTripForm()
@@ -166,16 +166,22 @@ const FormPage = () => {
                   currentStep={currentStep}
                 />
               </div>
-              <Textarea
-                className={styles.textarea}
-                value={formData.entertainment}
-                onChange={handleTextareaChange}
-                placeholder='План действий'
-                label='Информация о досуге'
-                hiddenLabel={true}
-                error={stepErrors.entertainment}
-                rows={5}
-              />
+              <div>
+                {formData.countries.map(country => (
+                  <div key={country.code}>
+                    <Textarea
+                      className={styles.textarea}
+                      value={country.plan || ''}
+                      onChange={(value) => handlePlanChange(country.code, value)}
+                      placeholder='План действий'
+                      label={`Информация о досуге в ${country.name_ru}`}
+                      hiddenLabel={true}
+                      error={stepErrors[`plan-${country.code}`]}
+                      rows={5}
+                    />
+                  </div>
+                ))}
+              </div>
               <StepsNav
                 currentStep={currentStep}
                 onNext={handleNextClick}

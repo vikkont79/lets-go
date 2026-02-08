@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Button, IconButton } from '@/shared/ui'
 import styles from './CountryDropdown.module.css'
 import { fetchCountries } from '../../api/mock-server-countries'
-import type { Country } from '@/pages/form/types'
+import type { Country } from '@/shared/types'
 
 interface CountryDropdownProps {
   onCountrySelect: (country: Country) => void;

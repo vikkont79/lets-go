@@ -66,14 +66,6 @@ export const stepValidators = {
       validate: (value: TransportType[]): boolean => value.length > 0,
       message: 'Выберите способ передвижения',
     },
-
-    entertainment: {
-      validate: (value: string): boolean => {
-        const trimmed = value.trim();
-        return trimmed.length >= 3 && trimmed.length <= 200;
-      },
-      message: 'От 3 до 200 символов'
-    }
   },
 } as const
 
@@ -93,6 +85,17 @@ export const validateStep = (
       errors[fieldName] = validator.message
     }
   })
+
+  if (stepKey === 'step3') {
+    formData.countries.forEach((country) => {
+      const plan = country.plan || '';
+      const trimmed = plan.trim();
+
+      if (trimmed.length < 3 || trimmed.length > 200) {
+        errors[`plan-${country.code}`] = 'Oт 3 до 200 символов';
+      }
+    });
+  }
 
   return {
     isValid: Object.keys(errors).length === 0,
