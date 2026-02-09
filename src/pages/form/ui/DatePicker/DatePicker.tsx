@@ -1,7 +1,8 @@
 import { DayPicker } from 'react-day-picker'
 import { ru } from 'date-fns/locale'
-import 'react-day-picker/dist/style.css'
+//import 'react-day-picker/dist/style.css'
 import type { TripDateRange } from '@/shared//types'
+import styles from './DatePicker.module.css'
 
 interface DatePickerProps {
   value: TripDateRange;
