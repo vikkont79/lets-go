@@ -8,8 +8,8 @@ const initialFormData: FormData = {
   companions: 1,
   duration: 2,
   dates: {
-    from: new Date(),
-    to: addDays(new Date(), 1)
+    from: undefined,
+    to: undefined
   },
   countries: [],
 }
