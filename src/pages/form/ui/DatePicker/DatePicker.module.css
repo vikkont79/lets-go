@@ -3,6 +3,13 @@
   border-top: 1px solid var(--color-neutral-300);
   font-size: 18px;
   line-height: 1;
+
+  @media(max-width: 321px) {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+
 }
 
 :global(.rdp-nav) {
@@ -60,6 +67,7 @@
 
   @media(max-width: 321px) {
     padding-block: 22px 12px;
+    text-transform: uppercase;
   }
 }
 
@@ -111,8 +119,6 @@
 
   @media(max-width: 321px) {
     padding-block: var(--indent-2);
-    font-size: 14px;
-    line-height: 18px;
   }
 }
 

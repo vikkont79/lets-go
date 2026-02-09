@@ -192,3 +192,7 @@
   margin-block: 0;
   color: var(--color-neutral-500);
 }
+
+.counters {
+  margin-block-end: var(--indent-8);
+}

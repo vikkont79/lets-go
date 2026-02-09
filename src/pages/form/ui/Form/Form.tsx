@@ -98,6 +98,7 @@ const FormPage = () => {
                 />
               </div>
               <Counters
+                className={styles.counters}
                 companions={formData.companions}
                 duration={formData.duration}
                 onCompanionsChange={handleCompanionsChange}

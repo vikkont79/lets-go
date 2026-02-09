@@ -2,6 +2,14 @@
   display: grid;
   grid-template-columns: max-content min-content min-content;
   row-gap: var(--indent-6);
+
+  @media(max-width: 769px) {
+    grid-template-columns: 1fr min-content;
+  }
+
+  @media(max-width: 321px) {
+    row-gap: var(--indent-5);
+  }
 }
 
 .counterInput {
@@ -9,4 +17,12 @@
   grid-column: 1/-1;
   grid-template-columns: subgrid;
   gap: var(--indent-8);
+
+  @media(max-width: 769px) {
+    gap: var(--indent-6);
+  }
+
+  @media(max-width: 321px) {
+    gap: var(--indent-2);
+  }
 }

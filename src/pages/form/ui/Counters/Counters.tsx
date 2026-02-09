@@ -2,6 +2,7 @@ import { CounterInput } from '@/shared/ui';
 import styles from './Counters.module.css';
 
 interface CountersProps {
+  className: string;
   companions: number;
   duration: number;
   onCompanionsChange: (value: number) => void;
@@ -13,6 +14,7 @@ interface CountersProps {
 }
 
 const Counters = ({
+  className = '',
   companions,
   duration,
   onCompanionsChange,
@@ -20,7 +22,7 @@ const Counters = ({
   errors,
 }: CountersProps) => {
   return (
-    <div className={styles.counterInputs}>
+    <div className={`${styles.counterInputs} ${className}`}>
       <CounterInput
         className={styles.counterInput}
         id='companions-input'
