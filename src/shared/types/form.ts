@@ -12,7 +12,7 @@ export type Country = {
   code: string;
   name_ru: string;
   plan?: string;
-};
+}
 
 export interface FormData {
   tags: string;
