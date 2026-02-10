@@ -1,12 +1,11 @@
-import { DayPicker } from 'react-day-picker'
+import { DayPicker, type DateRange } from 'react-day-picker'
 import { ru } from 'date-fns/locale'
-import type { TripDateRange } from '@/shared//types'
 import './DatePicker.module.css'
 import { memo } from 'react';
 
 interface DatePickerProps {
-  value: TripDateRange;
-  onChange: (range: TripDateRange) => void;
+  value: DateRange | undefined;
+  onChange: (range: DateRange | undefined) => void;
 }
 
 const DatePickerComponent = ({
@@ -16,7 +15,7 @@ const DatePickerComponent = ({
   return (
     <DayPicker
       mode='range'
-      selected={value}
+      selected={value as DateRange | undefined}
       onSelect={onChange}
       disabled={{ before: new Date() }}
       required

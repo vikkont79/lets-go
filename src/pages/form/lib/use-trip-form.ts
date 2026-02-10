@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import type { Country, FormData, TransportType, TripDateRange } from '@/shared//types'
-import { addDays, differenceInDays } from 'date-fns'
+import { addDays, differenceInDays, startOfDay } from 'date-fns'
+import type { DateRange } from 'react-day-picker'
 
 const initialFormData: FormData = {
   tags: '',
@@ -8,8 +9,8 @@ const initialFormData: FormData = {
   companions: 1,
   duration: 2,
   dates: {
-    from: undefined,
-    to: undefined
+    from: new Date(),
+    to: addDays(new Date(), 1)
   },
   countries: [],
 }
@@ -40,26 +41,29 @@ export const useTripForm = () => {
       if (!prev.dates?.from) {
         return { ...prev, duration: value }
       }
+      const from = startOfDay(prev.dates.from)
       return {
         ...prev,
         duration: value,
         dates: {
           from: prev.dates.from,
-          to: addDays(prev.dates.from, value - 1)
+          to: addDays(from, value - 1)
         }
       }
     })
   }, [])
 
-  const handleDateChange = useCallback((newRange: TripDateRange) => {
+  const handleDateChange = useCallback((newRange: DateRange | undefined) => {
     setFormData(prev => {
       if (!newRange?.from || !newRange?.to) {
-        return { ...prev, dates: newRange }
+        return { ...prev, dates: newRange as TripDateRange }
       }
-      const daysDiff = differenceInDays(newRange.to, newRange.from) + 1
+      const from = startOfDay(newRange.from)
+      const to = startOfDay(newRange.to)
+      const daysDiff = differenceInDays(to, from) + 1
       return {
         ...prev,
-        dates: newRange,
+        dates: newRange as TripDateRange,
         duration: daysDiff
       }
     })
@@ -76,8 +80,8 @@ export const useTripForm = () => {
     setFormData(prev => ({
       ...prev,
       countries: prev.countries.filter((_, i) => i !== index)
-    }));
-  }, []);
+    }))
+  }, [])
 
   const handleReplaceCountry = useCallback((index: number, newCountry: Country) => {
     setFormData(prev => ({
@@ -85,8 +89,8 @@ export const useTripForm = () => {
       countries: prev.countries.map((country, i) =>
         i === index ? { ...newCountry, plan: '' } : country
       )
-    }));
-  }, []);
+    }))
+  }, [])
 
   const handlePlanChange = useCallback((countryCode: string, plan: string) => {
     setFormData(prev => ({

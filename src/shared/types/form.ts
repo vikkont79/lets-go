@@ -4,7 +4,7 @@ export type TransportType = typeof TRANSPORT_OPTIONS[number];
 
 export type TripDateRange = {
   from: Date | undefined;
-  to?: Date | undefined;
+  to: Date | undefined;
 } | undefined;
 
 export type Country = {
