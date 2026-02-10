@@ -11,15 +11,23 @@ interface CountryDropdownProps {
 }
 
 const CountryDropdown = ({ onCountrySelect, onCloseButton, className }: CountryDropdownProps) => {
-  const [allCountries, setAllCountries] = useState<Country[]>([]);
-  const [countries, setCountries] = useState<Country[]>([]);
+  const [allCountries, setAllCountries] = useState<Country[]>([])
+  const [countries, setCountries] = useState<Country[]>([])
   const [isCountryOpen, setIsCountryOpen] = useState(false)
 
   useEffect(() => {
+    const cached = localStorage.getItem('countries')
+
+    if (cached) {
+      setAllCountries(JSON.parse(cached))
+      return
+    }
+
     const loadData = async () => {
       try {
         const data = await fetchCountries()
         setAllCountries(data)
+        localStorage.setItem('countries', JSON.stringify(data))
       } catch (error) {
         console.error('Failed to fetch countries:', error);
       }
