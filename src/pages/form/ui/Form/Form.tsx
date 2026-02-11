@@ -1,16 +1,15 @@
 import { Input } from '@/shared/ui'
 import { useFormSubmit, useTripForm, validateStep } from '../../lib'
 import { TransportSelector } from '../TransportSelector/TransportSelector'
-import styles from './Form.module.css'
 import { DatePicker } from '../DatePicker/DatePicker'
 import { StepList } from '../StepList/StepList'
 import { useCallback, useState } from 'react'
 import { StepsNav } from '../StepsNav/StepsNav'
 import { CountrySelect } from '@/widgets/country-select'
-import { UserInfo } from '@/widgets/user-info'
-import { generateUser } from '@/entities/user'
+import { generateUser, UserInfo } from '@/entities/user'
 import { CountryPlan } from '../CountryPlans/CountryPlans'
 import { Counters } from '../Counters/Counters'
+import styles from './Form.module.css'
 
 const FormPage = () => {
   const [currentUser] = useState(() => generateUser())
@@ -59,7 +58,7 @@ const FormPage = () => {
         Страница планирования путешествия
       </h1>
       <p className={styles.title}>Направления</p>
-      <UserInfo className={styles.user} />
+      <UserInfo className={styles.user} user={currentUser} />
       <form>
         <div className={`${styles.baseFields} wrapper`}>
           <h2 className='visually-hidden'>Базовые параметры маршрута</h2>

@@ -1,25 +1,33 @@
 import { Image } from '@/shared/ui'
-import levelImage from '@assets/images/level.png'
-import avatarImage from '@assets/images/avatar.jpg'
+import level from '@assets/images/level.png'
+import levelMob from '@assets/images/level-mob.png'
+import avatar from '@assets/images/avatar.jpg'
 import styles from './UserInfo.module.css'
+import type { User } from '@/entities/user'
 
 interface UserInfoProps {
+  user: User;
   className?: string;
 }
 
-const UserInfo = ({ className = '' }: UserInfoProps) => {
+const UserInfo = ({ user, className = '' }: UserInfoProps) => {
+  const avatarSrc = user.avatar || avatar
   return (
     <section className={`${styles.user} ${className}`}>
       <h2 className='visually-hidden'>Информация о пользователе</h2>
+
+
       <Image
-        src={levelImage}
+        className={styles.level}
+        src={level}
+        srcMob={levelMob}
         alt='Уровень попутчика'
-        width={94}
-        height={94}
+        width={100}
+        height={100}
       />
       <Image
         className={styles.avatar}
-        src={avatarImage}
+        src={avatarSrc}
         alt='Аватар попутчика'
         width={220}
         height={237}

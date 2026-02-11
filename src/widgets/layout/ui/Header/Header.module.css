@@ -24,6 +24,10 @@
   gap: var(--indent-4);
   list-style-type: none;
 
+  @media(max-width: 1025px) {
+    margin-inline-start: 85px;
+  }
+
   @media(max-width: 769px) {
     display: none;
   }
