@@ -6,11 +6,12 @@ import styles from './UserInfo.module.css'
 import type { User } from '@/entities/user'
 
 interface UserInfoProps {
-  user: User;
+  user: User | null;
   className?: string;
 }
 
 const UserInfo = ({ user, className = '' }: UserInfoProps) => {
+  if (!user) return null;
   const avatarSrc = user.avatar || avatar
   return (
     <section className={`${styles.user} ${className}`}>

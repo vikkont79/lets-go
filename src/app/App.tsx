@@ -4,8 +4,17 @@ import { Layout } from '@/widgets/layout'
 import { AppRoute } from './router/routes'
 import { CatalogPage } from '@/pages/catalog'
 import { FormPage } from '@/pages/form'
+import { useEffect } from 'react'
+import { useGlobalStore } from './store/root-store'
 
 function App() {
+  const currentUser = useGlobalStore(state => state.currentUser)
+  const generateCurrentUser = useGlobalStore(state => state.generateCurrentUser)
+
+  useEffect(() => {
+    if (!currentUser) generateCurrentUser()
+  }, [currentUser])
+
   return (
     <Layout>
       <Routes>

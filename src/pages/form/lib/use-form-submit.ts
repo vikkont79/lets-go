@@ -1,16 +1,21 @@
 import { useCallback, useState } from "react"
 import { useNavigate } from 'react-router-dom'
 import type { FormData } from '@/shared/types'
-import type { User } from '@/entities/user'
 import type { Trip } from "@/entities/trip/types/trip"
+import { useGlobalStore } from "@/app/store/root-store"
 
 const API_BASE = 'http://localhost:3001'
 
-export const useFormSubmit = (formData: FormData, currentUser: User) => {
+export const useFormSubmit = (formData: FormData) => {
+  const currentUser = useGlobalStore(state => state.currentUser)
   const navigate = useNavigate()
   const [isSubmit, setIsSubmit] = useState(false)
 
   const handleSubmit = useCallback(async () => {
+    if (!currentUser) {
+      console.error('Нет текущего пользователя')
+      return
+    }
     setIsSubmit(true)
     try {
       const trip: Trip = {

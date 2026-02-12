@@ -6,13 +6,14 @@ import { StepList } from '../StepList/StepList'
 import { useCallback, useState } from 'react'
 import { StepsNav } from '../StepsNav/StepsNav'
 import { CountrySelect } from '@/widgets/country-select'
-import { generateUser, UserInfo } from '@/entities/user'
+import { UserInfo } from '@/entities/user'
 import { CountryPlan } from '../CountryPlans/CountryPlans'
 import { Counters } from '../Counters/Counters'
 import styles from './Form.module.css'
+import { useGlobalStore } from '@/app/store/root-store'
 
 const FormPage = () => {
-  const [currentUser] = useState(() => generateUser())
+  const currentUser = useGlobalStore(state => state.currentUser)
   const {
     formData,
     currentStep,
@@ -32,7 +33,7 @@ const FormPage = () => {
   const {
     handleSubmit,
     isSubmit
-  } = useFormSubmit(formData, currentUser)
+  } = useFormSubmit(formData)
 
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({})
 
