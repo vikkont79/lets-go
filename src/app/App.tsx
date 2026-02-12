@@ -6,6 +6,7 @@ import { CatalogPage } from '@/pages/catalog'
 import { FormPage } from '@/pages/form'
 import { useEffect } from 'react'
 import { useGlobalStore } from './store/root-store'
+import { initMockData } from './api/init-mock-trips'
 
 function App() {
   const currentUser = useGlobalStore(state => state.currentUser)
@@ -14,6 +15,10 @@ function App() {
   useEffect(() => {
     if (!currentUser) generateCurrentUser()
   }, [currentUser])
+
+  useEffect(() => {
+    initMockData()
+  }, [])
 
   return (
     <Layout>
