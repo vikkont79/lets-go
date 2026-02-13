@@ -16,8 +16,6 @@ const UserInfo = ({ user, className = '' }: UserInfoProps) => {
   return (
     <section className={`${styles.user} ${className}`}>
       <h2 className='visually-hidden'>Информация о пользователе</h2>
-
-
       <Image
         className={styles.level}
         src={level}
