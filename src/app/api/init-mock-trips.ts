@@ -1,7 +1,7 @@
 import { fetchCountries } from '@/features/country-dropdown/api/mock-server-countries'
 import { generateMockTrips } from '@/entities/trip/lib/generate-mock-trips'
 
-const MOCK_TRIPS_COUNT = 5
+const MOCK_TRIPS_COUNT = 2
 
 export const initMockData = async () => {
   if (import.meta.env.PROD) return

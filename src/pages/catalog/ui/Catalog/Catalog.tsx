@@ -1,9 +1,21 @@
-import { useAllTrips } from '../../lib'
+import { useCatalog } from '../../lib'
 import { TripCard } from '@/entities/trip/ui'
+import { Button } from '@/shared/ui'
+import { Pagination } from '../Pagination/Pagination'
 import styles from './Catalog.module.css'
 
 const CatalogPage = () => {
-  const { trips, isLoading } = useAllTrips()
+  const {
+    trips,
+    isLoading,
+    totalPages,
+    currentPage,
+    activeRange,
+    canLoadMore,
+    loadMore,
+    goToPage
+  } = useCatalog()
+
 
   if (isLoading) {
     return (
@@ -32,6 +44,21 @@ const CatalogPage = () => {
           <TripCard key={trip.id} trip={trip} />
         ))}
       </section>
+      {canLoadMore && (
+        <div className={styles.loadMoreWrapper}>
+          <Button onClick={loadMore} className={styles.loadMoreButton}>
+            Показать ещё
+          </Button>
+        </div>
+      )}
+      {totalPages > 1 && (
+        <Pagination
+          activeRange={activeRange}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={goToPage}
+        />
+      )}
     </main>
   )
 }
