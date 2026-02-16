@@ -1,7 +1,143 @@
 .card {
   max-inline-size: 951px;
+  min-block-size: 285px;
   display: grid;
-  grid-template-columns: max-content 1fr max-content;
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
   border-radius: 20px;
+  font-size: var(--font-size-sm);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.avatar {
+  display: block;
+  max-inline-size: 285px;
+}
+
+.user {
+  display: grid;
+  grid-template-rows: min-content min-content auto;
+  padding-block: 36px;
+  text-align: start;
+}
+
+.name {
+  margin-block: 0 var(--indent-5);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.tags {
+  margin-block: 0;
+  color: var(--color-black);
+  line-height: var(--font-size-base);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  align-self: self-end;
+  gap: var(--indent-1);
+}
+
+.call {
+  max-inline-size: 150px;
+  padding-inline: var(--indent-6);
+  padding-block: var(--indent-4);
+  border-radius: 25px;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
+
+.likeButton {
+  max-inline-size: 50px;
+  padding: 10px;
+  background-color: var(--color-neutral-100);
+  color: var(--color-base-400);
+
+  &:hover {
+    background-color: var(--color-white);
+    color: var(--color-neutral-400);
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    background-color: var(--color-neutral-100);
+    color: var(--color-base-500);
+    opacity: var(--opacity-disabled);
+  }
+
+  &[aria-pressed='true'] {
+    color: var(--color-base-500);
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active,
+    &:focus,
+    &:focus-visible {
+      opacity: var(--opacity-base);
+    }
+  }
+}
+
+.likeQty {
+  color: var(--color-base-600);
+  font-weight: 700;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr max-content;
+  column-gap: 52px;
+  padding-inline-end: 40px;
+  padding-block: 36px 32px;
+}
+
+.countries {
+  grid-column: 1/-1;
+  margin-block: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+  text-transform: uppercase;
+  text-align: start;
+}
+
+.country {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.country:not(:last-child) {
+  margin-block-end: 12px;
+}
+
+.flag {
+  display: block;
+  min-inline-size: 35px;
+  justify-self: center;
+  object-fit: contain;
+}
+
+.transport {
+  align-self: center;
+  display: flex;
+  gap: var(--indent-3);
+  margin-block: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+}
+
+.icon {
+  opacity: 0.15;
+}
+
+.level {
+  display: block;
+  min-inline-size: 60px;
 }

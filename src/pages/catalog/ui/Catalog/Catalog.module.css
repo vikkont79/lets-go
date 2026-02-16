@@ -6,9 +6,11 @@
   background-color: var(--color-neutral-50);
 }
 
-.grid {
+.catalog {
   display: grid;
-  gap: 24px;
+  grid-template-columns: max-content 1fr min-content;
+  row-gap: 30px;
+  column-gap: 62px;
 }
 
 .skeleton {

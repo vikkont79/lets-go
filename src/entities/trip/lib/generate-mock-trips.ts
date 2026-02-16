@@ -23,9 +23,10 @@ export const generateMockTrip = (countries: Country[]): Trip => {
       })),
     user: {
       id: userId,
-      name: faker.person.fullName(),
+      name: `${faker.person.firstName()} ${faker.person.lastName()}`,
       avatar: faker.image.avatar(),
-      level: faker.number.int({ min: 1, max: 10 })
+      level: faker.number.int({ min: 1, max: 10 }),
+      likes: faker.number.int({ min: 0, max: 5000 })
     },
     createdAt: faker.date.recent({ days: 30 }).toISOString()
   }

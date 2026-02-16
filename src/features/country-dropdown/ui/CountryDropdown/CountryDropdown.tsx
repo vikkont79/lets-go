@@ -30,14 +30,14 @@ const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
           setAllCountries(data)
           localStorage.setItem('countries', JSON.stringify(data))
         } catch (error) {
-          console.error('Failed to fetch countries:', error);
+          console.error('Failed to fetch countries:', error)
         }
       }
       loadData()
     }, [])
 
     const handleLetterClick = useCallback((letter: string) => {
-      const normalizedLetter = letter.toLowerCase();
+      const normalizedLetter = letter.toLowerCase()
       const countries = allCountries
         .filter(country => country.name_ru.toLowerCase().startsWith(normalizedLetter))
         .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))

@@ -27,11 +27,11 @@ const CatalogPage = () => {
         Страница планирования путешествия
       </h1>
       <p className={styles.title}>Направления</p>
-      <div className={`${styles.grid} wrapper`}>
+      <section className={`${styles.catalog} wrapper`}>
         {trips.map(trip => (
           <TripCard key={trip.id} trip={trip} />
         ))}
-      </div>
+      </section>
     </main>
   )
 }
