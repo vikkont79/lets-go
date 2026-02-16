@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { CountryDropdown } from '@/features/country-dropdown/ui/CountryDropdown/CountryDropdown'
 import { IconButton } from '@/shared/ui'
 import styles from './CountrySelect.module.css'
@@ -16,8 +16,10 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
   const handleOpenDropdown = useCallback((index: number) => {
-    setActiveIndex(index);
+    setActiveIndex(index)
     setIsOpen(true)
   }, [])
   const handleAddCountry = useCallback((country: Country) => {
@@ -26,10 +28,10 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
   }, [onAdd])
   const handleReplaceCountry = useCallback((country: Country) => {
     if (activeIndex !== null) {
-      onReplace(activeIndex, country);
+      onReplace(activeIndex, country)
       setIsOpen(false);
     }
-  }, [activeIndex, onReplace]);
+  }, [activeIndex, onReplace])
   const handleRemoveCountry = useCallback((index: number) => {
     onRemove(index)
   }, [onRemove])
@@ -40,12 +42,23 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false);
+        setIsOpen(false)
       }
+    }
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (!isOpen) return
+      if (dropdownRef.current && dropdownRef.current.contains(e.target as Node)) {
+        return
+      }
+      setIsOpen(false)
     };
-    document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [isOpen]);
+    document.addEventListener('keydown', handleEscape)
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [isOpen, dropdownRef])
 
   return (
     <div className={styles.selects}>
@@ -82,6 +95,7 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           />
           {isOpen && activeIndex === index && (
             <CountryDropdown
+              ref={dropdownRef}
               className={styles.countryDropdown}
               onCountrySelect={handleReplaceCountry}
               onCloseButton={handleCloseDropdown}
@@ -111,13 +125,14 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
       )}
       {isOpen && activeIndex === -1 && (
         <CountryDropdown
+          ref={dropdownRef}
           className={styles.countryDropdown}
           onCountrySelect={handleAddCountry}
           onCloseButton={handleCloseDropdown}
         />
       )}
     </div >
-  );
-};
+  )
+}
 
 export { CountrySelect }
