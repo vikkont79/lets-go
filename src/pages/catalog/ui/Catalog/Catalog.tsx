@@ -1,6 +1,6 @@
 import { useCatalog } from '../../lib'
 import { TripCard } from '@/entities/trip/ui'
-import { Button } from '@/shared/ui'
+import { IconButton } from '@/shared/ui'
 import { Pagination } from '../Pagination/Pagination'
 import styles from './Catalog.module.css'
 
@@ -43,22 +43,28 @@ const CatalogPage = () => {
         {trips.map(trip => (
           <TripCard key={trip.id} trip={trip} />
         ))}
-      </section>
-      {canLoadMore && (
-        <div className={styles.loadMoreWrapper}>
-          <Button onClick={loadMore} className={styles.loadMoreButton}>
+        {canLoadMore && (
+          <IconButton
+            icon='plus'
+            iconColor='currentColor'
+            iconSize={26}
+            variant='transparent'
+            onClick={loadMore}
+            className={styles.moreButton}
+          >
             Показать ещё
-          </Button>
-        </div>
-      )}
-      {totalPages > 1 && (
-        <Pagination
-          activeRange={activeRange}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={goToPage}
-        />
-      )}
+          </IconButton>
+        )}
+        {totalPages > 1 && (
+          <Pagination
+            className={styles.pagination}
+            activeRange={activeRange}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={goToPage}
+          />
+        )}
+      </section>
     </main>
   )
 }

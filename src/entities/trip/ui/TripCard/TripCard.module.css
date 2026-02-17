@@ -5,6 +5,7 @@
   grid-column: 1/-1;
   grid-template-columns: subgrid;
   border-radius: 20px;
+  background-color: var(--color-white);
   font-size: var(--font-size-sm);
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
   overflow: hidden;

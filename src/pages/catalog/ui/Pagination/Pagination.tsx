@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui'
+import { Button, IconButton } from '@/shared/ui'
 import styles from './Pagination.module.css'
 
 interface PaginationProps {
@@ -6,13 +6,15 @@ interface PaginationProps {
   totalPages: number;
   onPageChange: (page: number) => void;
   activeRange?: { from: number; to: number };
+  className: string;
 }
 
-export const Pagination = ({
+const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
-  activeRange
+  activeRange,
+  className = ''
 
 }: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -25,21 +27,13 @@ export const Pagination = ({
   }
 
   return (
-    <nav className={styles.pagination} aria-label="Пагинация">
-      <Button
-        variant="secondary"
-        onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1}
-        className={styles.arrow}
-      >
-        ←
-      </Button>
-
+    <nav className={`${styles.pagination} ${className}`} aria-label="Пагинация">
       <div className={styles.pages}>
         {pages.map(page => (
           <Button
             key={page}
-            variant={isPageActive(page) ? 'primary' : 'secondary'}
+            variant={isPageActive(page) ? 'primary' : 'transparent'}
+            size='small'
             onClick={() => onPageChange(page)}
             className={styles.pageButton}
           >
@@ -47,15 +41,27 @@ export const Pagination = ({
           </Button>
         ))}
       </div>
+      <IconButton
+        icon='page-left'
+        iconSize={20}
+        variant="transparent"
+        size='small'
+        onClick={() => onPageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={styles.arrow}
+      />
 
-      <Button
-        variant="secondary"
+      <IconButton
+        icon='page-right'
+        iconSize={20}
+        variant="transparent"
+        size='small'
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={styles.arrow}
-      >
-        →
-      </Button>
+      />
     </nav>
   )
 }
+
+export { Pagination }

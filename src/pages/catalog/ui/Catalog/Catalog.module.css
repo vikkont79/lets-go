@@ -3,27 +3,8 @@
   inline-size: min(1440px, 100%);
   margin-inline: auto;
   margin-block-end: -60px;
+  padding-block-end: 137px;
   background-color: var(--color-neutral-50);
-}
-
-.catalog {
-  display: grid;
-  grid-template-columns: max-content 1fr min-content;
-  row-gap: 30px;
-  column-gap: 62px;
-}
-
-.skeleton {
-  padding: 48px;
-  text-align: center;
-  color: #999;
-}
-
-.empty {
-  padding: 48px;
-  text-align: center;
-  color: #999;
-  font-size: 18px;
 }
 
 .title {
@@ -55,4 +36,42 @@
     padding-block: 60px var(--indent-3);
     font-size: var(--font-size-xxl);
   }
+}
+
+.skeleton {
+  padding: 48px;
+  text-align: center;
+  color: #999;
+}
+
+.empty {
+  padding: 48px;
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+}
+
+.catalog {
+  display: grid;
+  grid-template-columns: max-content 1fr min-content;
+  row-gap: 30px;
+  column-gap: 62px;
+  padding-block-start: 60px;
+  font-size: 20px;
+}
+
+.moreButton {
+  max-inline-size: 300px;
+  margin-inline: auto;
+  margin-block: 38px 45px;
+  grid-column: 1/-1;
+  gap: 24px;
+  border: none;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.pagination {
+  grid-column: 1/-1;
+  justify-content: space-between;
 }

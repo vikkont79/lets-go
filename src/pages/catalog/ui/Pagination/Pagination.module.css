@@ -1,9 +1,12 @@
 .pagination {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr min-content min-content;
   align-items: center;
   gap: 12px;
-  margin: 32px 0;
+  padding-block: var(--indent-6);
+  padding-inline: var(--indent-8);
+  border-radius: 20px;
+  background-color: var(--color-white);
 }
 
 .pages {
@@ -12,9 +15,14 @@
 }
 
 .pageButton {
-  min-width: 40px;
+  min-inline-size: 50px;
+  border: none;
+  border-radius: 50%;
+  font-size: inherit;
 }
 
 .arrow {
-  padding: 8px 16px;
+  min-inline-size: 50px;
+  border: none;
+
 }
