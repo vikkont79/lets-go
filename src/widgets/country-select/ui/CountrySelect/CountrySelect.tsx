@@ -94,12 +94,22 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
             onClick={() => handleRemoveCountry(index)}
           />
           {isOpen && activeIndex === index && (
-            <CountryDropdown
-              ref={dropdownRef}
-              className={styles.countryDropdown}
-              onCountrySelect={handleReplaceCountry}
-              onCloseButton={handleCloseDropdown}
-            />
+            <>
+              <IconButton
+                className={styles.closeButton}
+                icon='close'
+                iconPosition='right'
+                variant='transparent'
+                onClick={handleCloseDropdown}
+              >
+                Выберите страну
+              </IconButton>
+              <CountryDropdown
+                ref={dropdownRef}
+                className={styles.countryDropdown}
+                onCountrySelect={handleReplaceCountry}
+              />
+            </>
           )}
         </div>
       ))}
@@ -121,15 +131,25 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           {error && (
             <span className={styles.error}>{error}</span>
           )}
+          {isOpen && activeIndex === -1 && (
+            <>
+              <IconButton
+                className={styles.closeButton}
+                icon='close'
+                iconPosition='right'
+                variant='transparent'
+                onClick={handleCloseDropdown}
+              >
+                Выберите страну
+              </IconButton>
+              <CountryDropdown
+                ref={dropdownRef}
+                className={styles.countryDropdown}
+                onCountrySelect={handleAddCountry}
+              />
+            </>
+          )}
         </div>
-      )}
-      {isOpen && activeIndex === -1 && (
-        <CountryDropdown
-          ref={dropdownRef}
-          className={styles.countryDropdown}
-          onCountrySelect={handleAddCountry}
-          onCloseButton={handleCloseDropdown}
-        />
       )}
     </div >
   )

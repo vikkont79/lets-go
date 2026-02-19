@@ -1,17 +1,16 @@
 import { forwardRef, useCallback, useEffect, useState } from 'react'
-import { Button, IconButton } from '@/shared/ui'
-import styles from './CountryDropdown.module.css'
+import { Button } from '@/shared/ui'
 import { fetchCountries } from '../../api/mock-server-countries'
 import type { Country } from '@/shared/types'
+import styles from './CountryDropdown.module.css'
 
 interface CountryDropdownProps {
   onCountrySelect: (country: Country) => void;
-  onCloseButton: () => void;
   className?: string;
 }
 
 const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
-  ({ onCountrySelect, onCloseButton, className }, ref) => {
+  ({ onCountrySelect, className }, ref) => {
     const [allCountries, setAllCountries] = useState<Country[]>([])
     const [countries, setCountries] = useState<Country[]>([])
     const [isCountryOpen, setIsCountryOpen] = useState(false)
@@ -52,15 +51,7 @@ const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
 
     return (
       <div ref={ref} className={`${styles.dropdown} ${className}`}>
-        <IconButton
-          className={styles.close}
-          icon='close'
-          iconPosition='right'
-          variant='transparent'
-          onClick={onCloseButton}
-        >
-          Выберите страну
-        </IconButton>
+
         <div className={styles.content}>
           <div className={styles.alfabet}>
             {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
