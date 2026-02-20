@@ -2,47 +2,66 @@ import type { Trip } from '@/entities/trip'
 
 const API_BASE = 'http://localhost:3001'
 
-interface TripsResponse {
-  data: Trip[]
-  items: number
-  pages: number
-}
-
-export const fetchTrips = async (params: {
+interface FetchTripsParams {
   page?: number
   from?: number
   to?: number
   limit: number
-}) => {
+  country?: string | null
+}
+
+interface FetchTripsResult {
+  trips: Trip[]
+  total: number
+  pages: number
+}
+
+export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsResult> => {
   try {
+    const buildUrl = (page: number) => {
+      let url = `${API_BASE}/trips?_page=${page}&_limit=${params.limit}`
+      if (params.country) {
+        url += `&countryCode=${params.country}`  // фильтр по коду страны
+      }
+      return url
+    }
+
     if (params.page !== undefined) {
-      const response = await fetch(
-        `${API_BASE}/trips?_page=${params.page}&_per_page=${params.limit}`
-      )
+      const response = await fetch(buildUrl(params.page))
+
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`)
-      const data: TripsResponse = await response.json()
+
+      const data: Trip[] = await response.json()
+      const totalCount = response.headers.get('X-Total-Count')
+      const total = totalCount ? parseInt(totalCount) : data.length
+      const pages = Math.ceil(total / params.limit)
 
       return {
-        trips: data.data || [],
-        total: data.items || 0,
-        pages: data.pages || 0
+        trips: data,
+        total,
+        pages
       }
     }
 
     if (params.from !== undefined && params.to !== undefined) {
-      const promises = []
+      const fetchPromises = []
       for (let p = params.from; p <= params.to; p++) {
-        promises.push(
-          fetch(`${API_BASE}/trips?_page=${p}&_per_page=${params.limit}`)
-            .then(res => res.json())
-            .then((data: TripsResponse) => data)
+        fetchPromises.push(
+          fetch(buildUrl(p))
         )
       }
 
-      const results = await Promise.all(promises)
-      const trips = results.flatMap(r => r.data || [])
-      const total = results[0]?.items || 0
+      const responses = await Promise.all(fetchPromises)
+      const totalCount = responses[0]?.headers.get('X-Total-Count')
+      const total = totalCount ? parseInt(totalCount) : 0
       const pages = Math.ceil(total / params.limit)
+
+      const tripsArrays = await Promise.all(
+        responses.map(response => response.json() as Promise<Trip[]>)
+      )
+
+      const trips = tripsArrays.flat()
+
 
       return { trips, total, pages }
     }

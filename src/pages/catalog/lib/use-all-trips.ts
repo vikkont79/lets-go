@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { fetchTrips } from '../api'
 import { useGlobalStore } from '@/app/store/root-store'
 import type { Trip } from '@/entities/trip'
+import type { Country } from '@/shared/types'
 
 const ITEMS_PER_PAGE = 4
 
@@ -9,6 +10,7 @@ export const useCatalog = () => {
   const [trips, setTrips] = useState<Trip[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [totalPages, setTotalPages] = useState(1)
+  const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
   const currentUser = useGlobalStore(state => state.currentUser)
 
   const [anchorPage, setAnchorPage] = useState(1)
@@ -17,13 +19,19 @@ export const useCatalog = () => {
 
   const isRangeMode = endPage > anchorPage
 
+  const handleCountrySelect = (country: Country) => {
+    setSelectedCountry(country.code)
+    setAnchorPage(1)
+    setEndPage(1)
+  }
+
   useEffect(() => {
     const loadTrips = async () => {
       setIsLoading(true)
 
       const params = isRangeMode
-        ? { from: anchorPage, to: endPage, limit: ITEMS_PER_PAGE }
-        : { page: anchorPage, limit: ITEMS_PER_PAGE }
+        ? { from: anchorPage, to: endPage, limit: ITEMS_PER_PAGE, country: selectedCountry }
+        : { page: anchorPage, limit: ITEMS_PER_PAGE, country: selectedCountry }
 
 
       const { trips: loadedTrips, pages } = await fetchTrips(params)
@@ -37,7 +45,7 @@ export const useCatalog = () => {
     }
 
     loadTrips()
-  }, [anchorPage, endPage, isRangeMode, currentUser?.id])
+  }, [anchorPage, endPage, isRangeMode, currentUser?.id, selectedCountry])
 
   const loadMore = () => {
     setEndPage(prev => Math.min(prev + 1, totalPages))
@@ -58,6 +66,8 @@ export const useCatalog = () => {
     activeRange: { from: anchorPage, to: endPage },
     canLoadMore,
     loadMore,
-    goToPage
+    goToPage,
+    selectedCountry,
+    handleCountrySelect
   }
 }

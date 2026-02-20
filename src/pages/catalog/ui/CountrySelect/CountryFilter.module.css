@@ -1,0 +1,45 @@
+.countries {
+  padding-block-start: 60px;
+  margin-block-end: 74px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: max-content auto;
+  column-gap: var(--indent-8);
+  padding: 0;
+  border: none;
+  text-transform: uppercase;
+}
+
+.filter {
+  gap: var(--indent-6);
+  padding: 0;
+  border: none;
+  text-transform: uppercase;
+}
+
+.continents {
+  display: flex;
+  margin-block: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+  column-gap: var(--indent-5);
+}
+
+.continent {
+  padding: 0;
+  border: none;
+  text-transform: uppercase;
+  opacity: 0.3;
+
+  &:focus,
+  &:focus-visible,
+  &:active {
+    opacity: 1;
+  }
+}
+
+.countriesDropdown {
+  margin-block-start: 74px;
+}

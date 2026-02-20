@@ -2,6 +2,7 @@ import { useCatalog } from '../../lib'
 import { TripCard } from '@/entities/trip/ui'
 import { IconButton } from '@/shared/ui'
 import { Pagination } from '../Pagination/Pagination'
+import { CountryFilter } from '../CountrySelect/CountryFilter'
 import styles from './Catalog.module.css'
 
 const CatalogPage = () => {
@@ -13,7 +14,8 @@ const CatalogPage = () => {
     activeRange,
     canLoadMore,
     loadMore,
-    goToPage
+    goToPage,
+    handleCountrySelect
   } = useCatalog()
 
 
@@ -39,6 +41,7 @@ const CatalogPage = () => {
         Страница планирования путешествия
       </h1>
       <p className={styles.title}>Направления</p>
+      <CountryFilter onCountrySelect={handleCountrySelect} />
       <section className={`${styles.catalog} wrapper`}>
         {trips.map(trip => (
           <TripCard key={trip.id} trip={trip} />
