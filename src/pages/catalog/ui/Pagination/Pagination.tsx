@@ -17,7 +17,35 @@ const Pagination = ({
   className = ''
 
 }: PaginationProps) => {
-  const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
+  const getVisiblePages = () => {
+    const delta = 3
+    const range: (number | string)[] = []
+
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        (i >= currentPage - delta && i <= currentPage + delta)
+      ) {
+        range.push(i)
+      }
+    }
+
+    const result: (number | string)[] = []
+    let prev = 0
+
+    for (const page of range) {
+      if (typeof page === 'number') {
+        if (page - prev > 1) {
+          result.push('...')
+        }
+        result.push(page)
+        prev = page
+      }
+    }
+
+    return result
+  }
 
   const isPageActive = (page: number) => {
     if (activeRange) {
@@ -29,17 +57,20 @@ const Pagination = ({
   return (
     <nav className={`${styles.pagination} ${className}`} aria-label="Пагинация">
       <div className={styles.pages}>
-        {pages.map(page => (
-          <Button
-            key={page}
-            variant={isPageActive(page) ? 'primary' : 'transparent'}
-            size='small'
-            onClick={() => onPageChange(page)}
-            className={styles.pageButton}
-          >
-            {page}
-          </Button>
-        ))}
+        {getVisiblePages().map((page, index) =>
+          page === '...' ? (
+            <span key={`dots-${index}`} className={styles.dots}>...</span>
+          ) : (
+            <Button
+              key={page}
+              variant={isPageActive(page as number) ? 'primary' : 'transparent'}
+              size='small'
+              onClick={() => onPageChange(page as number)}
+              className={styles.pageButton}
+            >
+              {page}
+            </Button>
+          ))}
       </div>
       <IconButton
         icon='page-left'
