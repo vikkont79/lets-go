@@ -19,6 +19,7 @@ export interface FormData {
   tags: string;
   transport: TransportType[];
   companions: number;
+  hasChildren: boolean;
   duration: number;
   dates: TripDateRange;
   countries: Country[];

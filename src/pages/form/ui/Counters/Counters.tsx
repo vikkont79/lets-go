@@ -1,4 +1,4 @@
-import { CounterInput } from '@/shared/ui';
+import { CounterInput, Toggle } from '@/shared/ui';
 import styles from './Counters.module.css';
 
 interface CountersProps {
@@ -7,6 +7,7 @@ interface CountersProps {
   duration: number;
   onCompanionsChange: (value: number) => void;
   onDurationChange: (value: number) => void;
+  onChildrenChange: (value: boolean | string) => void;
   errors: {
     companions?: string;
     duration?: string;
@@ -19,6 +20,7 @@ const Counters = ({
   duration,
   onCompanionsChange,
   onDurationChange,
+  onChildrenChange,
   errors,
 }: CountersProps) => {
   return (
@@ -33,6 +35,12 @@ const Counters = ({
         min={1}
         max={10}
         error={errors.companions}
+      />
+      <Toggle
+        className={styles.checkbox}
+        label='Можно с детьми'
+        type='checkbox'
+        onChange={onChildrenChange}
       />
       <CounterInput
         className={styles.counterInput}

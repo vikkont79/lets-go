@@ -1,9 +1,9 @@
 .counterInputs {
   display: grid;
-  grid-template-columns: max-content min-content min-content;
+  grid-template-columns: max-content min-content min-content auto;
   row-gap: var(--indent-6);
 
-  @media(max-width: 769px) {
+  @media(max-width: 1025px) {
     grid-template-columns: 1fr min-content;
   }
 
@@ -14,15 +14,28 @@
 
 .counterInput {
   display: grid;
-  grid-column: 1/-1;
+  grid-column: 1/-2;
   grid-template-columns: subgrid;
   gap: var(--indent-8);
 
-  @media(max-width: 769px) {
+  @media(max-width: 1025px) {
+    grid-column: 1/-1;
     gap: var(--indent-6);
   }
 
   @media(max-width: 321px) {
     gap: var(--indent-2);
+  }
+}
+
+.checkbox {
+  justify-self: end;
+
+  @media(max-width: 1025px) {
+    justify-self: start;
+  }
+
+  @media(max-width: 321px) {
+    order: 1;
   }
 }

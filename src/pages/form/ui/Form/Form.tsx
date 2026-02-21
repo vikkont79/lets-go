@@ -20,6 +20,7 @@ const FormPage = () => {
     handleTagsChange,
     handleToggleTransport,
     handleCompanionsChange,
+    handleChildrenChange,
     handleDurationChange,
     handleDateChange,
     handleAddCountry,
@@ -103,6 +104,7 @@ const FormPage = () => {
                 duration={formData.duration}
                 onCompanionsChange={handleCompanionsChange}
                 onDurationChange={handleDurationChange}
+                onChildrenChange={handleChildrenChange}
                 errors={stepErrors}
               />
               <DatePicker

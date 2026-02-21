@@ -49,11 +49,21 @@ input[type="radio"]+.toggleControl {
 .base {
   inline-size: 36px;
   block-size: 36px;
+
+  @media(max-width: 321px) {
+    inline-size: 26px;
+    block-size: 26px;
+  }
 }
 
 .labelText {
   font-weight: 500;
   text-transform: uppercase;
+
+  @media(max-width: 321px) {
+    font-size: 16px;
+    text-transform: none;
+  }
 }
 
 .error {

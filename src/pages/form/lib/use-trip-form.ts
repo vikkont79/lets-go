@@ -8,6 +8,7 @@ const initialFormData: FormData = {
   transport: [],
   companions: 1,
   duration: 2,
+  hasChildren: false,
   dates: {
     from: new Date(),
     to: addDays(new Date(), 1)
@@ -34,6 +35,10 @@ export const useTripForm = () => {
 
   const handleCompanionsChange = useCallback((value: number) => {
     setFormData(prev => ({ ...prev, companions: value }))
+  }, [])
+
+  const handleChildrenChange = useCallback((value: boolean | string) => {
+    setFormData(prev => ({ ...prev, hasChildren: value as boolean }))
   }, [])
 
   const handleDurationChange = useCallback((value: number) => {
@@ -119,6 +124,7 @@ export const useTripForm = () => {
     handleTagsChange,
     handleToggleTransport,
     handleCompanionsChange,
+    handleChildrenChange,
     handleDurationChange,
     handleDateChange,
     handleAddCountry,
