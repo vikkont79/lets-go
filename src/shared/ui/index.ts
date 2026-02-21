@@ -6,4 +6,5 @@ export { IconButton } from './IconButton/IconButton'
 export { Input } from './Input/Input'
 export { CounterInput } from './CounterInput/CounterInput'
 export { Textarea } from './Textarea/Textarea'
+export { Toggle } from './Toggle/Toggle'
 
