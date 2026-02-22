@@ -6,7 +6,7 @@ import { Button, IconButton } from "@/shared/ui";
 import { CONTINENTS } from "../../model";
 
 interface CountryFilterProps {
-  onCountrySelect: (country: Country) => void;
+  onCountrySelect: (country: Country | null) => void;
 }
 
 const CountryFilter = ({ onCountrySelect }: CountryFilterProps) => {
@@ -17,7 +17,12 @@ const CountryFilter = ({ onCountrySelect }: CountryFilterProps) => {
     setIsOpen(!isOpen)
   }
 
+  const handleCloseDropdown = () => {
+    setIsOpen(false)
+  }
+
   const handleContinentClick = (continent: string) => {
+    setIsOpen(true)
     setSelectedContinent(continent)
     // Не закрываем дропдаун, чтобы можно было выбрать страну
   }
@@ -25,6 +30,10 @@ const CountryFilter = ({ onCountrySelect }: CountryFilterProps) => {
   const handleCountrySelect = (country: Country) => {
     onCountrySelect(country)
     setIsOpen(false) // Закрываем после выбора страны
+  }
+
+  const handleCountryReset = () => {
+    onCountrySelect(null)
   }
 
   return (
@@ -51,15 +60,33 @@ const CountryFilter = ({ onCountrySelect }: CountryFilterProps) => {
             </li>
           ))}
         </ul>
+        <Button
+          variant='transparent'
+          className={styles.showAll}
+          onClick={handleCountryReset}
+        >
+          Показать все
+        </Button>
       </div>
-
       {isOpen && (
-        <FilterDropdown
-          className={styles.countriesDropdown}
-          selectedContinent={selectedContinent}
-          onCountrySelect={handleCountrySelect}
-        />
+        <>
+          <FilterDropdown
+            className={styles.countriesDropdown}
+            selectedContinent={selectedContinent}
+            onCountrySelect={handleCountrySelect}
+          />
+          <IconButton
+            className={styles.close}
+            icon='close'
+            variant='secondary'
+            size='large'
+            onClick={handleCloseDropdown}
+          >
+            Свернуть
+          </IconButton>
+        </>
       )}
+
     </section>
   )
 }

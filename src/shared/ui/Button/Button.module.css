@@ -32,6 +32,26 @@
   }
 }
 
+.secondary {
+  background-color: var(--color-neutral-200);
+  color: var(--color-base-500);
+
+  &:hover {
+    background-color: var(--color-neutral-400);
+  }
+
+  &:active,
+  &:focus,
+  &:focus-visible {
+    opacity: var(--opacity-base);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-neutral-400);
+    outline-offset: -2px;
+  }
+}
+
 .transparent {
   border: 1px solid var(--color-neutral-200);
   border-radius: var(--border-radius-sm);

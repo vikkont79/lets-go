@@ -1,13 +1,14 @@
 .countries {
   padding-block-start: 60px;
   margin-block-end: 74px;
+  font-size: var(--font-size-sm);
 }
 
 .filters {
   display: grid;
-  grid-template-columns: max-content auto;
+  grid-template-columns: max-content auto max-content;
   column-gap: var(--indent-8);
-  padding: 0;
+  padding-inline: var(--indent-5);
   border: none;
   text-transform: uppercase;
 }
@@ -16,6 +17,7 @@
   gap: var(--indent-6);
   padding: 0;
   border: none;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
 }
 
@@ -30,6 +32,7 @@
 .continent {
   padding: 0;
   border: none;
+  font-size: var(--font-size-sm);
   text-transform: uppercase;
   opacity: 0.3;
 
@@ -40,6 +43,21 @@
   }
 }
 
+.showAll {
+  padding: 0;
+  border: none;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+}
+
 .countriesDropdown {
-  margin-block-start: 74px;
+  margin-block: 74px 50px;
+}
+
+
+.close {
+  padding-block: 42px;
+  gap: var(--indent-4);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
 }

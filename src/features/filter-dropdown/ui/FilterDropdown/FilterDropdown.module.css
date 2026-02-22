@@ -17,8 +17,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, min-content);
   gap: var(--indent-5);
-  padding-inline: var(--indent-6);
-  padding-block: var(--indent-6);
+  padding-inline: var(--indent-8);
   text-align: start;
 
   @media(max-width: 769px) {

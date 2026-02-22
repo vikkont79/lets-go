@@ -19,8 +19,8 @@ export const useCatalog = () => {
 
   const isRangeMode = endPage > anchorPage
 
-  const handleCountrySelect = (country: Country) => {
-    setSelectedCountry(country.code)
+  const handleCountrySelect = (country: Country | null) => {
+    setSelectedCountry(country?.code || null)
     setAnchorPage(1)
     setEndPage(1)
   }
