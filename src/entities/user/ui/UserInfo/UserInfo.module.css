@@ -29,7 +29,14 @@
 }
 
 .level {
+  color: var(--color-white);
+
   @media(max-width: 1025px) {
     inline-size: 95px;
+    block-size: 95px;
+  }
+
+  @media(max-width: 769px) {
+    color: var(--color-base-500);
   }
 }

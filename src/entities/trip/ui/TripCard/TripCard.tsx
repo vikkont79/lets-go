@@ -1,7 +1,6 @@
-import { Button, Icon, IconButton, Image } from '@/shared/ui'
+import { Button, Icon, IconButton, Image, Level } from '@/shared/ui'
 import type { Trip } from '../../types'
 import avatar from '@assets/images/avatar.jpg'
-import level from '@assets/images/card-level.svg'
 import { TRANSPORT_OPTIONS } from '@/shared/constants'
 import styles from './TripCard.module.css'
 
@@ -11,6 +10,8 @@ interface TripCardProps {
 
 const TripCard = ({ trip }: TripCardProps) => {
   const avatarSrc = trip.user.avatar || avatar
+  const userLevel = trip.user.level ?? 80
+
   return (
     <article className={styles.card}>
       <Image
@@ -68,13 +69,7 @@ const TripCard = ({ trip }: TripCardProps) => {
             </li>
           ))}
         </ul>
-        <Image
-          className={styles.level}
-          src={level}
-          alt='Уровень попутчика'
-          width={60}
-          height={60}
-        />
+        <Level level={userLevel} />
       </div>
     </article>
   )
