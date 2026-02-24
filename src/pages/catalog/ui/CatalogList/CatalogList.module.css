@@ -1,0 +1,23 @@
+.list {
+  display: grid;
+  grid-template-columns: max-content 1fr min-content;
+  row-gap: 30px;
+  column-gap: 62px;
+}
+
+.moreButton {
+  grid-column: 1/-1;
+  max-inline-size: 300px;
+  margin-inline: auto;
+  margin-block-start: 38px;
+  gap: 24px;
+  border: none;
+  font-size: 24px;
+  text-transform: uppercase;
+}
+
+.pagination {
+  grid-column: 1/-1;
+  justify-content: space-between;
+  margin-block-start: 45px;
+}

@@ -1,8 +1,6 @@
 import { useCatalog } from '../../lib'
-import { TripCard } from '@/entities/trip/ui'
-import { IconButton } from '@/shared/ui'
-import { Pagination } from '../Pagination/Pagination'
 import { CountryFilter } from '../CountrySelect/CountryFilter'
+import { CatalogList } from '../CatalogList/CatalogList'
 import styles from './Catalog.module.css'
 
 const CatalogPage = () => {
@@ -41,33 +39,23 @@ const CatalogPage = () => {
         Страница планирования путешествия
       </h1>
       <p className={styles.title}>Направления</p>
-      <CountryFilter onCountrySelect={handleCountrySelect} />
+      <CountryFilter
+        className={styles.countries}
+        onCountrySelect={handleCountrySelect}
+      />
       <section className={`${styles.catalog} wrapper`}>
-        {trips.map(trip => (
-          <TripCard key={trip.id} trip={trip} />
-        ))}
-        {canLoadMore && (
-          <IconButton
-            icon='plus'
-            iconColor='currentColor'
-            iconSize={26}
-            variant='transparent'
-            onClick={loadMore}
-            className={styles.moreButton}
-          >
-            Показать ещё
-          </IconButton>
-        )}
-        {totalPages > 1 && (
-          <Pagination
-            className={styles.pagination}
-            activeRange={activeRange}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={goToPage}
-          />
-        )}
+        <div className={styles.filters}></div>
+        <CatalogList
+          trips={trips}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          activeRange={activeRange}
+          canLoadMore={canLoadMore}
+          loadMore={loadMore}
+          goToPage={goToPage}
+        />
       </section>
+
     </main>
   )
 }

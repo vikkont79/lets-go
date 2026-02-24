@@ -6,14 +6,15 @@ import styles from './TripCard.module.css'
 
 interface TripCardProps {
   trip: Trip;
+  className: string;
 }
 
-const TripCard = ({ trip }: TripCardProps) => {
+const TripCard = ({ trip, className }: TripCardProps) => {
   const avatarSrc = trip.user.avatar || avatar
   const userLevel = trip.user.level ?? 80
 
   return (
-    <article className={styles.card}>
+    <article className={`${styles.card} ${className || ''}`.trim()}>
       <Image
         className={styles.avatar}
         src={avatarSrc}
@@ -69,7 +70,7 @@ const TripCard = ({ trip }: TripCardProps) => {
             </li>
           ))}
         </ul>
-        <Level level={userLevel} />
+        <Level className={styles.level} level={userLevel} size={60} />
       </div>
     </article>
   )

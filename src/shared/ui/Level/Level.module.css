@@ -20,7 +20,7 @@
 
 .number {
   z-index: 1;
-  font-size: 38px;
+  font-size: calc(var(--size, 100px) * 0.38);
   font-weight: 700;
 }
 
@@ -28,7 +28,7 @@
   z-index: 1;
   inline-size: 60%;
   block-size: 2px;
-  margin-block: 0 6px;
+  margin-block: 0 calc(var(--size, 100px) * 0.06);
   border: none;
   background-color: var(--color-neutral-500);
   opacity: 0.3;
@@ -37,5 +37,5 @@
 
 .text {
   z-index: 1;
-  font-size: 18px;
+  font-size: calc(var(--size, 100px) * 0.18);
 }
