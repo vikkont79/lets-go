@@ -2,6 +2,7 @@ import { useCatalog } from '../../lib'
 import { CountryFilter } from '../CountrySelect/CountryFilter'
 import { CatalogList } from '../CatalogList/CatalogList'
 import styles from './Catalog.module.css'
+import { CatalogFilters } from '@/features/catalog-filter/ui'
 
 const CatalogPage = () => {
   const {
@@ -36,7 +37,7 @@ const CatalogPage = () => {
   return (
     <main className={styles.main}>
       <h1 className='visually-hidden'>
-        Страница планирования путешествия
+        Страница поиска попутчиков
       </h1>
       <p className={styles.title}>Направления</p>
       <CountryFilter
@@ -44,7 +45,7 @@ const CatalogPage = () => {
         onCountrySelect={handleCountrySelect}
       />
       <section className={`${styles.catalog} wrapper`}>
-        <div className={styles.filters}></div>
+        <CatalogFilters className={styles.filters} />
         <CatalogList
           trips={trips}
           totalPages={totalPages}

@@ -18,7 +18,6 @@
 .toggleControl {
   display: grid;
   place-items: center;
-  border: 1px solid var(--color-neutral-200);
   border-radius: var(--border-radius-sm);
   transition: var(--transition-all);
 
@@ -46,6 +45,24 @@ input[type="radio"]+.toggleControl {
   transition: var(--transition-all);
 }
 
+.labelText {
+  font-weight: 500;
+  text-transform: uppercase;
+
+  @media(max-width: 321px) {
+    font-size: 16px;
+    text-transform: none;
+  }
+}
+
+.primary {
+  background-color: var(--color-white);
+}
+
+.transparent {
+  border: 1px solid var(--color-neutral-200);
+}
+
 .base {
   inline-size: 36px;
   block-size: 36px;
@@ -56,14 +73,9 @@ input[type="radio"]+.toggleControl {
   }
 }
 
-.labelText {
-  font-weight: 500;
-  text-transform: uppercase;
-
-  @media(max-width: 321px) {
-    font-size: 16px;
-    text-transform: none;
-  }
+.small {
+  inline-size: 24px;
+  block-size: 24px;
 }
 
 .error {

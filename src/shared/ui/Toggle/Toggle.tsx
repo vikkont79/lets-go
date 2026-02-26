@@ -1,4 +1,4 @@
-import type { Size } from '../../types'
+import type { Size, Variant } from '../../types'
 import { Icon } from '../Icon/Icon'
 import styles from './Toggle.module.css'
 
@@ -9,9 +9,11 @@ interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,
   error?: string;
   type?: 'checkbox' | 'radio';
   onChange: (value: boolean | string) => void;
+  variant?: Variant;
   size?: Size;
   iconSize?: number | string;
   className?: string;
+  labelStyle?: React.CSSProperties;
 }
 
 const Toggle = ({
@@ -21,12 +23,14 @@ const Toggle = ({
   type = 'checkbox',
   onChange,
   size = 'base',
+  variant = 'primary',
   iconSize = 20,
   id,
   name,
   value,
   disabled,
   className = '',
+  labelStyle,
   ...props
 }: ToggleProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +56,7 @@ const Toggle = ({
         className="visually-hidden"
         {...props}
       />
-      <span className={`${styles.toggleControl} ${styles[size]}`}>
+      <span className={`${styles.toggleControl} ${styles[variant]} ${styles[size]}`}>
         {type === 'checkbox' && (
           <Icon className={styles.mark} name='check' size={iconSize} />
         )}
@@ -60,7 +64,7 @@ const Toggle = ({
           <span className={styles.dot} />
         )}
       </span>
-      <span className={hiddenLabel ? 'visually-hidden' : styles.labelText}>
+      <span style={labelStyle} className={hiddenLabel ? 'visually-hidden' : styles.labelText}>
         {label}
       </span>
       {error && (

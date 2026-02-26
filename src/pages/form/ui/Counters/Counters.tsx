@@ -41,6 +41,7 @@ const Counters = ({
         label='Можно с детьми'
         type='checkbox'
         onChange={onChildrenChange}
+        variant='transparent'
       />
       <CounterInput
         className={styles.counterInput}
