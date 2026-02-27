@@ -1,13 +1,11 @@
-import { IconButton } from '@/shared/ui'
 import type { TransportType } from '@/shared//types'
-import { TRANSPORT_OPTIONS } from '../../../../shared/constants'
 import styles from './TransportSelector.module.css'
+import { TransportIcons } from '@/shared/ui';
 
 type TransportSelectorProps = {
   selected: TransportType[];
   onChange: (type: TransportType) => void;
   error?: string;
-
 }
 
 const TransportSelector = ({
@@ -15,27 +13,21 @@ const TransportSelector = ({
   onChange,
   error,
 }: TransportSelectorProps) => (
-  <fieldset
-    className={styles.field}
-    data-invalid={!!error}
-  >
-    <legend className={styles.fieldTitle}>
-      транспорт
-    </legend>
-    <ul className={styles.transportList}>
-      {TRANSPORT_OPTIONS.map((item) => (
-        <li key={item}>
-          <IconButton
-            className={styles.transportButton}
-            icon={item}
-            onClick={() => onChange(item)}
-            iconLabel={item}
-            aria-pressed={selected.includes(item)}
-          />
-        </li>
-      ))}
-    </ul>
-  </fieldset>
+  <>
+    <fieldset
+      className={styles.field}
+      data-invalid={!!error}
+    >
+      <legend className={styles.fieldTitle}>
+        транспорт
+      </legend>
+      <TransportIcons
+        selected={selected}
+        onChange={onChange}
+      />
+    </fieldset>
+    {error && <span className={styles.error}>{error}</span>}
+  </>
 )
 
 export { TransportSelector }
