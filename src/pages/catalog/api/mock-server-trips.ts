@@ -1,4 +1,6 @@
 import type { Trip } from '@/entities/trip'
+import type { FiltersData } from '@/features/catalog-filter/types'
+
 
 const API_BASE = 'http://localhost:3001'
 
@@ -8,6 +10,11 @@ interface FetchTripsParams {
   to?: number
   limit: number
   country?: string | null
+  // ✨ НОВОЕ: фильтры из формы
+  hobbies?: FiltersData['hobbies']
+  music?: FiltersData['music']
+  food?: FiltersData['food']
+  transport?: FiltersData['transport']
 }
 
 interface FetchTripsResult {
@@ -20,9 +27,52 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
   try {
     const buildUrl = (page: number) => {
       let url = `${API_BASE}/trips?_page=${page}&_limit=${params.limit}`
+
+      // ✨ НОВОЕ: добавляем все фильтры в URL
       if (params.country) {
-        url += `&countryCode=${params.country}`  // фильтр по коду страны
+        url += `&countryCode=${params.country}`
       }
+
+      // Хобби (приходят объектом, преобразуем в массив активных)
+      if (params.hobbies) {
+        const activeHobbies = Object.entries(params.hobbies)
+          .filter(([_, value]) => value)
+          .map(([key]) => key)
+
+        activeHobbies.forEach(hobby => {
+          url += `&hobby=${hobby}`
+        })
+      }
+
+      // Музыка
+      if (params.music) {
+        const activeMusic = Object.entries(params.music)
+          .filter(([_, value]) => value)
+          .map(([key]) => key)
+
+        activeMusic.forEach(music => {
+          url += `&music=${music}`
+        })
+      }
+
+      // Еда
+      if (params.food) {
+        const activeFood = Object.entries(params.food)
+          .filter(([_, value]) => value)
+          .map(([key]) => key)
+
+        activeFood.forEach(food => {
+          url += `&food=${food}`
+        })
+      }
+
+      // Транспорт (уже массив)
+      if (params.transport && params.transport.length > 0) {
+        params.transport.forEach(transport => {
+          url += `&transport=${transport}`
+        })
+      }
+
       return url
     }
 
@@ -61,7 +111,6 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
       )
 
       const trips = tripsArrays.flat()
-
 
       return { trips, total, pages }
     }

@@ -14,7 +14,8 @@ const CatalogPage = () => {
     canLoadMore,
     loadMore,
     goToPage,
-    handleCountrySelect
+    handleCountrySelect,
+    handleApplyFilters,
   } = useCatalog()
 
 
@@ -45,7 +46,10 @@ const CatalogPage = () => {
         onCountrySelect={handleCountrySelect}
       />
       <section className={`${styles.catalog} wrapper`}>
-        <CatalogFilters className={styles.filters} />
+        <CatalogFilters
+          className={styles.filters}
+          onApply={handleApplyFilters}
+        />
         <CatalogList
           trips={trips}
           totalPages={totalPages}

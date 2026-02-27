@@ -3,6 +3,7 @@ import { fetchTrips } from '../api'
 import { useGlobalStore } from '@/app/store/root-store'
 import type { Trip } from '@/entities/trip'
 import type { Country } from '@/shared/types'
+import type { FiltersData } from '@/features/catalog-filter/types'
 
 const ITEMS_PER_PAGE = 4
 
@@ -11,6 +12,12 @@ export const useCatalog = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [totalPages, setTotalPages] = useState(1)
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
+  const [filters, setFilters] = useState<FiltersData>({
+    hobbies: { sport: false, hookah: false, couch: false },
+    music: { heavy: false, rap: false, eurodance: false },
+    food: { meat: false, pp: false, vegan: false },
+    transport: [],
+  })
   const currentUser = useGlobalStore(state => state.currentUser)
 
   const [anchorPage, setAnchorPage] = useState(1)
@@ -25,13 +32,29 @@ export const useCatalog = () => {
     setEndPage(1)
   }
 
+  const handleApplyFilters = (newFilters: FiltersData) => {
+    setFilters(newFilters)
+    setAnchorPage(1)
+    setEndPage(1)
+  }
+
   useEffect(() => {
     const loadTrips = async () => {
       setIsLoading(true)
 
-      const params = isRangeMode
-        ? { from: anchorPage, to: endPage, limit: ITEMS_PER_PAGE, country: selectedCountry }
-        : { page: anchorPage, limit: ITEMS_PER_PAGE, country: selectedCountry }
+      const params = {
+        limit: ITEMS_PER_PAGE,
+        country: selectedCountry,
+        // ✨ НОВОЕ: передаём все фильтры
+        hobbies: filters.hobbies,
+        music: filters.music,
+        food: filters.food,
+        transport: filters.transport,
+        ...(isRangeMode
+          ? { from: anchorPage, to: endPage }
+          : { page: anchorPage }
+        )
+      }
 
 
       const { trips: loadedTrips, pages } = await fetchTrips(params)
@@ -45,7 +68,7 @@ export const useCatalog = () => {
     }
 
     loadTrips()
-  }, [anchorPage, endPage, isRangeMode, currentUser?.id, selectedCountry])
+  }, [anchorPage, endPage, isRangeMode, currentUser?.id, selectedCountry, filters])
 
   const loadMore = () => {
     setEndPage(prev => Math.min(prev + 1, totalPages))
@@ -68,6 +91,7 @@ export const useCatalog = () => {
     loadMore,
     goToPage,
     selectedCountry,
-    handleCountrySelect
+    handleCountrySelect,
+    handleApplyFilters,
   }
 }

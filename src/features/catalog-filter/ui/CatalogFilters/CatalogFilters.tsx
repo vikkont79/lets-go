@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import styles from './CatalogFilters.module.css'
-import { Toggle } from '@/shared/ui'
+import { Toggle, TransportIcons } from '@/shared/ui'
 import type { FiltersData } from '../../types'
 import { FOOD_OPTIONS, HOBBY_OPTIONS, MUSIC_OPTIONS } from '@/shared/constants'
+import type { TransportType } from '@/shared/types'
+import styles from './CatalogFilters.module.css'
 
 interface CatalogFiltersProps {
   className: string;
+  onApply: (filters: FiltersData) => void;
 }
 
-const CatalogFilters = ({ className }: CatalogFiltersProps) => {
+const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
   const [filters, setFilters] = useState<FiltersData>({
     hobbies: { sport: false, hookah: false, couch: false },
     music: { heavy: false, rap: false, eurodance: false },
@@ -31,20 +33,25 @@ const CatalogFilters = ({ className }: CatalogFiltersProps) => {
     }
   }
 
-  /*const handleTransportChange = (type: TransportType) => {
+  const handleTransportChange = (type: TransportType) => {
     setFilters(prev => ({
       ...prev,
       transport: prev.transport.includes(type)
         ? prev.transport.filter(t => t !== type)
         : [...prev.transport, type]
     }))
-  }*/
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault() // предотвращаем перезагрузку
+    onApply(filters)   // отправляем данные наверх
+  }
 
   return (
     <div className={`${styles.filters} ${className || ''}`.trim()}>
       <p className={styles.title}>
         Подберите идеального попутчика</p>
-      <form>
+      <form onSubmit={handleSubmit}>
         <fieldset className={styles.group}>
           <p className={styles.fieldTitle}>Хобби</p>
           {HOBBY_OPTIONS.map(({ key, label }) => (
@@ -89,6 +96,18 @@ const CatalogFilters = ({ className }: CatalogFiltersProps) => {
             />
           ))}
         </fieldset>
+        <fieldset className={styles.group}>
+          <p className={styles.fieldTitle}>Транспорт</p>
+          <TransportIcons
+            selected={filters.transport}
+            onChange={handleTransportChange}
+          />
+        </fieldset>
+        <div className={styles.actions}>
+          <button type="submit" className={styles.applyButton}>
+            Применить фильтры
+          </button>
+        </div>
       </form>
     </div>
   )
