@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server": "json-server --watch db.json --port 3001 --middlewares ./middleware/country-filter.cjs"
+    "server": "json-server --watch db.json --port 3001 --middlewares ./middleware/filters.cjs"
   },
   "dependencies": {
     "date-fns": "^4.1.0",

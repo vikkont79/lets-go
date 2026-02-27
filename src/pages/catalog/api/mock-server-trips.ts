@@ -28,49 +28,24 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
     const buildUrl = (page: number) => {
       let url = `${API_BASE}/trips?_page=${page}&_limit=${params.limit}`
 
-      // ✨ НОВОЕ: добавляем все фильтры в URL
       if (params.country) {
         url += `&countryCode=${params.country}`
       }
 
-      // Хобби (приходят объектом, преобразуем в массив активных)
-      if (params.hobbies) {
-        const activeHobbies = Object.entries(params.hobbies)
-          .filter(([_, value]) => value)
-          .map(([key]) => key)
-
-        activeHobbies.forEach(hobby => {
-          url += `&hobby=${hobby}`
-        })
+      if (params.hobbies?.length) {
+        params.hobbies.forEach(h => url += `&hobby=${h}`)
       }
 
-      // Музыка
-      if (params.music) {
-        const activeMusic = Object.entries(params.music)
-          .filter(([_, value]) => value)
-          .map(([key]) => key)
-
-        activeMusic.forEach(music => {
-          url += `&music=${music}`
-        })
+      if (params.music?.length) {
+        params.music.forEach(m => url += `&music=${m}`)
       }
 
-      // Еда
-      if (params.food) {
-        const activeFood = Object.entries(params.food)
-          .filter(([_, value]) => value)
-          .map(([key]) => key)
-
-        activeFood.forEach(food => {
-          url += `&food=${food}`
-        })
+      if (params.food?.length) {
+        params.food.forEach(f => url += `&food=${f}`)
       }
 
-      // Транспорт (уже массив)
-      if (params.transport && params.transport.length > 0) {
-        params.transport.forEach(transport => {
-          url += `&transport=${transport}`
-        })
+      if (params.transport?.length) {
+        params.transport.forEach(t => url += `&transport=${t}`)
       }
 
       return url

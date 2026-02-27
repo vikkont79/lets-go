@@ -12,23 +12,22 @@ interface CatalogFiltersProps {
 
 const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
   const [filters, setFilters] = useState<FiltersData>({
-    hobbies: { sport: false, hookah: false, couch: false },
-    music: { heavy: false, rap: false, eurodance: false },
-    food: { meat: false, pp: false, vegan: false },
+    hobbies: [],
+    music: [],
+    food: [],
     transport: [],
   })
 
-  const handleToggleChange = (
-    group: keyof Pick<FiltersData, 'hobbies' | 'music' | 'food'>,
+  const handleToggle = (
+    field: 'hobbies' | 'music' | 'food',
     key: string
   ) => (value: string | boolean) => {
     if (typeof value === 'boolean') {
       setFilters(prev => ({
         ...prev,
-        [group]: {
-          ...prev[group],
-          [key]: value
-        }
+        [field]: value
+          ? [...prev[field], key]
+          : prev[field].filter(item => item !== key)
       }))
     }
   }
@@ -43,14 +42,14 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
   }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault() // предотвращаем перезагрузку
-    onApply(filters)   // отправляем данные наверх
+    e.preventDefault()
+    onApply(filters)
   }
 
   return (
     <div className={`${styles.filters} ${className || ''}`.trim()}>
-      <p className={styles.title}>
-        Подберите идеального попутчика</p>
+      <p className={styles.title}>Подберите идеального попутчика</p>
+
       <form onSubmit={handleSubmit}>
         <fieldset className={styles.group}>
           <p className={styles.fieldTitle}>Хобби</p>
@@ -59,8 +58,8 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
               className={styles.checkbox}
               key={key}
               label={label}
-              checked={filters.hobbies[key]}
-              onChange={handleToggleChange('hobbies', key)}
+              checked={filters.hobbies.includes(key)}
+              onChange={handleToggle('hobbies', key)}
               size='small'
               labelStyle={{ textTransform: 'none' }}
             />
@@ -74,8 +73,8 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
               className={styles.checkbox}
               key={key}
               label={label}
-              checked={filters.music[key]}
-              onChange={handleToggleChange('music', key)}
+              checked={filters.music.includes(key)}
+              onChange={handleToggle('music', key)}
               size='small'
               labelStyle={{ textTransform: 'none' }}
             />
@@ -89,13 +88,15 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
               className={styles.checkbox}
               key={key}
               label={label}
-              checked={filters.food[key]}
-              onChange={handleToggleChange('food', key)}
+              checked={filters.food.includes(key)}
+              onChange={handleToggle('food', key)}
               size='small'
               labelStyle={{ textTransform: 'none' }}
             />
           ))}
         </fieldset>
+
+        {/* Транспорт */}
         <fieldset className={styles.group}>
           <p className={styles.fieldTitle}>Транспорт</p>
           <TransportIcons
@@ -103,6 +104,7 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
             onChange={handleTransportChange}
           />
         </fieldset>
+
         <div className={styles.actions}>
           <button type="submit" className={styles.applyButton}>
             Применить фильтры

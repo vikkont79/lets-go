@@ -13,9 +13,9 @@ export const useCatalog = () => {
   const [totalPages, setTotalPages] = useState(1)
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
   const [filters, setFilters] = useState<FiltersData>({
-    hobbies: { sport: false, hookah: false, couch: false },
-    music: { heavy: false, rap: false, eurodance: false },
-    food: { meat: false, pp: false, vegan: false },
+    hobbies: [],
+    music: [],
+    food: [],
     transport: [],
   })
   const currentUser = useGlobalStore(state => state.currentUser)
@@ -45,11 +45,7 @@ export const useCatalog = () => {
       const params = {
         limit: ITEMS_PER_PAGE,
         country: selectedCountry,
-        // ✨ НОВОЕ: передаём все фильтры
-        hobbies: filters.hobbies,
-        music: filters.music,
-        food: filters.food,
-        transport: filters.transport,
+        ...filters,
         ...(isRangeMode
           ? { from: anchorPage, to: endPage }
           : { page: anchorPage }

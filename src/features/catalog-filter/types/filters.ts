@@ -6,8 +6,8 @@ export type MusicType = typeof MUSIC_OPTIONS[number]['key']
 export type FoodType = typeof FOOD_OPTIONS[number]['key']
 
 export interface FiltersData {
-  hobbies: Record<HobbyType, boolean>
-  music: Record<MusicType, boolean>
-  food: Record<FoodType, boolean>
+  hobbies: HobbyType[];
+  music: MusicType[];
+  food: FoodType[];
   transport: TransportType[]
-}
+};
