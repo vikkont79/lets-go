@@ -5,16 +5,16 @@ import type { FiltersData } from '@/features/catalog-filter/types'
 const API_BASE = 'http://localhost:3001'
 
 interface FetchTripsParams {
-  page?: number
-  from?: number
-  to?: number
-  limit: number
-  country?: string | null
-  // ✨ НОВОЕ: фильтры из формы
-  hobbies?: FiltersData['hobbies']
-  music?: FiltersData['music']
-  food?: FiltersData['food']
-  transport?: FiltersData['transport']
+  page?: number;
+  from?: number;
+  to?: number;
+  limit: number;
+  country?: string | null;
+  hobbies?: FiltersData['hobbies'];
+  music?: FiltersData['music'];
+  food?: FiltersData['food'];
+  transport?: FiltersData['transport'];
+  level?: [number, number];
 }
 
 interface FetchTripsResult {
@@ -46,6 +46,10 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
 
       if (params.transport?.length) {
         params.transport.forEach(t => url += `&transport=${t}`)
+      }
+
+      if (params.level) {
+        url += `&minLevel=${params.level[0]}&maxLevel=${params.level[1]}`
       }
 
       return url

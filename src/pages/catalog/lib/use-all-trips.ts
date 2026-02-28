@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { fetchTrips } from '../api'
 import { useGlobalStore } from '@/app/store/root-store'
 import type { Trip } from '@/entities/trip'
@@ -17,6 +17,7 @@ export const useCatalog = () => {
     music: [],
     food: [],
     transport: [],
+    level: [1, 100]
   })
   const currentUser = useGlobalStore(state => state.currentUser)
 
@@ -32,11 +33,11 @@ export const useCatalog = () => {
     setEndPage(1)
   }
 
-  const handleApplyFilters = (newFilters: FiltersData) => {
+  const handleApplyFilters = useCallback((newFilters: FiltersData) => {
     setFilters(newFilters)
     setAnchorPage(1)
     setEndPage(1)
-  }
+  }, [])
 
   useEffect(() => {
     const loadTrips = async () => {
@@ -89,5 +90,6 @@ export const useCatalog = () => {
     selectedCountry,
     handleCountrySelect,
     handleApplyFilters,
+    filters,
   }
 }

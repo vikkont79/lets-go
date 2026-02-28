@@ -9,4 +9,5 @@ export { Textarea } from './Textarea/Textarea'
 export { Toggle } from './Toggle/Toggle'
 export { Level } from './Level/Level'
 export { TransportIcons } from './TransportIcons/TransportIcons'
+export { RangeSlider } from './RangeSlider/RangeSlider'
 

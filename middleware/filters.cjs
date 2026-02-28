@@ -8,6 +8,8 @@ module.exports = (req, res, next) => {
   const hobbies = req.query.hobby;
   const music = req.query.music;
   const food = req.query.food;
+  const minLevel = req.query.minLevel ? parseInt(req.query.minLevel) : undefined;
+  const maxLevel = req.query.maxLevel ? parseInt(req.query.maxLevel) : undefined;
   const page = parseInt(req.query._page) || 1
   const limit = parseInt(req.query._limit) || 10
   const path = req.path
@@ -17,11 +19,11 @@ module.exports = (req, res, next) => {
   }
 
   // Если нет ни одного фильтра - пропускаем
-  if (!countryCode && !transport && !hobbies && !music && !food) {
+  if (!countryCode && !transport && !hobbies && !music && !food && !minLevel && !maxLevel) {
     return next()
   }
 
-  console.log('🔍 Фильтры:', { countryCode, transport, hobbies, music, food });
+  console.log('🔍 Фильтры:', { countryCode, transport, hobbies, music, food, minLevel, maxLevel });
 
   fetch('http://localhost:3001/trips')
     .then(response => response.json())
@@ -41,6 +43,18 @@ module.exports = (req, res, next) => {
         filteredTrips = filteredTrips.filter(trip =>
           trip.transport && trip.transport.some(t => transportList.includes(t))
         );
+      }
+
+      if (minLevel !== undefined || maxLevel !== undefined) {
+        const min = minLevel || 1;
+        const max = maxLevel || 100;
+
+        filteredTrips = filteredTrips.filter(trip => {
+          const level = trip.user?.level;
+          return level && level >= min && level <= max;
+        });
+
+        console.log(`📊 Уровень от ${min} до ${max}: осталось ${filteredTrips.length}`);
       }
 
       // Фильтр по хобби

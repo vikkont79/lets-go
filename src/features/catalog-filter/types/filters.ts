@@ -9,5 +9,6 @@ export interface FiltersData {
   hobbies: HobbyType[];
   music: MusicType[];
   food: FoodType[];
-  transport: TransportType[]
-};
+  transport: TransportType[];
+  level: [number, number];
+}

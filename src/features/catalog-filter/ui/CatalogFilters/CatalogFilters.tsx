@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Toggle, TransportIcons } from '@/shared/ui'
+import { memo, useState } from 'react'
+import { RangeSlider, Toggle, TransportIcons } from '@/shared/ui'
 import type { FiltersData } from '../../types'
 import { FOOD_OPTIONS, HOBBY_OPTIONS, MUSIC_OPTIONS } from '@/shared/constants'
 import type { TransportType } from '@/shared/types'
@@ -10,12 +10,13 @@ interface CatalogFiltersProps {
   onApply: (filters: FiltersData) => void;
 }
 
-const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
+const CatalogFiltersComponent = ({ className, onApply }: CatalogFiltersProps) => {
   const [filters, setFilters] = useState<FiltersData>({
     hobbies: [],
     music: [],
     food: [],
     transport: [],
+    level: [1, 100],
   })
 
   const handleToggle = (
@@ -39,6 +40,10 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
         ? prev.transport.filter(t => t !== type)
         : [...prev.transport, type]
     }))
+  }
+
+  const handleLevelChange = (value: [number, number]) => {
+    setFilters(prev => ({ ...prev, level: value }))
   }
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -96,12 +101,21 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
           ))}
         </fieldset>
 
-        {/* Транспорт */}
         <fieldset className={styles.group}>
           <p className={styles.fieldTitle}>Транспорт</p>
           <TransportIcons
             selected={filters.transport}
             onChange={handleTransportChange}
+          />
+        </fieldset>
+
+        <fieldset className={styles.group}>
+          <p className={styles.fieldTitle}>Левел</p>
+          <RangeSlider
+            min={1}
+            max={100}
+            value={filters.level}
+            onChange={handleLevelChange}
           />
         </fieldset>
 
@@ -114,5 +128,7 @@ const CatalogFilters = ({ className, onApply }: CatalogFiltersProps) => {
     </div>
   )
 }
+
+const CatalogFilters = memo(CatalogFiltersComponent)
 
 export { CatalogFilters }
