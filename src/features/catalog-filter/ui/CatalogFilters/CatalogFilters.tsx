@@ -7,17 +7,16 @@ import styles from './CatalogFilters.module.css'
 
 interface CatalogFiltersProps {
   className: string;
+  initialFilters: FiltersData;
   onApply: (filters: FiltersData) => void;
 }
 
-const CatalogFiltersComponent = ({ className, onApply }: CatalogFiltersProps) => {
-  const [filters, setFilters] = useState<FiltersData>({
-    hobbies: [],
-    music: [],
-    food: [],
-    transport: [],
-    level: [1, 100],
-  })
+const CatalogFiltersComponent = ({
+  className,
+  initialFilters,
+  onApply
+}: CatalogFiltersProps) => {
+  const [filters, setFilters] = useState<FiltersData>(initialFilters)
 
   const handleToggle = (
     field: 'hobbies' | 'music' | 'food',

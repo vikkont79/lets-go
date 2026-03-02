@@ -16,6 +16,7 @@ const CatalogPage = () => {
     goToPage,
     handleCountrySelect,
     handleApplyFilters,
+    filters,
   } = useCatalog()
 
 
@@ -48,6 +49,7 @@ const CatalogPage = () => {
       <section className={`${styles.catalog} wrapper`}>
         <CatalogFilters
           className={styles.filters}
+          initialFilters={filters}
           onApply={handleApplyFilters}
         />
         <CatalogList
