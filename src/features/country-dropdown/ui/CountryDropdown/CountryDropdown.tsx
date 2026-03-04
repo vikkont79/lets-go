@@ -16,14 +16,14 @@ const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
     const [isCountryOpen, setIsCountryOpen] = useState(false)
 
     useEffect(() => {
-      const cached = localStorage.getItem('countries')
-
-      if (cached) {
-        setAllCountries(JSON.parse(cached))
-        return
-      }
-
       const loadData = async () => {
+        const cached = localStorage.getItem('countries')
+
+        if (cached) {
+          setAllCountries(JSON.parse(cached))
+          return
+        }
+
         try {
           const data = await fetchCountries()
           setAllCountries(data)

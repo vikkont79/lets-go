@@ -46,7 +46,11 @@ const FormPage = () => {
       return;
     }
     setStepErrors({})
-    currentStep < 3 ? goToNextStep() : handleSubmit()
+    if (currentStep < 3) {
+      goToNextStep()
+    } else {
+      handleSubmit()
+    }
   }, [currentStep, formData, goToNextStep, handleSubmit])
 
   const handleBackClick = useCallback(() => {
@@ -174,7 +178,6 @@ const FormPage = () => {
           )}
         </div>
       </form>
-      {/*<pre>{JSON.stringify(formData, null, 2)}</pre>*/}
     </main>
   )
 }

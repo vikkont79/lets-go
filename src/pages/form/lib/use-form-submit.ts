@@ -38,7 +38,7 @@ export const useFormSubmit = (formData: FormData) => {
     } finally {
       setIsSubmit(false)
     }
-  }, [formData])
+  }, [formData, currentUser, navigate])
 
   return {
     handleSubmit,

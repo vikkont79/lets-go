@@ -14,7 +14,7 @@ function App() {
 
   useEffect(() => {
     if (!currentUser) generateCurrentUser()
-  }, [currentUser])
+  }, [currentUser, generateCurrentUser])
 
   useEffect(() => {
     initMockData()
