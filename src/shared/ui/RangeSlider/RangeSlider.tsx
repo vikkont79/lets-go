@@ -1,4 +1,3 @@
-// shared/ui/RangeSlider/RangeSlider.tsx
 import RangeSlider from 'react-range-slider-input'
 import 'react-range-slider-input/dist/style.css'
 import styles from './RangeSlider.module.css'
@@ -18,23 +17,30 @@ const RangeSliderComponent = ({
   onChange,
   className = ''
 }: RangeSliderProps) => {
+  const preventEnter = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') e.preventDefault();
+  }
   return (
     <div className={`${styles.wrapper} ${className}`.trim()}>
       <div className={styles.inputs}>
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
           min={min}
           max={max}
           value={value[0]}
           onChange={(e) => onChange([+e.target.value, value[1]])}
+          onKeyDown={preventEnter}
         />
-        <span>—</span>
+        <span className={styles.separator}>—</span>
         <input
-          type="number"
+          type="text"
+          inputMode="numeric"
           min={min}
           max={max}
           value={value[1]}
           onChange={(e) => onChange([value[0], +e.target.value])}
+          onKeyDown={preventEnter}
         />
       </div>
       <RangeSlider
