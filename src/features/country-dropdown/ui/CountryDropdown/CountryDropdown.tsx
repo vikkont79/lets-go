@@ -19,7 +19,7 @@ const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
       const loadData = async () => {
         const cached = localStorage.getItem('countries')
 
-        if (cached) {
+        if (cached && cached !== '[]') {
           setAllCountries(JSON.parse(cached))
           return
         }
@@ -27,7 +27,9 @@ const CountryDropdown = forwardRef<HTMLDivElement, CountryDropdownProps>(
         try {
           const data = await fetchCountries()
           setAllCountries(data)
-          localStorage.setItem('countries', JSON.stringify(data))
+          if (data && data.length > 0) {
+            localStorage.setItem('countries', JSON.stringify(data))
+          }
         } catch (error) {
           console.error('Failed to fetch countries:', error)
         }
