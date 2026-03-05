@@ -19,23 +19,6 @@ const CatalogPage = () => {
     filters,
   } = useCatalog()
 
-
-  if (isLoading) {
-    return (
-      <main className="wrapper">
-        <div className={styles.skeleton}>Загрузка...</div>
-      </main>
-    )
-  }
-
-  if (trips.length === 0) {
-    return (
-      <main className="wrapper">
-        <div className={styles.empty}>Пока нет маршрутов</div>
-      </main>
-    )
-  }
-
   return (
     <main className={styles.main}>
       <h1 className='visually-hidden'>
@@ -52,15 +35,21 @@ const CatalogPage = () => {
           initialFilters={filters}
           onApply={handleApplyFilters}
         />
-        <CatalogList
-          trips={trips}
-          totalPages={totalPages}
-          currentPage={currentPage}
-          activeRange={activeRange}
-          canLoadMore={canLoadMore}
-          loadMore={loadMore}
-          goToPage={goToPage}
-        />
+        {isLoading ? (
+          <div className={styles.skeleton}>Загрузка...</div>
+        ) : trips.length === 0 ? (
+          <div className={styles.empty}>Пока нет маршрутов</div>
+        ) : (
+          <CatalogList
+            trips={trips}
+            totalPages={totalPages}
+            currentPage={currentPage}
+            activeRange={activeRange}
+            canLoadMore={canLoadMore}
+            loadMore={loadMore}
+            goToPage={goToPage}
+          />
+        )}
       </section>
 
     </main>

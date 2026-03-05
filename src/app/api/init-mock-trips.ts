@@ -7,7 +7,6 @@ export const initMockData = async () => {
   if (import.meta.env.PROD) return
 
   try {
-    // 1. Берём страны (кэш или сервер — внутри fetchCountries)
     const countries = await fetchCountries()
 
     if (countries.length === 0) {
@@ -15,10 +14,8 @@ export const initMockData = async () => {
       return
     }
 
-    // 2. Генерируем трипы с реальными странами
     const trips = generateMockTrips(MOCK_TRIPS_COUNT, countries)
 
-    // 3. Отправляем на сервер
     await Promise.allSettled(
       trips.map(trip =>
         fetch('http://localhost:3001/trips', {
