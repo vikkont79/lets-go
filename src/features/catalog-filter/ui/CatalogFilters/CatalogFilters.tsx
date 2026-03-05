@@ -1,5 +1,5 @@
 import { memo, useState } from 'react'
-import { RangeSlider, Toggle, TransportIcons } from '@/shared/ui'
+import { Button, RangeSlider, Toggle, TransportIcons } from '@/shared/ui'
 import type { FiltersData } from '../../types'
 import { FOOD_OPTIONS, HOBBY_OPTIONS, MUSIC_OPTIONS } from '@/shared/constants'
 import type { TransportType } from '@/shared/types'
@@ -119,9 +119,12 @@ const CatalogFiltersComponent = ({
         </fieldset>
 
         <div className={styles.actions}>
-          <button type="submit" className={styles.applyButton}>
-            Применить фильтры
-          </button>
+          <Button
+            className={styles.apply}
+            type="submit"
+          >
+            Показать
+          </Button>
         </div>
       </form>
     </div>
