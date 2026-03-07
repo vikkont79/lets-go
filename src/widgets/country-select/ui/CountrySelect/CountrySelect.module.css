@@ -17,6 +17,7 @@
   max-inline-size: 730px;
   justify-content: space-between;
   padding: var(--indent-6);
+  border: 1px solid var(--color-neutral-200);
   font-size: var(--font-size-sm);
   font-weight: 500;
   text-transform: uppercase;
@@ -57,7 +58,6 @@
   padding: 0;
   justify-self: end;
   align-self: center;
-  border: none;
   color: var(--color-black);
   opacity: 0.5;
 

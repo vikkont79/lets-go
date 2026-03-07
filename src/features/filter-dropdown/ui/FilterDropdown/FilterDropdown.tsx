@@ -1,5 +1,5 @@
-import { forwardRef, useCallback, useEffect, useState } from 'react'
-import { Button } from '@/shared/ui'
+import { forwardRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Button, IconButton } from '@/shared/ui'
 import { fetchCountries } from '../../api/mock-server-countries'
 import type { Country } from '@/shared/types'
 import styles from './FilterDropdown.module.css'
@@ -13,37 +13,16 @@ interface FilterDropdownProps {
 const FilterDropdown = forwardRef<HTMLDivElement, FilterDropdownProps>(
   ({ onCountrySelect, selectedContinent, className }, ref) => {
     const [allCountries, setAllCountries] = useState<Country[]>([])
-    const [filteredCountries, setFilteredCountries] = useState<Country[]>([])
     const [selectedLetterCountries, setSelectedLetterCountries] = useState<Country[]>([])
     const [isCountryOpen, setIsCountryOpen] = useState(false)
 
-    useEffect(() => {
-      const cached = localStorage.getItem('countries')
+    const countriesByLetterRef = useRef<HTMLDivElement>(null)
 
-      if (cached) {
-        setAllCountries(JSON.parse(cached))
-        return
-      }
-
-      const loadData = async () => {
-        try {
-          const data = await fetchCountries()
-          setAllCountries(data)
-          localStorage.setItem('countries', JSON.stringify(data))
-        } catch (error) {
-          console.error('Failed to fetch countries:', error)
-        }
-      }
-      loadData()
-    }, [])
-
-    useEffect(() => {
-      if (!allCountries.length) return
-      const filtered = selectedContinent
-        ? allCountries.filter(country => country.continent === selectedContinent) // <-- предполагаем поле continent
+    const filteredCountries = useMemo(() => {
+      if (!allCountries.length) return []
+      return selectedContinent
+        ? allCountries.filter(country => country.continent === selectedContinent)
         : allCountries
-      setFilteredCountries(filtered)
-      setIsCountryOpen(false)
     }, [selectedContinent, allCountries])
 
     const handleLetterClick = useCallback((letter: string) => {
@@ -57,17 +36,53 @@ const FilterDropdown = forwardRef<HTMLDivElement, FilterDropdownProps>(
 
     const handleCountrySelect = useCallback((country: Country) => {
       onCountrySelect(country)
-      setIsCountryOpen(false)
     }, [onCountrySelect])
+
+    const handleCountriesClose = useCallback(() => {
+      setIsCountryOpen(false)
+    }, [])
+
+    useEffect(() => {
+      const loadData = async () => {
+        const cached = localStorage.getItem('countries')
+
+        if (cached) {
+          setAllCountries(JSON.parse(cached))
+          return
+        }
+        try {
+          const data = await fetchCountries()
+          setAllCountries(data)
+          localStorage.setItem('countries', JSON.stringify(data))
+        } catch (error) {
+          console.error('Failed to fetch countries:', error)
+        }
+      }
+      loadData()
+    }, [])
+
+    useEffect(() => {
+      const handleOutsideClick = (e: MouseEvent) => {
+        if (!isCountryOpen) return
+        if (countriesByLetterRef.current &&
+          !countriesByLetterRef.current.contains(e.target as Node)) {
+          setIsCountryOpen(false)
+        }
+      }
+      document.addEventListener('mousedown', handleOutsideClick)
+
+      return () => {
+        document.removeEventListener('mousedown', handleOutsideClick)
+      }
+    }, [isCountryOpen])
 
     return (
       <div ref={ref} className={`${styles.dropdown} ${className}`}>
         <div className={styles.content}>
           <div className={styles.alfabet}>
             {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
-              <div>
+              <div key={letter}>
                 <Button
-                  key={letter}
                   className={styles.letter}
                   variant='transparent'
                   onClick={() => handleLetterClick(letter)}
@@ -92,8 +107,20 @@ const FilterDropdown = forwardRef<HTMLDivElement, FilterDropdownProps>(
               </div>
             ))}
           </div>
-          {isCountryOpen && (
-            <div className={styles.countriesByLetter}>
+          {isCountryOpen && selectedLetterCountries.length > 0 && (
+            <div
+              ref={countriesByLetterRef}
+              className={styles.countriesByLetter}
+            >
+              <IconButton
+                className={styles.close}
+                icon='close'
+                iconPosition='right'
+                variant='transparent'
+                onClick={handleCountriesClose}
+              >
+                Свернуть
+              </IconButton>
               {selectedLetterCountries.map(country => (
                 <Button
                   key={country.code}

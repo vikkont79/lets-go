@@ -8,16 +8,22 @@
   grid-template-columns: max-content auto max-content;
   column-gap: var(--indent-8);
   padding-inline: var(--indent-5);
-  border: none;
   text-transform: uppercase;
+
+  @media(max-width: 769px) {
+    grid-template-columns: auto max-content;
+  }
 }
 
 .filter {
   gap: var(--indent-6);
   padding: 0;
-  border: none;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
+
+  @media(max-width: 769px) {
+    display: none;
+  }
 }
 
 .continents {
@@ -30,7 +36,6 @@
 
 .continent {
   padding: 0;
-  border: none;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
   opacity: 0.3;
@@ -44,7 +49,6 @@
 
 .showAll {
   padding: 0;
-  border: none;
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 }

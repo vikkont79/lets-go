@@ -1,9 +1,9 @@
-import { FilterDropdown } from "@/features/filter-dropdown";
-import type { Country } from "@/shared/types";
-import { useState } from "react";
+import { FilterDropdown } from "@/features/filter-dropdown"
+import type { Country } from "@/shared/types"
+import { useEffect, useRef, useState } from "react"
 import styles from './CountryFilter.module.css'
-import { Button, IconButton } from "@/shared/ui";
-import { CONTINENTS } from "../../model";
+import { Button, IconButton } from "@/shared/ui"
+import { CONTINENTS } from "../../model"
 
 interface CountryFilterProps {
   className: string;
@@ -13,6 +13,8 @@ interface CountryFilterProps {
 const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState<string | undefined>()
+
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -25,18 +27,30 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const handleContinentClick = (continent: string) => {
     setIsOpen(true)
     setSelectedContinent(continent)
-    // Не закрываем дропдаун, чтобы можно было выбрать страну
   }
 
   const handleCountrySelect = (country: Country) => {
     onCountrySelect(country)
-    setIsOpen(false) // Закрываем после выбора страны
+    setIsOpen(false)
   }
 
   const handleCountryReset = () => {
     onCountrySelect(null)
     setSelectedContinent(undefined)
   }
+
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
 
   return (
     <section className={`${styles.countries} ${className} wrapper`}>
@@ -73,6 +87,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
       {isOpen && (
         <>
           <FilterDropdown
+            ref={dropdownRef}
             className={styles.countriesDropdown}
             selectedContinent={selectedContinent}
             onCountrySelect={handleCountrySelect}
