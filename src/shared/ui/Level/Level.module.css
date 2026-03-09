@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: center;
   color: currentColor;
+  --stroke-color: #4D99D6;
 }
 
 .progress {
@@ -16,6 +17,10 @@
   inline-size: 100%;
   block-size: 100%;
   transform: rotate(-90deg);
+}
+
+.progress circle {
+  stroke: var(--stroke-color);
 }
 
 .number {

@@ -7,11 +7,19 @@
   padding-inline: var(--indent-8);
   border-radius: 20px;
   background-color: var(--color-white);
+
+  @media(max-width: 321px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .pages {
   display: flex;
   gap: 8px;
+
+  @media(max-width: 321px) {
+    display: none;
+  }
 }
 
 .pageButton {

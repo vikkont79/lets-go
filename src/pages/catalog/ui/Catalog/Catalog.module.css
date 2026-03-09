@@ -53,8 +53,12 @@
 }
 
 .countries {
-  grid-column: 1/-1;
-  margin-block-end: 74px;
+  padding-block-end: 74px;
+
+  @media(max-width: 769px) {
+    padding-block-end: 60px;
+    background-color: var(--color-neutral-100);
+  }
 }
 
 .catalog {
@@ -63,9 +67,18 @@
   column-gap: 86px;
   padding-block-start: 60px;
   font-size: 20px;
+
+  @media(max-width: 769px) {
+    grid-template-columns: 1fr;
+    padding-block-start: 40px;
+  }
 }
 
 .filters {
-  inline-size: 275px;
   order: 1;
+
+  @media(max-width: 769px) {
+    order: 0;
+    margin-block-end: 40px;
+  }
 }

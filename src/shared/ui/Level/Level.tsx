@@ -10,7 +10,7 @@ interface LevelProps {
 const Level = ({
   level,
   size = 100,
-  strokeColor = '#4D99D6',
+  strokeColor,
   className = '' }: LevelProps) => {
   const normalizedLevel = Math.min(100, Math.max(0, level));
   const circumference = 2 * Math.PI * 30;
@@ -19,7 +19,10 @@ const Level = ({
   return (
     <div
       className={`${styles.userLevel} ${className}`.trim()}
-      style={{ '--size': typeof size === 'number' ? `${size}px` : size } as React.CSSProperties}
+      style={{
+        '--size': typeof size === 'number' ? `${size}px` : size,
+        ...(strokeColor && { '--stroke-color': strokeColor })
+      } as React.CSSProperties}
     >
       {/* SVG для прогресс-бара (только обводка) */}
       <svg viewBox="0 0 63 63" className={styles.progress}>
@@ -28,7 +31,7 @@ const Level = ({
           cy="31.5"
           r="30"
           fill="none"
-          stroke={strokeColor}
+          stroke="var(--stroke-color)"
           strokeWidth="3"
           strokeLinecap="round"
           strokeDasharray={circumference}
