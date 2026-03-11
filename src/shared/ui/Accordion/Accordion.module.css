@@ -1,0 +1,70 @@
+.trigger {
+  justify-content: space-between;
+  margin-block: 0 var(--indent-6);
+  padding: 0;
+  line-height: 22px;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  text-transform: uppercase;
+
+  @media(max-width: 769px) {
+    inline-size: 125px;
+    grid-column: 1;
+    margin: 0;
+  }
+
+  @media(max-width: 321px) {
+    inline-size: 100%;
+    margin-block: var(--indent-4);
+    font-size: 16px;
+    line-height: 18px;
+  }
+}
+
+.trigger [class*="icon"] {
+  transition: transform 0.2s ease;
+
+  @media(max-width: 769px) {
+    display: none;
+  }
+
+  @media(max-width: 321px) {
+    display: block;
+  }
+}
+
+.triggerOpen [class*="icon"] {
+  transform: rotate(180deg);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--indent-4);
+
+  @media(max-width: 769px) {
+    display: grid !important;
+    grid-column: 2;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--indent-2);
+  }
+
+  @media(max-width: 321px) {
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--indent-3);
+  }
+}
+
+@media(max-width: 769px) {
+  .trigger[data-icon-position="right"] {
+    flex-direction: row;
+  }
+}
+
+@media(max-width: 321px) {
+  .trigger[data-icon-position="right"] {
+    flex-direction: row-reverse;
+  }
+}
