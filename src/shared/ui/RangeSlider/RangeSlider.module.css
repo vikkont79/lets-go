@@ -1,6 +1,17 @@
 .wrapper {
   display: grid;
   row-gap: var(--indent-8);
+
+  @media(max-width: 769px) {
+    grid-column: 1/-1;
+    grid-template-columns: 280px 148px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  @media(max-width: 321px) {
+    grid-template-columns: minmax(auto, 220px);
+  }
 }
 
 .inputs {
@@ -27,6 +38,15 @@
     &:first-of-type {
       border-right: 1px solid var(--color-neutral-300);
     }
+  }
+
+  @media(max-width: 769px) {
+    order: 1;
+  }
+
+  @media(max-width: 321px) {
+    order: 0;
+    max-inline-size: 220px;
   }
 }
 

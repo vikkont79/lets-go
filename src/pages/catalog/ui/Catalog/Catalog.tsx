@@ -24,7 +24,7 @@ const CatalogPage = () => {
       <h1 className='visually-hidden'>
         Страница поиска попутчиков
       </h1>
-      <p className={styles.title}>Направления</p>
+      <p className={styles.title} aria-hidden="true">Направления</p>
       <CountryFilter
         className={styles.countries}
         onCountrySelect={handleCountrySelect}
@@ -36,9 +36,9 @@ const CatalogPage = () => {
           onApply={handleApplyFilters}
         />
         {isLoading ? (
-          <div className={styles.skeleton}>Загрузка...</div>
+          <div className={styles.skeleton} role="status">Загрузка...</div>
         ) : trips.length === 0 ? (
-          <div className={styles.empty}>Пока нет маршрутов</div>
+          <div className={styles.empty} role="status">Пока нет маршрутов</div>
         ) : (
           <CatalogList
             trips={trips}

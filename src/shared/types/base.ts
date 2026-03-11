@@ -5,6 +5,9 @@ export interface BasePressableProps {
   /** Дополнительные CSS-классы */
   className?: string;
   disabled?: boolean;
+  // Добавляем popover-атрибуты
+  popoverTarget?: string;
+  popoverTargetAction?: 'toggle' | 'show' | 'hide';
 }
 
 /* Базовые пропсы для инпутов/форм */

@@ -28,6 +28,8 @@ const Button = ({
   type = 'button',
   onClick,
   to,
+  popoverTarget,
+  popoverTargetAction,
   ...props
 }: ButtonProps) => {
   return to ? (
@@ -44,6 +46,8 @@ const Button = ({
       className={`${styles.button} ${styles[variant]} ${styles[size]} ${className || ''}`.trim()}
       type={type}
       onClick={onClick}
+      popoverTarget={popoverTarget}
+      popoverTargetAction={popoverTargetAction}
       {...props}
     >
       {children}

@@ -17,3 +17,5 @@ export const FOOD_OPTIONS = [
   { key: 'pp', label: 'ПП' },
   { key: 'vegan', label: 'Веган-сыроед' }
 ] as const
+
+export const FILTERS_TOGGLE_STYLE = { textTransform: 'none' } as const;

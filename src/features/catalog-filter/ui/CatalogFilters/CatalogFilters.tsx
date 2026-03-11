@@ -1,7 +1,7 @@
 import { memo, useState } from 'react'
-import { Button, RangeSlider, Toggle, TransportIcons } from '@/shared/ui'
+import { Accordion, Button, RangeSlider, Toggle, TransportIcons } from '@/shared/ui'
 import type { FiltersData } from '../../types'
-import { FOOD_OPTIONS, HOBBY_OPTIONS, MUSIC_OPTIONS } from '@/shared/constants'
+import { FILTERS_TOGGLE_STYLE, FOOD_OPTIONS, HOBBY_OPTIONS, MUSIC_OPTIONS } from '@/shared/constants'
 import type { TransportType } from '@/shared/types'
 import styles from './CatalogFilters.module.css'
 
@@ -56,78 +56,81 @@ const CatalogFiltersComponent = ({
 
       <form onSubmit={handleSubmit}>
         <fieldset className={styles.group}>
-          <p className={styles.fieldTitle}>Хобби</p>
-          {HOBBY_OPTIONS.map(({ key, label }) => (
-            <Toggle
-              className={styles.checkbox}
-              key={key}
-              label={label}
-              checked={filters.hobbies.includes(key)}
-              onChange={handleToggle('hobbies', key)}
-              size='small'
-              labelStyle={{ textTransform: 'none' }}
+          <Accordion title='Хобби'>
+            {HOBBY_OPTIONS.map(({ key, label }) => (
+              <Toggle
+                className={styles.checkbox}
+                key={key}
+                label={label}
+                checked={filters.hobbies.includes(key)}
+                onChange={handleToggle('hobbies', key)}
+                size='small'
+                labelStyle={FILTERS_TOGGLE_STYLE}
+              />
+            ))}
+          </Accordion>
+        </fieldset>
+        <fieldset className={styles.group}>
+          <Accordion title='Музыка'>
+            {MUSIC_OPTIONS.map(({ key, label }) => (
+              <Toggle
+                className={styles.checkbox}
+                key={key}
+                label={label}
+                checked={filters.music.includes(key)}
+                onChange={handleToggle('music', key)}
+                size='small'
+                labelStyle={FILTERS_TOGGLE_STYLE}
+              />
+            ))}
+          </Accordion>
+        </fieldset>
+
+        <fieldset className={styles.group}>
+          <Accordion title='Еда'>
+            {FOOD_OPTIONS.map(({ key, label }) => (
+              <Toggle
+                className={styles.checkbox}
+                key={key}
+                label={label}
+                checked={filters.food.includes(key)}
+                onChange={handleToggle('food', key)}
+                size='small'
+                labelStyle={FILTERS_TOGGLE_STYLE}
+              />
+            ))}
+          </Accordion>
+        </fieldset>
+
+        <fieldset className={styles.group}>
+          <Accordion title='Транспорт'>
+            <TransportIcons
+              selected={filters.transport}
+              onChange={handleTransportChange}
             />
-          ))}
+          </Accordion>
         </fieldset>
 
         <fieldset className={styles.group}>
-          <p className={styles.fieldTitle}>Музыка</p>
-          {MUSIC_OPTIONS.map(({ key, label }) => (
-            <Toggle
-              className={styles.checkbox}
-              key={key}
-              label={label}
-              checked={filters.music.includes(key)}
-              onChange={handleToggle('music', key)}
-              size='small'
-              labelStyle={{ textTransform: 'none' }}
+          <Accordion title='Левел' id="level-label">
+            <RangeSlider
+              min={1}
+              max={100}
+              value={filters.level}
+              onChange={handleLevelChange}
+              aria-labelledby="level-label"
             />
-          ))}
+          </Accordion>
         </fieldset>
 
-        <fieldset className={styles.group}>
-          <p className={styles.fieldTitle}>Еда</p>
-          {FOOD_OPTIONS.map(({ key, label }) => (
-            <Toggle
-              className={styles.checkbox}
-              key={key}
-              label={label}
-              checked={filters.food.includes(key)}
-              onChange={handleToggle('food', key)}
-              size='small'
-              labelStyle={{ textTransform: 'none' }}
-            />
-          ))}
-        </fieldset>
-
-        <fieldset className={styles.group}>
-          <p className={styles.fieldTitle}>Транспорт</p>
-          <TransportIcons
-            selected={filters.transport}
-            onChange={handleTransportChange}
-          />
-        </fieldset>
-
-        <fieldset className={styles.group}>
-          <p className={styles.fieldTitle}>Левел</p>
-          <RangeSlider
-            min={1}
-            max={100}
-            value={filters.level}
-            onChange={handleLevelChange}
-          />
-        </fieldset>
-
-        <div className={styles.actions}>
-          <Button
-            className={styles.apply}
-            type="submit"
-          >
-            Показать
-          </Button>
-        </div>
+        <Button
+          className={styles.apply}
+          type="submit"
+        >
+          Показать
+        </Button>
       </form>
-    </div>
+    </div >
   )
 }
 
