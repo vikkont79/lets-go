@@ -1,5 +1,5 @@
 import { useCatalog } from '../../lib'
-import { CountryFilter } from '../CountrySelect/CountryFilter'
+import { CountryFilter } from '../CountryFilter/CountryFilter'
 import { CatalogList } from '../CatalogList/CatalogList'
 import styles from './Catalog.module.css'
 import { CatalogFilters } from '@/features/catalog-filter/ui'
@@ -24,7 +24,7 @@ const CatalogPage = () => {
       <h1 className='visually-hidden'>
         Страница поиска попутчиков
       </h1>
-      <p className={styles.title} aria-hidden="true">Направления</p>
+      <p className={styles.title} aria-hidden="true">Попутчики</p>
       <CountryFilter
         className={styles.countries}
         onCountrySelect={handleCountrySelect}

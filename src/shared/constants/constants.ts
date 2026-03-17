@@ -18,4 +18,6 @@ export const FOOD_OPTIONS = [
   { key: 'vegan', label: 'Веган-сыроед' }
 ] as const
 
-export const FILTERS_TOGGLE_STYLE = { textTransform: 'none' } as const;
+export const FILTERS_TOGGLE_STYLE = { textTransform: 'none' } as const
+
+export const CONTINENTS = ['Европа', 'Азия', 'Африка', 'Америка', 'Острова'] as const

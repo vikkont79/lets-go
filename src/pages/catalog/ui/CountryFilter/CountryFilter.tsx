@@ -1,9 +1,11 @@
-import { FilterDropdown } from "@/features/filter-dropdown"
-import type { Country } from "@/shared/types"
-import { useEffect, useRef, useState } from "react"
+import { FilterDropdown } from '@/features/filter-dropdown'
+import type { Country } from '@/shared/types'
+import { useEffect, useRef, useState } from 'react'
 import styles from './CountryFilter.module.css'
-import { Button, IconButton } from "@/shared/ui"
-import { CONTINENTS } from "../../model"
+import { Button, IconButton } from '@/shared/ui'
+import { CONTINENTS } from '@/shared/constants'
+import { useMediaQuery } from '@/shared/lib'
+
 
 interface CountryFilterProps {
   className: string;
@@ -13,15 +15,21 @@ interface CountryFilterProps {
 const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState<string | undefined>()
+  const isDesktopOrTablet = useMediaQuery('(min-width: 322px)');
+  const isMobile = useMediaQuery('(max-width: 321px)');
+
+  const showContinents = isDesktopOrTablet || (isMobile && isOpen);
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen)
+    setSelectedContinent(undefined)
   }
 
   const handleCloseDropdown = () => {
     setIsOpen(false)
+    setSelectedContinent(undefined)
   }
 
   const handleContinentClick = (continent: string) => {
@@ -31,7 +39,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
 
   const handleCountrySelect = (country: Country) => {
     onCountrySelect(country)
-    setIsOpen(false)
+    handleCloseDropdown()
   }
 
   const handleCountryReset = () => {
@@ -42,7 +50,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && isOpen) {
-        setIsOpen(false)
+        handleCloseDropdown()
       }
     }
     document.addEventListener('keydown', handleEscape)
@@ -60,37 +68,46 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
           variant='transparent'
           className={styles.filter}
           onClick={handleToggleDropdown}
+          aria-expanded={isOpen}
+          aria-controls="countries-dropdown"
         >
           Фильтрация по странам:
         </IconButton>
-        <ul className={styles.continents}>
-          {CONTINENTS.map(item => (
-            <li key={item}>
-              <Button
-                variant='transparent'
-                className={styles.continent}
-                onClick={() => handleContinentClick(item)}
-              >
-                {item}
-              </Button>
-            </li>
-          ))}
-        </ul>
-        <Button
-          variant='transparent'
-          className={styles.showAll}
-          onClick={handleCountryReset}
-        >
-          Показать все
-        </Button>
+        {showContinents && (
+          <ul className={styles.continents}>
+            {CONTINENTS.map(item => (
+              <li key={item}>
+                <Button
+                  variant='transparent'
+                  className={styles.continent}
+                  onClick={() => handleContinentClick(item)}
+                  data-selected={selectedContinent === item}
+                >
+                  {item}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {showContinents && (
+          <Button
+            variant='transparent'
+            className={styles.showAll}
+            onClick={handleCountryReset}
+          >
+            Показать все
+          </Button>
+        )}
       </div>
       {isOpen && (
-        <>
+        <div className={styles.countriesDropdown}>
           <FilterDropdown
             ref={dropdownRef}
-            className={styles.countriesDropdown}
             selectedContinent={selectedContinent}
             onCountrySelect={handleCountrySelect}
+            id="countries-dropdown"
+            role="listbox"
+            aria-label="Список стран"
           />
           <IconButton
             className={styles.close}
@@ -101,7 +118,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
           >
             Свернуть
           </IconButton>
-        </>
+        </div>
       )}
 
     </section>

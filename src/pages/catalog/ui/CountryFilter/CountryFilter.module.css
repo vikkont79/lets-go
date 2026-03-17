@@ -1,0 +1,123 @@
+.countries {
+  position: relative;
+  padding-block-start: 60px;
+  font-size: var(--font-size-sm);
+
+  @media(max-width: 321px) {
+    padding-block-start: 30px;
+  }
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: max-content auto max-content;
+  column-gap: var(--indent-8);
+  padding-inline: var(--indent-5);
+  text-transform: uppercase;
+
+  @media(max-width: 769px) {
+    grid-template-columns: min-content max-content;
+    justify-content: space-between;
+    padding-inline: 0;
+  }
+
+  @media(max-width: 321px) {
+    grid-template-columns: 1fr;
+    row-gap: var(--indent-3);
+    margin-block-end: var(--indent-5);
+    font-size: 16px;
+    line-height: 18px;
+    text-align: start;
+  }
+}
+
+.filter {
+  gap: var(--indent-6);
+  padding: 0;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+
+  @media(max-width: 769px) {
+    display: none;
+  }
+
+  @media(max-width: 321px) {
+    display: inline-flex;
+    justify-content: start;
+  }
+}
+
+.continents {
+  display: flex;
+  margin-block: 0;
+  padding-inline-start: 0;
+  list-style-type: none;
+  column-gap: var(--indent-5);
+
+  @media(max-width: 321px) {
+    flex-direction: column;
+    row-gap: var(--indent-2);
+  }
+}
+
+.continent {
+  padding: 0;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+  opacity: 0.3;
+
+  &:active,
+  &[data-selected="true"] {
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: transparent;
+  }
+}
+
+.showAll {
+  padding: 0;
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+
+  @media(max-width: 321px) {
+    text-align: start;
+  }
+}
+
+.countriesDropdown {
+  margin-block: 74px 50px;
+  transition: opacity 0.2s ease;
+
+  @media(max-width: 769px) {
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    top: calc(100% - 30px);
+    margin-block: 0;
+    padding-inline: var(--indent-8);
+    padding-block-end: 50px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    background-color: var(--color-neutral-100);
+    overflow-y: auto;
+  }
+
+  @media(max-width: 321px) {
+    padding-inline: var(--indent-6);
+  }
+}
+
+.close {
+  margin-block-start: 50px;
+  padding-block: 40px;
+  gap: var(--indent-4);
+  font-size: var(--font-size-sm);
+  text-transform: uppercase;
+
+  @media(max-width: 321px) {
+    padding-block: var(--indent-3);
+  }
+}

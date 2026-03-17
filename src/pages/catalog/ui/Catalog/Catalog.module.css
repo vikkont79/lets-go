@@ -58,6 +58,12 @@
   @media(max-width: 769px) {
     padding-block-end: 60px;
     background-color: var(--color-neutral-100);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
+  @media(max-width: 321px) {
+    padding-block-end: 30px;
   }
 }
 
