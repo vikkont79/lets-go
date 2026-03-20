@@ -1,10 +1,19 @@
 .countries {
   position: relative;
   padding-block-start: 60px;
+  padding-block-end: 74px;
   font-size: var(--font-size-sm);
 
+  @media(max-width: 769px) {
+    padding-block-start: 90px;
+    padding-block-end: 60px;
+    background-color: var(--color-neutral-100);
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
+
   @media(max-width: 321px) {
-    padding-block-start: 30px;
+    padding-block: 60px 30px;
   }
 }
 
@@ -24,7 +33,6 @@
   @media(max-width: 321px) {
     grid-template-columns: 1fr;
     row-gap: var(--indent-3);
-    margin-block-end: var(--indent-5);
     font-size: 16px;
     line-height: 18px;
     text-align: start;
@@ -44,11 +52,15 @@
   @media(max-width: 321px) {
     display: inline-flex;
     justify-content: start;
+    gap: var(--indent-3);
+    font-size: 16px;
+    line-height: 18px;
   }
 }
 
 .continents {
   display: flex;
+  align-items: center;
   margin-block: 0;
   padding-inline-start: 0;
   list-style-type: none;
@@ -56,7 +68,9 @@
 
   @media(max-width: 321px) {
     flex-direction: column;
+    align-items: start;
     row-gap: var(--indent-2);
+    padding-inline: var(--indent-4);
   }
 }
 
@@ -65,6 +79,11 @@
   font-size: var(--font-size-sm);
   text-transform: uppercase;
   opacity: 0.3;
+
+  @media(max-width: 321px) {
+    font-size: 16px;
+    line-height: 18px;
+  }
 
   &:active,
   &[data-selected="true"] {
@@ -82,7 +101,10 @@
   text-transform: uppercase;
 
   @media(max-width: 321px) {
+    padding-inline: var(--indent-4);
     text-align: start;
+    font-size: 16px;
+    line-height: 18px;
   }
 }
 
@@ -102,11 +124,11 @@
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     background-color: var(--color-neutral-100);
-    overflow-y: auto;
   }
 
   @media(max-width: 321px) {
     padding-inline: var(--indent-6);
+    padding-block-end: var(--indent-8);
   }
 }
 
@@ -118,6 +140,7 @@
   text-transform: uppercase;
 
   @media(max-width: 321px) {
+    margin-block-start: var(--indent-5);
     padding-block: var(--indent-3);
   }
 }

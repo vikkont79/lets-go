@@ -8,135 +8,153 @@ interface FilterDropdownProps {
   onCountrySelect: (country: Country) => void;
   selectedContinent?: string;
   className?: string;
+  id?: string;
+  role?: string;
+  'aria-label'?: string;
 }
 
-const FilterDropdown = forwardRef<HTMLDivElement, FilterDropdownProps>(
-  ({ onCountrySelect, selectedContinent, className }, ref) => {
-    const [allCountries, setAllCountries] = useState<Country[]>([])
-    const [selectedLetterCountries, setSelectedLetterCountries] = useState<Country[]>([])
-    const [isCountryOpen, setIsCountryOpen] = useState(false)
+const FilterDropdown = forwardRef<HTMLDivElement, FilterDropdownProps>(({
+  onCountrySelect,
+  selectedContinent,
+  className,
+  id,
+  role,
+  'aria-label': ariaLabel,
+}, ref) => {
+  const [allCountries, setAllCountries] = useState<Country[]>([])
+  const [selectedLetterCountries, setSelectedLetterCountries] = useState<Country[]>([])
+  const [isCountryOpen, setIsCountryOpen] = useState(false)
 
-    const countriesByLetterRef = useRef<HTMLDivElement>(null)
+  const countriesByLetterRef = useRef<HTMLDivElement>(null)
 
-    const filteredCountries = useMemo(() => {
-      if (!allCountries.length) return []
-      return selectedContinent
-        ? allCountries.filter(country => country.continent === selectedContinent)
-        : allCountries
-    }, [selectedContinent, allCountries])
+  const filteredCountries = useMemo(() => {
+    if (!allCountries.length) return []
+    return selectedContinent
+      ? allCountries.filter(country => country.continent === selectedContinent)
+      : allCountries
+  }, [selectedContinent, allCountries])
 
-    const handleLetterClick = useCallback((letter: string) => {
-      const normalizedLetter = letter.toLowerCase()
-      const countriesByLetter = filteredCountries
-        .filter(country => country.name_ru.toLowerCase().startsWith(normalizedLetter))
-        .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))
-      setSelectedLetterCountries(countriesByLetter)
-      setIsCountryOpen(true)
-    }, [filteredCountries])
+  const handleLetterClick = useCallback((letter: string) => {
+    const normalizedLetter = letter.toLowerCase()
+    const countriesByLetter = filteredCountries
+      .filter(country => country.name_ru.toLowerCase().startsWith(normalizedLetter))
+      .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))
+    setSelectedLetterCountries(countriesByLetter)
+    setIsCountryOpen(true)
+  }, [filteredCountries])
 
-    const handleCountrySelect = useCallback((country: Country) => {
-      onCountrySelect(country)
-    }, [onCountrySelect])
+  const handleCountrySelect = useCallback((country: Country) => {
+    onCountrySelect(country)
+  }, [onCountrySelect])
 
-    const handleCountriesClose = useCallback(() => {
-      setIsCountryOpen(false)
-    }, [])
+  const handleCountriesClose = useCallback(() => {
+    setIsCountryOpen(false)
+  }, [])
 
-    useEffect(() => {
-      const loadData = async () => {
-        const cached = localStorage.getItem('countries')
+  useEffect(() => {
+    const loadData = async () => {
+      const cached = localStorage.getItem('countries')
 
-        if (cached) {
-          setAllCountries(JSON.parse(cached))
-          return
-        }
-        try {
-          const data = await fetchCountries()
-          setAllCountries(data)
-          localStorage.setItem('countries', JSON.stringify(data))
-        } catch (error) {
-          console.error('Failed to fetch countries:', error)
-        }
+      if (cached) {
+        setAllCountries(JSON.parse(cached))
+        return
       }
-      loadData()
-    }, [])
-
-    useEffect(() => {
-      const handleOutsideClick = (e: MouseEvent) => {
-        if (!isCountryOpen) return
-        if (countriesByLetterRef.current &&
-          !countriesByLetterRef.current.contains(e.target as Node)) {
-          setIsCountryOpen(false)
-        }
+      try {
+        const data = await fetchCountries()
+        setAllCountries(data)
+        localStorage.setItem('countries', JSON.stringify(data))
+      } catch (error) {
+        console.error('Failed to fetch countries:', error)
       }
-      document.addEventListener('mousedown', handleOutsideClick)
+    }
+    loadData()
+  }, [])
 
-      return () => {
-        document.removeEventListener('mousedown', handleOutsideClick)
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (!isCountryOpen) return
+      if (countriesByLetterRef.current &&
+        !countriesByLetterRef.current.contains(e.target as Node)) {
+        setIsCountryOpen(false)
       }
-    }, [isCountryOpen])
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
 
-    return (
-      <div ref={ref} className={`${styles.dropdown} ${className}`}>
-        <div className={styles.content}>
-          <div className={styles.alfabet}>
-            {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
-              <div key={letter}>
-                <Button
-                  className={styles.letter}
-                  variant='transparent'
-                  onClick={() => handleLetterClick(letter)}
-                >
-                  {letter}
-                </Button>
-                <div className={styles.countries}>
-                  {filteredCountries
-                    .filter(country => country.name_ru.toLocaleUpperCase().startsWith(letter))
-                    .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))
-                    .map(country => (
-                      <Button
-                        key={country.code}
-                        className={styles.country}
-                        variant='transparent'
-                        onClick={() => handleCountrySelect(country)}
-                      >
-                        {country.name_ru}
-                      </Button>
-                    ))}
-                </div>
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [isCountryOpen])
+
+  return (
+    <div
+      ref={ref}
+      className={`${styles.dropdown} ${className || ''}`.trim()}
+      id={id}
+      role={role}
+      aria-label={ariaLabel}
+    >
+      <div className={styles.content}>
+        <div className={styles.alfabet}>
+          {'АБВГДЕЗИКЛМНОПРСТУФХЧШЭЮЯ'.split('').map(letter => (
+            <div
+              className={styles.letterButton}
+              key={letter}
+            >
+              <Button
+                className={styles.letter}
+                variant='transparent'
+                onClick={() => handleLetterClick(letter)}
+              >
+                {letter}
+              </Button>
+              <div className={styles.countries}>
+                {filteredCountries
+                  .filter(country => country.name_ru.toLocaleUpperCase().startsWith(letter))
+                  .sort((a, b) => a.name_ru.localeCompare(b.name_ru, 'ru'))
+                  .map(country => (
+                    <Button
+                      key={country.code}
+                      className={styles.country}
+                      variant='transparent'
+                      onClick={() => handleCountrySelect(country)}
+                    >
+                      {country.name_ru}
+                    </Button>
+                  ))}
               </div>
+            </div>
+          ))}
+        </div>
+        {isCountryOpen && selectedLetterCountries.length > 0 && (
+          <div
+            ref={countriesByLetterRef}
+            className={styles.countriesByLetter}
+          >
+            <IconButton
+              className={styles.close}
+              icon='close'
+              iconPosition='right'
+              variant='transparent'
+              onClick={handleCountriesClose}
+            >
+              Свернуть
+            </IconButton>
+            {selectedLetterCountries.map(country => (
+              <Button
+                key={country.code}
+                className={styles.country}
+                variant='transparent'
+                onClick={() => handleCountrySelect(country)}
+              >
+                {country.name_ru}
+              </Button>
             ))}
           </div>
-          {isCountryOpen && selectedLetterCountries.length > 0 && (
-            <div
-              ref={countriesByLetterRef}
-              className={styles.countriesByLetter}
-            >
-              <IconButton
-                className={styles.close}
-                icon='close'
-                iconPosition='right'
-                variant='transparent'
-                onClick={handleCountriesClose}
-              >
-                Свернуть
-              </IconButton>
-              {selectedLetterCountries.map(country => (
-                <Button
-                  key={country.code}
-                  className={styles.country}
-                  variant='transparent'
-                  onClick={() => handleCountrySelect(country)}
-                >
-                  {country.name_ru}
-                </Button>
-              ))}
-            </div>
-          )}
-        </div>
+        )}
       </div>
-    )
-  }
+    </div>
+  )
+}
 )
 
 export { FilterDropdown }

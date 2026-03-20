@@ -45,6 +45,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const handleCountryReset = () => {
     onCountrySelect(null)
     setSelectedContinent(undefined)
+    setIsOpen(false)
   }
 
   useEffect(() => {

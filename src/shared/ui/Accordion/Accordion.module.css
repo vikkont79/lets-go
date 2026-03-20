@@ -43,7 +43,7 @@
   gap: var(--indent-4);
 
   @media(max-width: 769px) {
-    display: grid !important;
+    display: grid;
     grid-column: 2;
     grid-template-columns: repeat(3, 1fr);
     gap: var(--indent-2);

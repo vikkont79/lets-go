@@ -16,7 +16,8 @@ const Accordion = ({
   id,
 }: AccordionProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isTablet = useMediaQuery('(max-width: 769px)');
+
+  const isTablet = useMediaQuery('(min-width: 322px) and (max-width: 769px)');
 
   return (
     <>

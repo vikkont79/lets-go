@@ -21,7 +21,7 @@
 
   @media(max-width: 321px) {
     margin-block: 0 var(--indent-6);
-    font-size: var(--font-size-sm);
+    font-size: 22px;
   }
 }
 
