@@ -10,7 +10,7 @@ export const fetchCountries = async (): Promise<Country[]> => {
     }
     return response.json()
   } catch (error) {
-    console.error('Failed to fetch countries:', error);
+    console.error('Failed to fetch countries:', error)
     return []
   }
-};
+}

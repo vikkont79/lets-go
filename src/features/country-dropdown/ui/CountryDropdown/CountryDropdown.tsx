@@ -1,6 +1,6 @@
 import { forwardRef, useCallback, useEffect, useState } from 'react'
 import { Button } from '@/shared/ui'
-import { fetchCountries } from '../../api/mock-server-countries'
+import { fetchCountries } from '@/shared/api'
 import type { Country } from '@/shared/types'
 import styles from './CountryDropdown.module.css'
 
