@@ -1,5 +1,5 @@
 import { useCatalog } from '../../lib'
-import { CountryFilter } from '../CountryFilter/CountryFilter'
+import { CountryFilter } from '@/widgets/country-filter/ui'
 import { CatalogList } from '../CatalogList/CatalogList'
 import styles from './Catalog.module.css'
 import { CatalogFilters } from '@/features/catalog-filter/ui'
