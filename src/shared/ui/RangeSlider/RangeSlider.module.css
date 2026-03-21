@@ -9,7 +9,7 @@
     align-items: center;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     grid-template-columns: minmax(auto, 220px);
   }
 }
@@ -44,7 +44,7 @@
     order: 1;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     order: 0;
     max-inline-size: 220px;
   }

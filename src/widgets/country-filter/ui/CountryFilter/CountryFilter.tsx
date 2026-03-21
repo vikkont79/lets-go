@@ -16,7 +16,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState<string | undefined>()
   const isDesktopOrTablet = useMediaQuery('(min-width: 322px)');
-  const isMobile = useMediaQuery('(max-width: 321px)');
+  const isMobile = useMediaQuery('(max-width: 376px)');
 
   const showContinents = isDesktopOrTablet || (isMobile && isOpen);
 

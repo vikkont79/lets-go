@@ -4,7 +4,7 @@
   font-size: 18px;
   line-height: 1;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     font-size: 14px;
     line-height: 18px;
   }
@@ -17,7 +17,7 @@
   display: flex;
   justify-content: space-between;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     top: var(--indent-3);
   }
 }
@@ -41,7 +41,7 @@
   font-weight: 700;
   text-transform: capitalize;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding-block: var(--indent-3);
     font-size: 20px;
   }
@@ -63,7 +63,7 @@
     padding-block: 36px 12px;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding-block: 22px 12px;
     text-transform: uppercase;
   }
@@ -115,7 +115,7 @@
     text-align: center;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding-block: var(--indent-2);
   }
 }

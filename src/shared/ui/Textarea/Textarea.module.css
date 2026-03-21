@@ -35,7 +35,7 @@
   padding: var(--indent-6);
   font-size: var(--font-size-sm);
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     font-size: 16px;
     line-height: 22px;
   }

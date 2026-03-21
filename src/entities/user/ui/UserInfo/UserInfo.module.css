@@ -23,7 +23,7 @@
     inline-size: 95px;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     border-radius: 50%;
   }
 }

@@ -8,7 +8,7 @@
   grid-template-columns: 1fr min-content;
   justify-content: space-between;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     grid-template-columns: 1fr;
   }
 }
@@ -28,7 +28,7 @@
     text-align: center;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     grid-template-columns: repeat(5, 1fr);
     margin-block: var(--indent-4);
     padding-inline: var(--indent-4);
@@ -55,7 +55,7 @@
     opacity: 0.3;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     border: 1px solid var(--color-neutral-200);
     border-radius: 0;
     background-color: var(--color-white);
@@ -105,7 +105,7 @@
   font-weight: 400;
   text-align: start;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     font-size: 16px;
     line-height: 22px;
     text-transform: capitalize;
@@ -127,7 +127,7 @@
     display: flex;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     position: static;
     top: auto;
     padding-inline: var(--indent-4);
@@ -141,7 +141,7 @@
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     display: none;
   }
 }

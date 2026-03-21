@@ -7,7 +7,7 @@
     grid-template-columns: 1fr min-content;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     row-gap: var(--indent-5);
   }
 }
@@ -23,7 +23,7 @@
     gap: var(--indent-6);
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     gap: var(--indent-2);
   }
 }
@@ -35,7 +35,7 @@
     justify-self: start;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     order: 1;
   }
 }

@@ -33,7 +33,7 @@
     border-bottom-right-radius: 30px;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding-inline: var(--indent-6);
     padding-block: 60px var(--indent-3);
     font-size: var(--font-size-xxl);

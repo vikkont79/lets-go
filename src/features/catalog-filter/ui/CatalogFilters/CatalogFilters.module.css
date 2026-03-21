@@ -9,7 +9,7 @@
     padding: var(--indent-8);
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding: var(--indent-6);
   }
 }
@@ -19,7 +19,7 @@
   font-size: 30px;
   font-weight: 700;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     margin-block: 0 var(--indent-6);
     font-size: 22px;
   }
@@ -38,7 +38,7 @@
     grid-template-columns: 125px 1fr;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     grid-template-columns: 1fr;
     margin-block: 0;
     padding-block: 0;
@@ -56,7 +56,7 @@
   font-size: var(--font-size-sm);
   text-transform: uppercase;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     max-inline-size: 220px;
     margin-block-start: var(--indent-5);
   }

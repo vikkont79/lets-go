@@ -6,7 +6,7 @@
     padding-block-start: var(--indent-8);
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     padding-block-start: var(--indent-4);
   }
 }
@@ -23,7 +23,7 @@
   font-weight: 700;
   text-align: start;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     font-size: 18px;
     font-weight: 500;
   }
@@ -35,7 +35,7 @@
   justify-self: center;
   object-fit: contain;
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     min-inline-size: 35px;
     margin-inline: var(--indent-2);
   }
@@ -51,7 +51,7 @@
     margin-block-start: 30px;
   }
 
-  @media(max-width: 321px) {
+  @media(max-width: 376px) {
     margin-block-start: var(--indent-4);
   }
 }
