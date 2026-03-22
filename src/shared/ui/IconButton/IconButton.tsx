@@ -4,6 +4,7 @@ import styles from './IconButton.module.css'
 interface IconButtonProps extends Omit<ButtonProps, 'children'> {
   icon: string;
   iconSize?: IconProps['size'];
+  iconSizeMob?: IconProps['mobSize']
   iconColor?: IconProps['color'];
   iconLabel?: IconProps['label'];
   iconPosition?: 'left' | 'right';
@@ -12,6 +13,7 @@ interface IconButtonProps extends Omit<ButtonProps, 'children'> {
 const IconButton = ({
   icon,
   iconSize,
+  iconSizeMob,
   iconColor,
   iconLabel,
   iconPosition,
@@ -28,6 +30,7 @@ const IconButton = ({
       <Icon
         name={icon}
         size={iconSize}
+        mobSize={iconSizeMob}
         color={iconColor}
         label={iconLabel || (typeof children === 'string' ? children : undefined)}
         className={styles.icon}

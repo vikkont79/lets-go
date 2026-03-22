@@ -1,19 +1,21 @@
 .icon {
-  /* Базовые стили для элемента, который станет иконкой */
   display: inline-block;
   width: var(--icon-size, 24px);
   height: var(--icon-size, 24px);
   background-color: var(--icon-color, currentColor);
 
-  /* Маскирование SVG-иконкой */
   mask-image: var(--icon-mask);
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
 
-  /* Для браузеров, которые используют префикс (старые версии) */
   -webkit-mask-image: var(--icon-mask);
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
+
+  @media(max-width: 321px) {
+    width: var(--icon-size-mob, 16px);
+    height: var(--icon-size-mob, 16px);
+  }
 }

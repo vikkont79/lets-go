@@ -1,13 +1,19 @@
 import { Image } from '@/shared/ui'
 import styles from './Hero.module.css'
 import bgImage from '@assets/images/globe.png'
+import bgImageMob from '@assets/images/globe-mob.png'
+import bgImageTab from '@assets/images/globe-tab.png'
 import traveller from '@assets/images/traveller.png'
+import travellerMob from '@assets/images/traveller-mob.png'
+import travellerTab from '@assets/images/traveller-tab.png'
 
 const Hero = () => {
   return (
     <section className={`${styles.hero} wrapper`}>
       <Image
         src={bgImage}
+        srcMob={bgImageMob}
+        srcTab={bgImageTab}
         alt='Вид на планету'
         width={1440}
         height={750}
@@ -40,6 +46,8 @@ const Hero = () => {
       </div>
       <Image
         src={traveller}
+        srcMob={travellerMob}
+        srcTab={travellerTab}
         alt='Путешественник'
         width={430}
         height={640}

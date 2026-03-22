@@ -1,4 +1,4 @@
-import { fetchCountries } from '@/features/country-dropdown/api/mock-server-countries'
+import { fetchCountries } from '@/shared/api/mock-server-countries'
 import { generateMockTrips } from '@/entities/trip/lib/generate-mock-trips'
 
 const MOCK_TRIPS_COUNT = 2

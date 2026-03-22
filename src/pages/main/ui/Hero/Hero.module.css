@@ -4,13 +4,23 @@
   border-bottom-left-radius: 60px;
   border-bottom-right-radius: 60px;
   background-color: var(--color-base-400);
+
+  @media(max-width: 769px) {
+    margin-block: 30px -30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+  }
 }
 
 .bgImage {
   position: absolute;
   left: 0;
-  top: -108px;
+  top: -128px;
   z-index: 1;
+
+  @media(max-width: 376px) {
+    top: -245px;
+  }
 }
 
 .content {
@@ -19,21 +29,40 @@
 }
 
 .slogan {
-  margin-block: 0 110px;
+  margin-block: 90px 110px;
   padding-inline-start: 12px;
-  padding-block-start: 90px;
   color: var(--color-white);
   font-size: 70px;
   font-weight: 700;
   font-variant: small-caps;
   text-transform: lowercase;
   text-align: start;
+
+  @media(max-width: 769px) {
+    margin-block-end: 450px;
+  }
+
+  @media(max-width: 376px) {
+    margin-block-end: 290px;
+    font-size: var(--font-size-xxl);
+    line-height: 40px;
+  }
 }
 
 .heroImage {
   position: absolute;
   top: 0;
   z-index: 1;
+
+  @media(max-width: 769px) {
+    top: 140px;
+    right: 40px;
+  }
+
+  @media(max-width: 376px) {
+    top: 154px;
+    inline-size: 192px;
+  }
 }
 
 .roadmap {
@@ -42,6 +71,16 @@
   padding-inline-start: 0;
   padding-block-end: 115px;
   list-style-type: none;
+
+  @media(max-width: 769px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-block-end: 40px;
+  }
+
+  @media(max-width: 376px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .roadmapItem {
@@ -55,23 +94,64 @@
   text-align: start;
 }
 
+.roadmapItem:not(:first-child) {
+  margin-inline-start: -30px;
+  box-shadow: -4px 0px 10px 0px #00000040;
+
+  @media(max-width: 769px) {
+    margin-inline-start: 0;
+  }
+}
+
 .roadmapItem:first-child {
   background-color: var(--color-primary-500);
+
+  @media(max-width: 769px) {
+    border-bottom-left-radius: 0;
+  }
+
+  @media(max-width: 376px) {
+    border-bottom-right-radius: 0;
+  }
 }
 
 .roadmapItem:nth-child(2) {
   background-color: var(--color-primary-400);
+
+  @media(max-width: 769px) {
+    margin-inline-start: -30px;
+    border-bottom-right-radius: 0;
+  }
+
+  @media(max-width: 376px) {
+    margin-inline-start: 0;
+    border-radius: 0;
+  }
 }
 
 .roadmapItem:nth-child(3) {
   background-color: var(--color-primary-200);
+
+  @media(max-width: 769px) {
+    border-top-left-radius: 0;
+  }
+
+  @media(max-width: 376px) {
+    margin-inline-start: 0;
+    border-radius: 0;
+  }
 }
 
 .roadmapItem:last-child {
   background-color: var(--color-primary-100);
-}
 
-.roadmapItem:not(:first-child) {
-  margin-inline-start: -30px;
-  box-shadow: -4px 0px 10px 0px #00000040;
+  @media(max-width: 769px) {
+    margin-inline-start: -30px;
+    border-top-right-radius: 0;
+  }
+
+  @media(max-width: 376px) {
+    margin-inline-start: 0;
+    border-top-left-radius: 0;
+  }
 }

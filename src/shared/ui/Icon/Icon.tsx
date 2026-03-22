@@ -3,6 +3,7 @@ import styles from './Icon.module.css'
 interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   name: string;
   size?: number | string;
+  mobSize?: number | string;
   color?: string;
   label?: string;
 }
@@ -10,20 +11,26 @@ interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
 const Icon = ({
   name,
   size = 24,
+  mobSize = 16,
   color = 'currentColor',
   className = '',
   label,
   ...props
 }: IconProps) => {
+  const desktopSize = typeof size === 'number' ? `${size}px` : size
+  const mobileSize = mobSize
+    ? (typeof mobSize === 'number' ? `${mobSize}px` : mobSize)
+    : desktopSize
   const inlineStyles = {
-    '--icon-size': typeof size === 'number' ? `${size}px` : size,
+    '--icon-size': desktopSize,
+    '--icon-size-mob': mobileSize,
     '--icon-color': color,
     '--icon-mask': `url(/icons/${name}.svg)`,
-  } as React.CSSProperties;
+  } as React.CSSProperties
 
   const accessibilityProps = label
     ? { role: 'img', 'aria-label': label }
-    : { 'aria-hidden': true };
+    : { 'aria-hidden': true }
 
   return (
     <span

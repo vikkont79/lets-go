@@ -3,6 +3,7 @@ import type { ImgHTMLAttributes } from 'react';
 interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   src: string;
   srcMob?: string;
+  srcTab?: string;
   alt: string;
   width: number | string;
   height: number | string;
@@ -12,6 +13,7 @@ interface ImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 const Image = ({
   src,
   srcMob,
+  srcTab,
   alt,
   width,
   height,
@@ -22,8 +24,12 @@ const Image = ({
   return (
     <picture>
       <source
+        media='(max-width: 376px)'
+        srcSet={srcMob ? srcMob : src}
+      />
+      <source
         media='(max-width: 769px)'
-        srcSet={srcMob}
+        srcSet={srcTab ? srcTab : src}
       />
       <img
         src={src}
