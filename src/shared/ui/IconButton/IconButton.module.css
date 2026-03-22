@@ -9,6 +9,6 @@
   flex-shrink: 0;
 }
 
-.iconButton[data-icon-position="right"] {
+.iconButton[data-icon-position='right'] {
   flex-direction: row-reverse;
 }

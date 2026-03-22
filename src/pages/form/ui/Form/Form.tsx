@@ -39,11 +39,11 @@ const FormPage = () => {
   const [stepErrors, setStepErrors] = useState<Record<string, string>>({})
 
   const handleNextClick = useCallback(() => {
-    const stepKey = `step${currentStep}` as const;
+    const stepKey = `step${currentStep}` as const
     const validation = validateStep(stepKey, formData)
     if (!validation.isValid) {
-      setStepErrors(validation.errors);
-      return;
+      setStepErrors(validation.errors)
+      return
     }
     setStepErrors({})
     if (currentStep < 3) {
@@ -54,8 +54,8 @@ const FormPage = () => {
   }, [currentStep, formData, goToNextStep, handleSubmit])
 
   const handleBackClick = useCallback(() => {
-    setStepErrors({});
-    goToPrevStep();
+    setStepErrors({})
+    goToPrevStep()
   }, [goToPrevStep])
 
   return (

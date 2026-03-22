@@ -15,10 +15,10 @@ interface CountryFilterProps {
 const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedContinent, setSelectedContinent] = useState<string | undefined>()
-  const isDesktopOrTablet = useMediaQuery('(min-width: 322px)');
-  const isMobile = useMediaQuery('(max-width: 376px)');
+  const isDesktopOrTablet = useMediaQuery('(min-width: 322px)')
+  const isMobile = useMediaQuery('(max-width: 376px)')
 
-  const showContinents = isDesktopOrTablet || (isMobile && isOpen);
+  const showContinents = isDesktopOrTablet || (isMobile && isOpen)
 
   const dropdownRef = useRef<HTMLDivElement>(null)
 
@@ -70,7 +70,7 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
           className={styles.filter}
           onClick={handleToggleDropdown}
           aria-expanded={isOpen}
-          aria-controls="countries-dropdown"
+          aria-controls='countries-dropdown'
         >
           Фильтрация по странам:
         </IconButton>
@@ -106,9 +106,9 @@ const CountryFilter = ({ className, onCountrySelect }: CountryFilterProps) => {
             ref={dropdownRef}
             selectedContinent={selectedContinent}
             onCountrySelect={handleCountrySelect}
-            id="countries-dropdown"
-            role="listbox"
-            aria-label="Список стран"
+            id='countries-dropdown'
+            role='listbox'
+            aria-label='Список стран'
           />
           <IconButton
             className={styles.close}

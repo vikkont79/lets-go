@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react"
+import { useCallback, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import type { FormData } from '@/shared/types'
-import type { Trip } from "@/entities/trip/types/trip"
-import { useGlobalStore } from "@/app/store/root-store"
+import type { Trip } from '@/entities/trip/types/trip'
+import { useGlobalStore } from '@/app/store/root-store'
 
 const API_BASE = 'http://localhost:3001'
 
@@ -34,7 +34,7 @@ export const useFormSubmit = (formData: FormData) => {
       }
       navigate('/')
     } catch (error) {
-      console.error('Ошибка:', error);
+      console.error('Ошибка:', error)
     } finally {
       setIsSubmit(false)
     }

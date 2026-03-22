@@ -78,8 +78,8 @@ export const useTripForm = () => {
     setFormData(prev => ({
       ...prev,
       countries: [...prev.countries, { ...country, plan: '' }]
-    }));
-  }, []);
+    }))
+  }, [])
 
   const handleRemoveCountry = useCallback((index: number) => {
     setFormData(prev => ({
@@ -108,15 +108,15 @@ export const useTripForm = () => {
 
   const goToNextStep = useCallback(() => {
     if (currentStep < 3) {
-      setCurrentStep(prev => (prev + 1) as 1 | 2 | 3);
+      setCurrentStep(prev => (prev + 1) as 1 | 2 | 3)
     }
-  }, [currentStep]);
+  }, [currentStep])
 
   const goToPrevStep = useCallback(() => {
     if (currentStep > 1) {
-      setCurrentStep(prev => (prev - 1) as 1 | 2 | 3);
+      setCurrentStep(prev => (prev - 1) as 1 | 2 | 3)
     }
-  }, [currentStep]);
+  }, [currentStep])
 
   return {
     formData,

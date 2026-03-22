@@ -41,7 +41,7 @@ const Image = ({
         {...props}
       />
     </picture>
-  );
+  )
 }
 
 export { Image }

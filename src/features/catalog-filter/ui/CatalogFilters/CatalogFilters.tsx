@@ -112,20 +112,20 @@ const CatalogFiltersComponent = ({
         </fieldset>
 
         <fieldset className={styles.group}>
-          <Accordion title='Левел' id="level-label">
+          <Accordion title='Левел' id='level-label'>
             <RangeSlider
               min={1}
               max={100}
               value={filters.level}
               onChange={handleLevelChange}
-              aria-labelledby="level-label"
+              aria-labelledby='level-label'
             />
           </Accordion>
         </fieldset>
 
         <Button
           className={styles.apply}
-          type="submit"
+          type='submit'
         >
           Показать
         </Button>

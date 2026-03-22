@@ -51,7 +51,7 @@ const TripCard = ({ trip, className }: TripCardProps) => {
               height={24}
               onError={(e) => {
                 // fallback: скрыть или поставить заглушку
-                (e.currentTarget as HTMLImageElement).style.display = 'none';
+                (e.currentTarget as HTMLImageElement).style.display = 'none'
               }}
             />
             <span>{country.name_ru}</span>

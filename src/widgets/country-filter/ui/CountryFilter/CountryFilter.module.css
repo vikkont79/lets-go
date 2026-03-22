@@ -86,7 +86,7 @@
   }
 
   &:active,
-  &[data-selected="true"] {
+  &[data-selected='true'] {
     opacity: 1;
   }
 

@@ -18,14 +18,14 @@ const RangeSliderComponent = ({
   className = ''
 }: RangeSliderProps) => {
   const preventEnter = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') e.preventDefault();
+    if (e.key === 'Enter') e.preventDefault()
   }
   return (
     <div className={`${styles.wrapper} ${className}`.trim()}>
       <div className={styles.inputs}>
         <input
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           min={min}
           max={max}
           value={value[0]}
@@ -34,8 +34,8 @@ const RangeSliderComponent = ({
         />
         <span className={styles.separator}>—</span>
         <input
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           min={min}
           max={max}
           value={value[1]}

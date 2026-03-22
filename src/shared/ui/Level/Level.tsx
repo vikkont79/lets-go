@@ -12,9 +12,9 @@ const Level = ({
   size = 100,
   strokeColor,
   className = '' }: LevelProps) => {
-  const normalizedLevel = Math.min(100, Math.max(0, level));
-  const circumference = 2 * Math.PI * 30;
-  const strokeDashoffset = circumference * (1 - normalizedLevel / 100);
+  const normalizedLevel = Math.min(100, Math.max(0, level))
+  const circumference = 2 * Math.PI * 30
+  const strokeDashoffset = circumference * (1 - normalizedLevel / 100)
 
   return (
     <div
@@ -53,7 +53,7 @@ const Level = ({
         level
       </span>
     </div>
-  );
-};
+  )
+}
 
 export { Level }

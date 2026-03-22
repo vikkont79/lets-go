@@ -21,7 +21,7 @@
   }
 }
 
-.trigger [class*="icon"] {
+.trigger [class*='icon'] {
   transition: transform 0.2s ease;
 
   @media(max-width: 769px) {
@@ -33,7 +33,7 @@
   }
 }
 
-.triggerOpen [class*="icon"] {
+.triggerOpen [class*='icon'] {
   transform: rotate(180deg);
 }
 
@@ -58,13 +58,13 @@
 }
 
 @media(max-width: 769px) {
-  .trigger[data-icon-position="right"] {
+  .trigger[data-icon-position='right'] {
     flex-direction: row;
   }
 }
 
 @media(max-width: 376px) {
-  .trigger[data-icon-position="right"] {
+  .trigger[data-icon-position='right'] {
     flex-direction: row-reverse;
   }
 }

@@ -1,4 +1,4 @@
-import { Icon } from "../Icon/Icon";
+import { Icon } from '../Icon/Icon';
 import styles from './CounterInput.module.css'
 
 
@@ -30,11 +30,11 @@ const CounterInput = ({
   className = '',
 }: CounterInputProps) => {
   const handleIncrement = () => {
-    onChange(Math.min(max, value + step));
-  };
+    onChange(Math.min(max, value + step))
+  }
 
   const handleDecrement = () => {
-    onChange(Math.max(min, value - step));
+    onChange(Math.max(min, value - step))
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,18 +51,18 @@ const CounterInput = ({
       </span>
       <div className={styles.counter}>
         <button
-          type="button"
+          type='button'
           onClick={handleDecrement}
           disabled={value <= min}
           className={styles.button}
           aria-label='Уменьшить'
         >
-          <Icon name="minus" size={iconSize} />
+          <Icon name='minus' size={iconSize} />
         </button>
         <input
           id={id}
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           value={value}
           onChange={handleInputChange}
           className={styles.input}
@@ -70,13 +70,13 @@ const CounterInput = ({
           aria-invalid={!!error}
         />
         <button
-          type="button"
+          type='button'
           onClick={handleIncrement}
           disabled={value >= max}
           className={styles.button}
           aria-label='Увеличить'
         >
-          <Icon name="plus" size={iconSize} />
+          <Icon name='plus' size={iconSize} />
         </button>
         {error && (
           <span className={styles.error}>{error}</span>

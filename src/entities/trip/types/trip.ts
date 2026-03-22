@@ -1,5 +1,5 @@
-import type { User } from "@/entities/user";
-import type { Country, TransportType, TripDateRange } from "@/shared/types";
+import type { User } from '@/entities/user'
+import type { Country, TransportType, TripDateRange } from '@/shared/types'
 
 export interface Trip {
   id: string;

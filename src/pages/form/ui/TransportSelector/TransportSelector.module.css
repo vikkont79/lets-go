@@ -20,6 +20,6 @@
   letter-spacing: 9%;
 }
 
-.field[data-invalid="true"] {
+.field[data-invalid='true'] {
   border-color: red;
 }

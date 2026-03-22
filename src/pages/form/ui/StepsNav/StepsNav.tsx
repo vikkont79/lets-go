@@ -27,7 +27,7 @@ const StepsNav = ({
       {currentStep > 1 && (
         <Button
           onClick={onBack}
-          variant="outline"
+          variant='outline'
           disabled={isSubmit}
         >
           На шаг назад

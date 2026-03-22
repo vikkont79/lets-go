@@ -35,9 +35,9 @@ const Toggle = ({
 }: ToggleProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === 'radio') {
-      onChange(e.target.value);
+      onChange(e.target.value)
     } else {
-      onChange(e.target.checked);
+      onChange(e.target.checked)
     }
   }
 
@@ -53,7 +53,7 @@ const Toggle = ({
         onChange={handleChange}
         disabled={disabled}
         aria-invalid={!!error}
-        className="visually-hidden"
+        className='visually-hidden'
         {...props}
       />
       <span className={`${styles.toggleControl} ${styles[variant]} ${styles[size]}`}>

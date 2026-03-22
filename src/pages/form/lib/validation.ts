@@ -3,7 +3,7 @@ export const stepValidators = {
   step1: {
     tags: {
       validate: (value: string): boolean => {
-        const trimmed = value.trim();
+        const trimmed = value.trim()
         return trimmed.split(/[\s,]+/).some(tag =>
           tag.startsWith('#') && tag.length > 1
         )
@@ -35,7 +35,7 @@ export const stepValidators = {
   step2: {
     tags: {
       validate: (value: string): boolean => {
-        const trimmed = value.trim();
+        const trimmed = value.trim()
         return trimmed.split(/[\s,]+/).some(tag =>
           tag.startsWith('#') && tag.length > 1
         )
@@ -54,7 +54,7 @@ export const stepValidators = {
   step3: {
     tags: {
       validate: (value: string): boolean => {
-        const trimmed = value.trim();
+        const trimmed = value.trim()
         return trimmed.split(/[\s,]+/).some(tag =>
           tag.startsWith('#') && tag.length > 1
         )
@@ -69,7 +69,7 @@ export const stepValidators = {
   },
 } as const
 
-export type StepKey = keyof typeof stepValidators;
+export type StepKey = keyof typeof stepValidators
 
 export const validateStep = (
   stepKey: StepKey,
@@ -88,13 +88,13 @@ export const validateStep = (
 
   if (stepKey === 'step3') {
     formData.countries.forEach((country) => {
-      const plan = country.plan || '';
-      const trimmed = plan.trim();
+      const plan = country.plan || ''
+      const trimmed = plan.trim()
 
       if (trimmed.length < 3 || trimmed.length > 200) {
-        errors[`plan-${country.code}`] = 'Oт 3 до 200 символов';
+        errors[`plan-${country.code}`] = 'Oт 3 до 200 символов'
       }
-    });
+    })
   }
 
   return {

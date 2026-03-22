@@ -29,7 +29,7 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
   const handleReplaceCountry = useCallback((country: Country) => {
     if (activeIndex !== null) {
       onReplace(activeIndex, country)
-      setIsOpen(false);
+      setIsOpen(false)
     }
   }, [activeIndex, onReplace])
   const handleRemoveCountry = useCallback((index: number) => {

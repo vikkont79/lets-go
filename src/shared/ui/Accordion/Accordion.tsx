@@ -15,9 +15,9 @@ const Accordion = ({
   children,
   id,
 }: AccordionProps) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
-  const isTablet = useMediaQuery('(min-width: 322px) and (max-width: 769px)');
+  const isTablet = useMediaQuery('(min-width: 322px) and (max-width: 769px)')
 
   return (
     <>
@@ -43,4 +43,4 @@ const Accordion = ({
   )
 }
 
-export { Accordion };
+export { Accordion }

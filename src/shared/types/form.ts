@@ -1,4 +1,4 @@
-import type { TRANSPORT_OPTIONS } from "../constants";
+import type { TRANSPORT_OPTIONS } from '../constants';
 
 export type TransportType = typeof TRANSPORT_OPTIONS[number];
 

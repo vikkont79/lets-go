@@ -55,7 +55,7 @@ const Pagination = ({
   }
 
   return (
-    <nav className={`${styles.pagination} ${className}`} aria-label="Пагинация">
+    <nav className={`${styles.pagination} ${className}`} aria-label='Пагинация'>
       <div className={styles.pages}>
         {getVisiblePages().map((page, index) =>
           page === '...' ? (
@@ -75,7 +75,7 @@ const Pagination = ({
       <IconButton
         icon='page-left'
         iconSize={20}
-        variant="transparent"
+        variant='transparent'
         size='small'
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -85,7 +85,7 @@ const Pagination = ({
       <IconButton
         icon='page-right'
         iconSize={20}
-        variant="transparent"
+        variant='transparent'
         size='small'
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

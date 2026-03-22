@@ -1,5 +1,5 @@
 import { fakerRU as faker } from '@faker-js/faker'
-import type { User } from '../types';
+import type { User } from '../types'
 
 export function generateUser(): User {
   return {

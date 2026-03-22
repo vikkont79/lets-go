@@ -1,6 +1,6 @@
 import type { Country } from '@/shared/types'
 import styles from './CountryPlans.module.css'
-import { Textarea } from '@/shared/ui';
+import { Textarea } from '@/shared/ui'
 
 interface CountryPlansProps {
   countries: Country[];

@@ -1,7 +1,7 @@
 import { DayPicker, type DateRange } from 'react-day-picker'
 import { ru } from 'date-fns/locale'
 import './DatePicker.module.css'
-import { memo } from 'react';
+import { memo } from 'react'
 
 interface DatePickerProps {
   value: DateRange | undefined;

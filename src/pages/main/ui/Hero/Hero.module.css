@@ -18,8 +18,13 @@
   top: -128px;
   z-index: 1;
 
+  @media(max-width: 769px) {
+    top: -164px;
+  }
+
   @media(max-width: 376px) {
     top: -245px;
+    block-size: 888px;
   }
 }
 

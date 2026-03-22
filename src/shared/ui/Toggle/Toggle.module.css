@@ -26,7 +26,7 @@
   }
 }
 
-input[type="radio"]+.toggleControl {
+input[type='radio']+.toggleControl {
   border-radius: 50%;
 }
 

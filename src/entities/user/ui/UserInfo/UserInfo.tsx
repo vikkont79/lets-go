@@ -9,7 +9,7 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ user, className = '' }: UserInfoProps) => {
-  if (!user) return null;
+  if (!user) return null
   const avatarSrc = user.avatar || avatar
   const level = user.level ?? 80
   return (
