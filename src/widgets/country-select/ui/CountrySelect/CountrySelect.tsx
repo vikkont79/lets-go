@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { CountryDropdown } from '@/features/country-dropdown/ui/CountryDropdown/CountryDropdown'
-import { IconButton } from '@/shared/ui'
+import { IconButton, Image } from '@/shared/ui'
 import styles from './CountrySelect.module.css'
 import type { Country } from '@/shared//types'
 
@@ -76,7 +76,7 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           >
             {country.name_ru}
           </IconButton>
-          <img
+          <Image
             src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
             alt={country.name_ru}
             className={styles.flag}
@@ -90,6 +90,7 @@ const CountrySelect = ({ selected, onAdd, onRemove, onReplace, error }: CountryS
           <IconButton
             className={styles.close}
             icon='close'
+            iconSizeMob={10}
             variant='transparent'
             onClick={() => handleRemoveCountry(index)}
           />

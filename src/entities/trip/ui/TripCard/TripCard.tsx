@@ -43,7 +43,7 @@ const TripCard = ({ trip, className }: TripCardProps) => {
       <ul className={styles.countries}>
         {trip.countries.map(country => (
           <li className={styles.country} key={country.code}>
-            <img
+            <Image
               src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
               alt={country.name_ru}
               className={styles.flag}
@@ -54,6 +54,7 @@ const TripCard = ({ trip, className }: TripCardProps) => {
                 (e.currentTarget as HTMLImageElement).style.display = 'none'
               }}
             />
+
             <span>{country.name_ru}</span>
           </li>
         ))}

@@ -37,6 +37,7 @@
 
   @media(max-width: 376px) {
     min-inline-size: 35px;
+    inline-size: 35px;
     margin-inline: var(--indent-2);
   }
 }

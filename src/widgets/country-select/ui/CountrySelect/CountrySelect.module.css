@@ -43,14 +43,15 @@
 
 .flag {
   display: inline-block;
-  min-inline-size: 70px;
+  max-inline-size: 70px;
   margin-inline: var(--indent-6);
   justify-self: center;
   object-fit: contain;
 
   @media(max-width: 376px) {
-    min-inline-size: 35px;
+    inline-size: 35px;
     margin-inline: var(--indent-2);
+    border-radius: 5px;
   }
 }
 
@@ -60,6 +61,16 @@
   align-self: center;
   color: var(--color-black);
   opacity: 0.5;
+
+  @media(max-width: 376px) {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    padding: var(--indent-1);
+    border: 1px var(--color-neutral-300) solid;
+    border-radius: 50%;
+    background-color: var(--color-neutral-200);
+  }
 
   &:hover {
     opacity: 1;
@@ -81,6 +92,7 @@
   text-transform: uppercase;
 
   @media(max-width: 376px) {
+    top: -64px;
     padding: var(--indent-3);
     font-size: 15px;
     line-height: 18px;

@@ -46,6 +46,8 @@
   }
 
   @media(max-width: 376px) {
+    padding-inline: var(--indent-5);
+    padding-block: var(--indent-4);
     font-size: 15px;
     line-height: 18px;
   }

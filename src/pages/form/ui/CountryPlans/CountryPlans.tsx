@@ -1,6 +1,6 @@
 import type { Country } from '@/shared/types'
 import styles from './CountryPlans.module.css'
-import { Textarea } from '@/shared/ui'
+import { Textarea, Image } from '@/shared/ui'
 
 interface CountryPlansProps {
   countries: Country[];
@@ -18,7 +18,7 @@ const CountryPlan = ({
       {countries.map(country => (
         <div className={styles.plan} key={country.code}>
           <p className={styles.country}>{country.name_ru}</p>
-          <img
+          <Image
             src={`https://cdn.jsdelivr.net/npm/flag-icons@6.6.6/flags/4x3/${country.code.toLowerCase()}.svg`}
             alt={country.name_ru}
             className={styles.flag}

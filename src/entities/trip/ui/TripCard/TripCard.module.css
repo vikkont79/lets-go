@@ -228,12 +228,12 @@
 
 .flag {
   display: block;
-  min-inline-size: 35px;
+  inline-size: 35px;
   justify-self: center;
   object-fit: contain;
 
   @media(max-width: 376px) {
-    max-inline-size: 26px;
+    inline-size: 26px;
   }
 }
 

@@ -23,14 +23,18 @@ const Image = ({
 }: ImageProps) => {
   return (
     <picture>
-      <source
-        media='(max-width: 376px)'
-        srcSet={srcMob ? srcMob : src}
-      />
-      <source
-        media='(max-width: 769px)'
-        srcSet={srcTab ? srcTab : src}
-      />
+      {srcMob && (
+        <source
+          media='(max-width: 376px)'
+          srcSet={srcMob}
+        />
+      )}
+      {srcTab && (
+        <source
+          media='(max-width: 769px)'
+          srcSet={srcTab}
+        />
+      )}
       <img
         src={src}
         alt={alt}
