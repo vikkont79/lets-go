@@ -1,7 +1,7 @@
 /* Базовые пропсы для всех кнопок/кликабельных элементов */
 export interface BasePressableProps {
   /** Текст или содержимое кнопки, строки */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /** Дополнительные CSS-классы */
   className?: string;
   disabled?: boolean;
