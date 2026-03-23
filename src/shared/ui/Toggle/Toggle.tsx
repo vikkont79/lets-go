@@ -1,9 +1,10 @@
+import { useId } from 'react';
 import type { Size, Variant } from '../../types'
 import { Icon } from '../Icon/Icon'
 import styles from './Toggle.module.css'
 
 interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,
-  'type' | 'onChange' | 'size'> {
+  'type' | 'onChange' | 'size' | 'id' | 'name'> {
   label: string;
   hiddenLabel?: boolean;
   error?: string;
@@ -14,6 +15,7 @@ interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,
   iconSize?: number | string;
   className?: string;
   labelStyle?: React.CSSProperties;
+  name: string;
 }
 
 const Toggle = ({
@@ -25,7 +27,6 @@ const Toggle = ({
   size = 'base',
   variant = 'primary',
   iconSize = 20,
-  id,
   name,
   value,
   disabled,
@@ -33,6 +34,8 @@ const Toggle = ({
   labelStyle,
   ...props
 }: ToggleProps) => {
+  const id = useId()
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (type === 'radio') {
       onChange(e.target.value)

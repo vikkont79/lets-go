@@ -1,10 +1,10 @@
 import styles from './Textarea.module.css'
 import type { BaseInputProps, Size } from '../../types/base'
+import { useId } from 'react';
 
 interface TextareaProps extends BaseInputProps,
   Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-    'value' | 'onChange' | 'disabled' | 'className' | 'placeholder' | 'rows'
-  > {
+    'value' | 'onChange' | 'disabled' | 'className' | 'placeholder' | 'rows' | 'id' | 'name'> {
   label: string;
   hiddenLabel?: boolean;
   error?: string;
@@ -23,9 +23,14 @@ const Textarea = ({
   error,
   size = 'base',
   rows = 4,
-  id,
   ...props
 }: TextareaProps) => {
+  const id = useId()
+  const name = label
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]/g, '_')
+    .replace(/^_|_$/g, '')
+
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     onChange(e.target.value)
   }
@@ -40,6 +45,7 @@ const Textarea = ({
         value={value}
         placeholder={placeholder}
         id={id}
+        name={name}
         onChange={handleChange}
         disabled={disabled}
         rows={rows}

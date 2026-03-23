@@ -1,9 +1,9 @@
+import { useId } from 'react';
 import { Icon } from '../Icon/Icon';
 import styles from './CounterInput.module.css'
 
 
 interface CounterInputProps {
-  id: string;
   label: string;
   value: number;
   unit?: string;
@@ -17,7 +17,6 @@ interface CounterInputProps {
 }
 
 const CounterInput = ({
-  id,
   label,
   value,
   unit,
@@ -29,6 +28,12 @@ const CounterInput = ({
   iconSize = 20,
   className = '',
 }: CounterInputProps) => {
+  const id = useId()
+  const name = label
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]/g, '_')
+    .replace(/^_|_$/g, '')
+
   const handleIncrement = () => {
     onChange(Math.min(max, value + step))
   }
@@ -61,6 +66,7 @@ const CounterInput = ({
         </button>
         <input
           id={id}
+          name={name}
           type='text'
           inputMode='numeric'
           value={value}

@@ -1,8 +1,9 @@
+import { useId } from 'react'
 import type { BaseInputProps, Size } from '../../types'
 import styles from './Input.module.css'
 
 interface InputProps extends BaseInputProps, Omit<React.InputHTMLAttributes<HTMLInputElement>,
-  'size' | 'onChange' | 'value' | 'disabled' | 'className' | 'placeholder'> {
+  'size' | 'onChange' | 'value' | 'disabled' | 'className' | 'placeholder' | 'id' | 'name'> {
   label: string;
   hiddenLabel?: boolean;
   error?: string;
@@ -19,10 +20,14 @@ const Input = ({
   hiddenLabel,
   error,
   size = 'base',
-  id,
   type = 'text',
   ...props
 }: InputProps) => {
+  const id = useId()
+  const name = label
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]/g, '_')
+    .replace(/^_|_$/g, '')
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.target.value)
   }
@@ -38,6 +43,7 @@ const Input = ({
         value={value}
         placeholder={placeholder}
         id={id}
+        name={name}
         onChange={handleChange}
         disabled={disabled}
         aria-invalid={!!error}

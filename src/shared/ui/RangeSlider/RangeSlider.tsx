@@ -1,6 +1,7 @@
 import RangeSlider from 'react-range-slider-input'
 import 'react-range-slider-input/dist/style.css'
 import styles from './RangeSlider.module.css'
+import { useId } from 'react'
 
 interface RangeSliderProps {
   min?: number
@@ -8,6 +9,7 @@ interface RangeSliderProps {
   value: [number, number]
   onChange: (value: [number, number]) => void
   className?: string
+  label?: string
 }
 
 const RangeSliderComponent = ({
@@ -15,8 +17,16 @@ const RangeSliderComponent = ({
   max = 100,
   value,
   onChange,
-  className = ''
+  className = '',
+  label = 'Range'
 }: RangeSliderProps) => {
+  const id = useId()
+  const name = label
+    .toLowerCase()
+    .replace(/[^a-z0-9а-яё]/g, '_')
+    .replace(/^_|_$/g, '')
+    .replace(/_+/g, '_')
+
   const preventEnter = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter') e.preventDefault()
   }
@@ -24,6 +34,8 @@ const RangeSliderComponent = ({
     <div className={`${styles.wrapper} ${className}`.trim()}>
       <div className={styles.inputs}>
         <input
+          id={`${id}-min`}
+          name={`${name}_min`}
           type='text'
           inputMode='numeric'
           min={min}
@@ -34,6 +46,8 @@ const RangeSliderComponent = ({
         />
         <span className={styles.separator}>—</span>
         <input
+          id={`${id}-max`}
+          name={`${name}_max`}
           type='text'
           inputMode='numeric'
           min={min}
