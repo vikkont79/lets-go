@@ -13,17 +13,19 @@
 }
 
 .bgImage {
+  block-size: 768px;
   position: absolute;
-  left: 0;
+  inset: 0 0 auto 0;
   top: -128px;
   z-index: 1;
 
   @media(max-width: 769px) {
+    block-size: 906px;
     top: -164px;
   }
 
   @media(max-width: 376px) {
-    top: -245px;
+    top: -128px;
     block-size: 888px;
   }
 }
