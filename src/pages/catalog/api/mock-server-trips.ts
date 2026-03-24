@@ -21,6 +21,7 @@ interface FetchTripsResult {
   trips: Trip[]
   total: number
   pages: number
+  error: Error | null
 }
 
 export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsResult> => {
@@ -68,7 +69,8 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
       return {
         trips: data,
         total,
-        pages
+        pages,
+        error: null
       }
     }
 
@@ -91,13 +93,14 @@ export const fetchTrips = async (params: FetchTripsParams): Promise<FetchTripsRe
 
       const trips = tripsArrays.flat()
 
-      return { trips, total, pages }
+      return { trips, total, pages, error: null }
     }
 
-    return { trips: [], total: 0, pages: 0 }
+    return { trips: [], total: 0, pages: 0, error: null }
 
   } catch (error) {
-    console.error('Failed to fetch trips:', error)
-    return { trips: [], total: 0, pages: 0 }
+    const err = error instanceof Error ? error : new Error('Unknown error')
+    console.error('Failed to fetch trips:', err)
+    return { trips: [], total: 0, pages: 0, error: err }
   }
 }

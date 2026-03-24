@@ -10,6 +10,7 @@ const ITEMS_PER_PAGE = 4
 export const useCatalog = () => {
   const [trips, setTrips] = useState<Trip[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<Error | null>(null)
   const [totalPages, setTotalPages] = useState(1)
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null)
   const [filters, setFilters] = useState<FiltersData>({
@@ -31,17 +32,20 @@ export const useCatalog = () => {
     setSelectedCountry(country?.code || null)
     setAnchorPage(1)
     setEndPage(1)
+    setError(null)
   }
 
   const handleApplyFilters = useCallback((newFilters: FiltersData) => {
     setFilters(newFilters)
     setAnchorPage(1)
     setEndPage(1)
+    setError(null)
   }, [])
 
   useEffect(() => {
     const loadTrips = async () => {
       setIsLoading(true)
+      setError(null)
 
       const params = {
         limit: ITEMS_PER_PAGE,
@@ -54,7 +58,13 @@ export const useCatalog = () => {
       }
 
 
-      const { trips: loadedTrips, pages } = await fetchTrips(params)
+      const { trips: loadedTrips, pages, error: fetchError, } = await fetchTrips(params)
+
+      if (fetchError) {
+        setIsLoading(false)
+        setError(fetchError)
+        return
+      }
 
       setTotalPages(pages)
 
@@ -91,5 +101,6 @@ export const useCatalog = () => {
     handleCountrySelect,
     handleApplyFilters,
     filters,
+    error,
   }
 }

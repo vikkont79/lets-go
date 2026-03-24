@@ -17,6 +17,7 @@ const CatalogPage = () => {
     handleCountrySelect,
     handleApplyFilters,
     filters,
+    error,
   } = useCatalog()
 
   return (
@@ -37,8 +38,10 @@ const CatalogPage = () => {
         />
         {isLoading ? (
           <div className={styles.skeleton} role='status'>Загрузка...</div>
-        ) : trips.length === 0 ? (
-          <div className={styles.empty} role='status'>Пока нет маршрутов</div>
+        ) : error ? (
+          <div className={styles.empty} role='status'>
+            {error ? `Ошибка: ${error.message}` : 'Пока нет маршрутов'}
+          </div>
         ) : (
           <CatalogList
             trips={trips}
@@ -51,7 +54,6 @@ const CatalogPage = () => {
           />
         )}
       </section>
-
     </main>
   )
 }
