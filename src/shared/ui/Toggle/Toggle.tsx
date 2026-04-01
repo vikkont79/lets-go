@@ -15,7 +15,7 @@ interface ToggleProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>,
   iconSize?: number | string;
   className?: string;
   labelStyle?: React.CSSProperties;
-  name: string;
+  name?: string;
 }
 
 const Toggle = ({

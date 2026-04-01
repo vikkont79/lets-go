@@ -34,7 +34,6 @@
     font-weight: 500;
     appearance: none;
 
-
     &:first-of-type {
       border-right: 1px solid var(--color-neutral-300);
     }
@@ -72,4 +71,12 @@
 
 .wrapper :global(.range-slider .range-slider__range) {
   background-color: var(--color-base-500);
+}
+
+.wrapper:has(.error) .inputs {
+  border-color: var(--color-error);
+}
+
+.error {
+  color: var(--color-error);
 }
